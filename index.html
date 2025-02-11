@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sampat Bandlamudi Portfolio</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Configure Tailwind for dark mode using class strategy
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <!-- GSAP for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <style>
+    /* Additional custom styles can be added here */
+  </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+  <!-- Header with Theme Toggle -->
+  <header class="flex justify-end p-4">
+    <button id="theme-toggle" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">
+      Toggle Dark/Light
+    </button>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
+    <h1 class="text-5xl font-bold mb-4">Sampat Bandlamudi</h1>
+    <p class="text-xl">Data Science Student | Developer | Innovator</p>
+  </section>
+
+  <!-- Achievements & Impact Section -->
+  <section id="achievements" class="py-16 bg-gray-100 dark:bg-gray-800">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-semibold text-center mb-8">Achievements & Impact</h2>
+      <ul class="space-y-4">
+        <li class="bg-white dark:bg-gray-700 p-4 rounded shadow">
+          Accomplished reducing page load time by 40% as measured by increased user retention by doing optimized React code, boosting user retention by 25%.
+        </li>
+        <li class="bg-white dark:bg-gray-700 p-4 rounded shadow">
+          Accomplished increasing predicted engagement by over 20% as measured by engagement metrics by developing accurate classification and forecasting models.
+        </li>
+        <li class="bg-white dark:bg-gray-700 p-4 rounded shadow">
+          Accomplished improving forecast accuracy by 15% as measured by testing accuracy by integrating public weather APIs with AI modules.
+        </li>
+        <li class="bg-white dark:bg-gray-700 p-4 rounded shadow">
+          Accomplished reducing property value prediction error by 25% as measured by mean absolute error by designing ensemble regression models.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills Showcase -->
+  <section id="skills" class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-semibold text-center mb-8">Skills Showcase</h2>
+      
+      <!-- Technical Skills -->
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold mb-4">Technical</h3>
+        <div class="space-y-4">
+          <!-- Example Skill -->
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>Java</span>
+              <span>90%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 90%;"></div>
+            </div>
+          </div>
+          <!-- Additional Technical Skills -->
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>C++</span>
+              <span>85%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%;"></div>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>Python</span>
+              <span>95%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 95%;"></div>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>R</span>
+              <span>80%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%;"></div>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>HTML/CSS</span>
+              <span>90%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 90%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Skills -->
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold mb-4">Tools</h3>
+        <div class="space-y-4">
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>Jupyter Notebook</span>
+              <span>90%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 90%;"></div>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>Git</span>
+              <span>85%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%;"></div>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>macOS/Windows</span>
+              <span>80%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leadership Skills -->
+      <div>
+        <h3 class="text-2xl font-bold mb-4">Leadership</h3>
+        <div class="space-y-4">
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>Project Planning</span>
+              <span>80%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 80%;"></div>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded hover:shadow-lg transition-shadow duration-300">
+            <div class="flex justify-between">
+              <span>Team Management</span>
+              <span>85%</span>
+            </div>
+            <div class="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div class="bg-indigo-500 h-2 rounded-full" style="width: 85%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Gallery -->
+  <section id="projects" class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-semibold text-center mb-8">Project Gallery</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-gray-700 p-6 rounded shadow hover:shadow-xl transition-shadow duration-300">
+          <h3 class="text-2xl font-bold text-indigo-600 mb-2">Netflix Content Release Strategy Analysis</h3>
+          <p class="mb-2">Developed classification and forecasting models to predict optimal content release dates, increasing predicted engagement by over 20%.</p>
+          <p class="text-sm mb-2">Tech: R, ggplot2, dplyr, tidyverse</p>
+          <p class="text-sm">Duration: September - October 2024</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded shadow hover:shadow-xl transition-shadow duration-300">
+          <h3 class="text-2xl font-bold text-indigo-600 mb-2">Weather API Integration and Bot Development</h3>
+          <p class="mb-2">Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15%.</p>
+          <p class="text-sm mb-2">Tech: Java, Python, TensorFlow, Pircbot</p>
+          <p class="text-sm">Duration: July - September 2024</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded shadow hover:shadow-xl transition-shadow duration-300">
+          <h3 class="text-2xl font-bold text-indigo-600 mb-2">Real Estate Market Analysis</h3>
+          <p class="mb-2">Designed ensemble regression models and interactive dashboards that predicted property values with a 25% reduction in error.</p>
+          <p class="text-sm mb-2">Tech: Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</p>
+          <p class="text-sm">Duration: July - October 2024</p>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded shadow hover:shadow-xl transition-shadow duration-300">
+          <h3 class="text-2xl font-bold text-indigo-600 mb-2">Senior Shield</h3>
+          <p class="mb-2">Led a team to create a cross-platform app with AI-based anomaly detection, reducing false alerts by 20%.</p>
+          <p class="text-sm mb-2">Tech: HTML, CSS, JavaScript</p>
+          <p class="text-sm">Duration: February 2024</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center">
+    <p>&copy; <span id="year"></span> Sampat Bandlamudi. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Toggle dark/light theme
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // GSAP animations for hero section elements
+    gsap.from("#hero h1", { duration: 1, y: -50, opacity: 0, ease: "power3.out" });
+    gsap.from("#hero p", { duration: 1, delay: 0.5, y: -50, opacity: 0, ease: "power3.out" });
+  </script>
+</body>
+</html>
