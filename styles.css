@@ -1,178 +1,67 @@
-/* CSS Variables for Light Theme */
 :root {
   --bg-color: #ffffff;
-  --text-color: #4B0082;
-  --nav-bg: rgba(255, 255, 255, 0.95);
-  --section-bg: #f0f0f0;
-  --hero-bg-gradient: linear-gradient(135deg, #ffffff, #f0f0f0);
-  --button-bg: #8A2BE2;
-  --button-hover-bg: #9b5de5;
-  --link-hover: #8A2BE2;
+  --text-color: #333333;
+  --accent-color: #6A0DAD;
 }
 
-/* Dark Theme Overrides */
-body.dark {
-  --bg-color: #2C003E;
-  --text-color: #ffffff;
-  --nav-bg: rgba(44, 0, 62, 0.95);
-  --section-bg: #3A0E52;
-  --hero-bg-gradient: linear-gradient(135deg, #2C003E, #3A0E52);
-  --button-bg: #8A2BE2;
-  --button-hover-bg: #9b5de5;
-  --link-hover: #9b5de5;
-}
-
-/* Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  font-family: 'Helvetica Neue', sans-serif;
-  background: var(--bg-color);
+body {
+  background-color: var(--bg-color);
   color: var(--text-color);
-  scroll-behavior: smooth;
-  transition: background 0.3s ease, color 0.3s ease;
+  font-family: 'Open Sans', sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: none; /* Hide default cursor */
 }
 
-/* Fixed Navigation */
-.fixed-header {
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #EEEEEE;
+}
+
+/* Header & Navigation Styles */
+header {
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* Section Styles */
+section {
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 1rem;
+}
+
+section h2 {
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Toggle Button */
+#mode-toggle {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: var(--nav-bg);
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-.fixed-header nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-}
-.fixed-header nav ul {
-  display: flex;
-  list-style: none;
-  margin-right: 20px;
-}
-.fixed-header nav ul li {
-  margin: 0 15px;
-}
-.fixed-header nav ul li a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s;
-}
-.fixed-header nav ul li a:hover {
-  color: var(--link-hover);
-}
-#theme-toggle {
-  padding: 8px 16px;
-  background: var(--button-bg);
-  border: none;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent-color);
   color: #fff;
-  font-weight: bold;
-  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  transition: background 0.3s;
-}
-#theme-toggle:hover {
-  background: var(--button-hover-bg);
-}
-
-/* Hero Section */
-.hero-section {
-  height: 100vh;
-  background: var(--hero-bg-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  padding: 20px;
-}
-.hero-content {
-  z-index: 1;
-}
-.hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  transition: color 0.3s;
-}
-.hero-content p {
-  font-size: 1.2rem;
-  line-height: 1.5;
-}
-
-/* Section Styling */
-.section {
-  padding: 100px 20px;
-  background: var(--section-bg);
-  margin-top: 60px;
-}
-.content-wrapper {
-  max-width: 1200px;
-  margin: auto;
-}
-.section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  text-align: center;
-  color: var(--text-color);
-}
-
-/* Items */
-.item, .project-item, .experience-item {
-  margin-bottom: 40px;
-  background: var(--bg-color);
-  padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.item:hover, .project-item:hover, .experience-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-.item h3, .project-item h3, .experience-item h3 {
-  margin-bottom: 10px;
-  color: var(--text-color);
 }
 
-/* Custom Cursor Glow */
-.cursor-glow {
+/* Custom Cursor Effect */
+.custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
   width: 40px;
   height: 40px;
-  background: rgba(138, 43, 226, 0.3);
+  margin-top: -20px;
+  margin-left: -20px;
+  border: 2px solid var(--accent-color);
   border-radius: 50%;
   pointer-events: none;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: overlay;
-  transition: background 0.3s, transform 0.1s;
+  transition: transform 0.1s ease-out, opacity 0.3s;
+  opacity: 0.7;
   z-index: 9999;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .fixed-header nav {
-    flex-direction: column;
-  }
-  .fixed-header nav ul {
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-  .hero-content p {
-    font-size: 1rem;
-  }
 }
