@@ -1,185 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sampat Bandlamudi Resume</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sampat Bandlamudi - Resume</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Fixed Navigation with Theme Toggle -->
-  <header class="fixed-header">
-    <nav>
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#awards">Awards</a></li>
-      </ul>
-      <button id="theme-toggle">Toggle Theme</button>
-    </nav>
+  <!-- Toggle Button for Light/Dark Mode -->
+  <button id="mode-toggle">Toggle Mode</button>
+
+  <!-- Header -->
+  <header>
+    <h1>Sampat Bandlamudi</h1>
+    <p>sam.bandlamudi@gmail.com • (916)-799-6198 • Dallas-Fort Worth, TX</p>
   </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero-section">
-    <div class="hero-content">
-      <h1>SAMPAT BANDLAMUDI</h1>
-      <p>sam.bandlamudi@gmail.com • (916)-799-6198 • Dallas-Fort Worth, TX</p>
-    </div>
-  </section>
-
-  <!-- Education Section -->
-  <section id="education" class="education-section section">
-    <div class="content-wrapper">
+  <!-- Main Content -->
+  <main>
+    <section id="education">
       <h2>Education</h2>
-      <div class="item">
-        <h3>The University of Texas at Dallas</h3>
-        <p>
-          <strong>B.S. in Data Science</strong> | Richardson, TX | Expected Graduation:
-          May 2026
-        </p>
-        <p>
-          <em>Relevant Courses:</em> Data Structures and Introduction to Algorithmic Analysis,
-          Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data
-          Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)
-        </p>
-      </div>
-    </div>
-  </section>
+      <p><strong>The University of Texas at Dallas</strong> | B.S. in Data Science | Richardson, TX | Expected Graduation: May 2026</p>
+      <p>Relevant Courses: Data Structures, Algorithmic Analysis, Linear Algebra, and more.</p>
+    </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="skills-section section">
-    <div class="content-wrapper">
-      <h2>Skills and Certifications</h2>
-      <div class="item">
-        <p>
-          <strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS
-        </p>
-        <p>
-          <strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows
-        </p>
-        <p>
-          <strong>Frameworks and Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn,
-          Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova
-        </p>
-        <p>
-          <strong>Certifications:</strong> Introduction to Relational Database and SQL,
-          Fundamentals of Project Planning and Management, Introduction to Programming Using
-          Python, Data Science and AI Fundamentals
-        </p>
-      </div>
-    </div>
-  </section>
+    <section id="skills">
+      <h2>Skills & Certifications</h2>
+      <p>Languages: Java, C++, Python, R, HTML/CSS</p>
+      <p>Frameworks: TensorFlow, PyTorch, Keras, etc.</p>
+      <!-- ... more content ... -->
+    </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects-section section">
-    <div class="content-wrapper">
-      <h2>Academic and Personal Projects</h2>
+    <!-- Additional sections for projects, leadership, etc. -->
+  </main>
 
-      <div class="project-item item">
-        <h3>Netflix Content Release Strategy Analysis</h3>
-        <p>
-          <em>Technologies:</em> R, ggplot2, dplyr, tidyverse | <strong>Duration:</strong>
-          September - October 2024
-        </p>
-        <p>
-          Developed classification and time-series forecasting models to predict optimal
-          content release dates, increasing predicted engagement by over 20%. Leveraged clustering
-          and regression techniques to segment genres and identify seasonal trends with 85%
-          accuracy.
-        </p>
-      </div>
+  <!-- Custom Cursor Element -->
+  <div class="custom-cursor"></div>
 
-      <div class="project-item item">
-        <h3>Weather API Integration and Bot Development</h3>
-        <p>
-          <em>Technologies:</em> Java, Python, TensorFlow, Pircbot | <strong>Duration:</strong>
-          July - September 2024
-        </p>
-        <p>
-          Integrated public weather APIs with an AI module using historical data, improving
-          forecast accuracy by 15%. Built an IRC bot that processed over 10,000 API calls, reducing
-          user query response time by 30% through machine learning optimizations.
-        </p>
-      </div>
-
-      <div class="project-item item">
-        <h3>Real Estate Market Analysis</h3>
-        <p>
-          <em>Technologies:</em> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn |
-          <strong>Duration:</strong> July - October 2024
-        </p>
-        <p>
-          Designed ensemble regression models and feature engineering pipelines that predicted
-          property values with a mean absolute error reduction of 25%. Developed interactive
-          dashboards that visualized trends for over 50+ regions, aiding data-driven investment
-          decisions.
-        </p>
-      </div>
-
-      <div class="project-item item">
-        <h3>Senior Shield</h3>
-        <p>
-          <em>Technologies:</em> HTML, CSS, Javascript | <strong>Event:</strong> Axxess Hackathon
-          2024, February 2024
-        </p>
-        <p>
-          Led a team to create a cross-platform app integrating AI-based anomaly detection,
-          reducing false alerts by 20% compared to standard monitoring tools. Designed a user-centric
-          interface and implemented predictive analytics to provide proactive care
-          recommendations.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience" class="experience-section section">
-    <div class="content-wrapper">
-      <h2>Leadership and Work Experience</h2>
-
-      <div class="experience-item item">
-        <h3>Alliance Ground International - Passenger Service Agent</h3>
-        <p><strong>Duration:</strong> May 2024 - Present</p>
-        <p>
-          Contracted to an airline company and was responsible for managing inquiries and resolving
-          issues regarding flight operations as well as luggage transfers. Worked under high pressure
-          to ensure smooth airline functions and maintain safety protocols.
-        </p>
-      </div>
-
-      <div class="experience-item item">
-        <h3>BizInstitution - Cofounder / President</h3>
-        <p><strong>Duration:</strong> August 2022 - May 2024</p>
-        <p>
-          Founded and led an organization dedicated to leveraging data science and AI to modernize
-          technical education for underserved communities. Directed a team of 10+ in designing
-          data-driven curricula and AI-assisted learning modules in subjects such as calculus and
-          business law.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Awards Section -->
-  <section id="awards" class="awards-section section">
-    <div class="content-wrapper">
-      <h2>Additional Information & Awards</h2>
-      <p>
-        <strong>Awards:</strong> Coppell High School Most Improved (x2), TMEA Wind Ensemble, TMEA
-        Symphonic Band, Houston Underground Competition Finalist, BOA Marching Band Finalist, UIL
-        State Finalist, DECA State Finalist, DECA State Qualifier (x2)
-      </p>
-    </div>
-  </section>
-
-  <!-- Custom Cursor Glow -->
-  <div class="cursor-glow"></div>
-
-  <!-- GSAP Library for Animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
