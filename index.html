@@ -4,68 +4,65 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sampat Bandlamudi - Resume</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- You can add custom fonts here if desired -->
   <style>
-    /* CSS Variables for Themes */
+    /* Theme Variables */
     :root {
-      --bg-color: #f9f9f9;
-      --text-color: #333;
-      --card-bg: #fff;
+      --bg-color: #ffffff;
+      --text-color: #222222;
       --accent-color: #2575fc;
-      --nav-bg: #fff;
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: #f7f7f7;
     }
     [data-theme="dark"] {
       --bg-color: #121212;
       --text-color: #e0e0e0;
-      --card-bg: #1e1e1e;
       --accent-color: #66aaff;
-      --nav-bg: #1e1e1e;
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --card-bg: #1e1e1e;
     }
-    
-    /* Global Styles */
+
+    /* Reset and Global Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: var(--text-color);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       background: var(--bg-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      cursor: none; /* Hide default cursor */
+      color: var(--text-color);
+      transition: background 0.3s ease, color 0.3s ease;
+      line-height: 1.6;
     }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
     
     /* Navigation */
     nav {
-      background: var(--nav-bg);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      position: sticky;
+      position: fixed;
+      width: 100%;
       top: 0;
+      left: 0;
+      background: var(--nav-bg);
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       z-index: 1000;
-      transition: background-color 0.3s ease;
+      backdrop-filter: blur(10px);
+      transition: background 0.3s ease;
     }
     nav ul {
-      display: flex;
-      justify-content: center;
       list-style: none;
-      padding: 10px 0;
+      display: flex;
+      gap: 30px;
       align-items: center;
     }
-    nav ul li {
-      margin: 0 15px;
-    }
-    nav ul li a {
-      font-weight: bold;
-      color: var(--text-color);
+    nav li a {
+      font-weight: 500;
       transition: color 0.3s ease;
     }
-    nav ul li a:hover {
+    nav li a:hover {
       color: var(--accent-color);
     }
     #theme-toggle {
@@ -80,74 +77,62 @@
       color: var(--accent-color);
     }
     
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #6a11cb, var(--accent-color));
-      color: #fff;
-      padding: 50px 20px;
-      text-align: center;
-      transition: background 0.3s ease;
-    }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-size: 1.2rem;
-    }
-    
     /* Sections */
     section {
-      padding: 50px 20px;
+      padding: 100px 40px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
     }
     .container {
       max-width: 1200px;
-      margin: auto;
+      margin: 0 auto;
+    }
+    header {
+      background: linear-gradient(135deg, #6a11cb, var(--accent-color));
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 20px;
+      transition: background 0.3s ease;
+    }
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
     }
     .card {
       background: var(--card-bg);
-      padding: 30px;
-      margin-bottom: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .card:hover {
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     }
-    .card h2 {
+    h2 {
+      margin-bottom: 20px;
+      font-size: 2.2rem;
       border-bottom: 2px solid var(--accent-color);
       display: inline-block;
-      padding-bottom: 5px;
-      margin-bottom: 20px;
+      padding-bottom: 8px;
     }
-    
-    /* Grid for Projects */
+    /* Grid Layout for Projects */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
+      margin-top: 30px;
     }
-    .grid > div {
-      padding: 15px;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      background: var(--card-bg);
-      transition: transform 0.3s ease;
-    }
-    .grid > div:hover {
-      transform: translateY(-5px);
-    }
-    
-    /* Footer */
-    footer {
-      background: var(--nav-bg);
-      color: var(--text-color);
-      text-align: center;
-      padding: 20px;
-      transition: background-color 0.3s ease;
-    }
-    
+
     /* Scroll Reveal Animation */
     .reveal {
       opacity: 0;
@@ -159,38 +144,41 @@
       transform: translateY(0);
     }
     
-    /* Responsive Text Sizes */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-      header p {
-        font-size: 1rem;
-      }
-    }
-    
-    /* Custom Cursor */
-    #cursor {
+    /* Fog Effect - a subtle overlay that follows the cursor */
+    #fog {
       position: fixed;
       top: 0;
       left: 0;
-      width: 20px;
-      height: 20px;
-      background: var(--accent-color);
-      border-radius: 50%;
+      width: 80px;
+      height: 80px;
       pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out, background-color 0.3s ease;
-      z-index: 10000;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 70%);
+      filter: blur(15px);
+      z-index: 999;
+      transition: transform 0.12s ease-out;
+      animation: fogPulse 4s infinite ease-in-out;
+    }
+    @keyframes fogPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.8rem; }
+      header p { font-size: 1rem; }
+      nav { padding: 10px 20px; }
     }
   </style>
 </head>
 <body>
-  <!-- Custom Cursor -->
-  <div id="cursor"></div>
+  <!-- Fog Effect Element -->
+  <div id="fog"></div>
 
   <!-- Navigation -->
   <nav>
+    <div class="logo"><strong>Sampat</strong></div>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#education">Education</a></li>
@@ -198,13 +186,13 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#awards">Awards</a></li>
-      <li style="margin-left: auto; margin-right: 20px;">
+      <li>
         <button id="theme-toggle">🌙</button>
       </li>
     </ul>
   </nav>
 
-  <!-- Header / About -->
+  <!-- Hero Section -->
   <header id="about">
     <div class="container">
       <h1>Sampat Bandlamudi</h1>
@@ -214,49 +202,55 @@
 
   <!-- Education Section -->
   <section id="education">
-    <div class="container card reveal">
-      <h2>Education</h2>
-      <p><strong>The University of Texas at Dallas</strong> | B.S. in Data Science | Richardson, TX</p>
-      <p>Expected Graduation: May 2026</p>
-      <p><em>Relevant Courses:</em> Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)</p>
+    <div class="container">
+      <div class="card reveal">
+        <h2>Education</h2>
+        <p><strong>The University of Texas at Dallas</strong> | B.S. in Data Science | Richardson, TX</p>
+        <p>Expected Graduation: May 2026</p>
+        <p><em>Relevant Courses:</em> Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)</p>
+      </div>
     </div>
   </section>
 
   <!-- Skills and Certifications -->
   <section id="skills">
-    <div class="container card reveal">
-      <h2>Skills and Certifications</h2>
-      <p><strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS</p>
-      <p><strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows</p>
-      <p><strong>Frameworks and Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova</p>
-      <p><strong>Certifications:</strong> Introduction to Relational Database and SQL, Fundamentals of Project Planning and Management, Introduction to Programming Using Python, Data Science and AI Fundamentals</p>
+    <div class="container">
+      <div class="card reveal">
+        <h2>Skills and Certifications</h2>
+        <p><strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS</p>
+        <p><strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows</p>
+        <p><strong>Frameworks and Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova</p>
+        <p><strong>Certifications:</strong> Introduction to Relational Database and SQL, Fundamentals of Project Planning and Management, Introduction to Programming Using Python, Data Science and AI Fundamentals</p>
+      </div>
     </div>
   </section>
 
   <!-- Projects Section -->
   <section id="projects">
-    <div class="container card reveal">
-      <h2>Academic and Personal Projects</h2>
-      <div class="grid">
-        <div>
-          <h3>Netflix Content Release Strategy Analysis</h3>
-          <p><em>Tools:</em> R, ggplot2, dplyr, tidyverse | Sept - Oct 2024</p>
-          <p>Developed classification and time-series forecasting models to predict optimal content release dates, increasing predicted engagement by over 20%. Utilized clustering and regression techniques for genre segmentation and seasonal trends.</p>
-        </div>
-        <div>
-          <h3>Weather API Integration and Bot Development</h3>
-          <p><em>Tools:</em> Java, Python, TensorFlow, Pircbot | July - Sept 2024</p>
-          <p>Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15%. Developed an IRC bot that processed over 10,000 API calls, reducing user query response time by 30%.</p>
-        </div>
-        <div>
-          <h3>Real Estate Market Analysis</h3>
-          <p><em>Tools:</em> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn | July - Oct 2024</p>
-          <p>Designed ensemble regression models and feature engineering pipelines that predicted property values with a mean absolute error reduction of 25%. Created interactive dashboards for data-driven decisions across 50+ regions.</p>
-        </div>
-        <div>
-          <h3>Senior Shield</h3>
-          <p><em>Tools:</em> HTML, CSS, JavaScript | Axxess Hackathon 2024 (Feb 2024)</p>
-          <p>Led a team to create a cross-platform app integrating AI-based anomaly detection, reducing false alerts by 20%. Focused on user-centric design and predictive analytics.</p>
+    <div class="container">
+      <div class="card reveal">
+        <h2>Academic and Personal Projects</h2>
+        <div class="grid">
+          <div>
+            <h3>Netflix Content Release Strategy Analysis</h3>
+            <p><em>Tools:</em> R, ggplot2, dplyr, tidyverse | Sept - Oct 2024</p>
+            <p>Developed classification and time-series forecasting models to predict optimal content release dates, increasing engagement by over 20% while leveraging clustering and regression techniques.</p>
+          </div>
+          <div>
+            <h3>Weather API Integration &amp; Bot Development</h3>
+            <p><em>Tools:</em> Java, Python, TensorFlow, Pircbot | July - Sept 2024</p>
+            <p>Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15% and building an IRC bot to handle 10,000+ API calls.</p>
+          </div>
+          <div>
+            <h3>Real Estate Market Analysis</h3>
+            <p><em>Tools:</em> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn | July - Oct 2024</p>
+            <p>Designed ensemble regression models and feature pipelines reducing prediction error by 25%, alongside interactive dashboards for 50+ regions.</p>
+          </div>
+          <div>
+            <h3>Senior Shield</h3>
+            <p><em>Tools:</em> HTML, CSS, JavaScript | Axxess Hackathon 2024 (Feb 2024)</p>
+            <p>Led a team to develop a cross-platform app integrating AI-based anomaly detection, reducing false alerts by 20% with a user-centric design.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -264,52 +258,56 @@
 
   <!-- Experience Section -->
   <section id="experience">
-    <div class="container card reveal">
-      <h2>Leadership and Work Experience</h2>
-      <div>
-        <h3>Alliance Ground International</h3>
-        <p><strong>Passenger Service Agent</strong> | May 2024 - Present</p>
-        <p>Managed inquiries and resolved issues regarding flight operations and luggage transfers, ensuring safety protocols in high-pressure situations.</p>
-      </div>
-      <div style="margin-top:20px;">
-        <h3>BizInstitution</h3>
-        <p><strong>Cofounder / President</strong> | August 2022 - May 2024</p>
-        <p>Founded and led an organization dedicated to leveraging data science and AI to modernize technical education. Directed a team of 10+ in designing data-driven curricula and AI-assisted learning modules.</p>
+    <div class="container">
+      <div class="card reveal">
+        <h2>Leadership &amp; Work Experience</h2>
+        <div>
+          <h3>Alliance Ground International</h3>
+          <p><strong>Passenger Service Agent</strong> | May 2024 - Present</p>
+          <p>Managed inquiries and resolved flight and luggage issues under high-pressure conditions, ensuring operational safety.</p>
+        </div>
+        <div style="margin-top: 20px;">
+          <h3>BizInstitution</h3>
+          <p><strong>Cofounder / President</strong> | August 2022 - May 2024</p>
+          <p>Founded and led an organization focused on modernizing technical education with data science and AI, directing a team of 10+.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Awards and Additional Information -->
+  <!-- Awards & Additional Information -->
   <section id="awards">
-    <div class="container card reveal">
-      <h2>Additional Information &amp; Awards</h2>
-      <p>Awards: Coppell High School Most Improved x2, TMEA Wind Ensemble, TMEA Symphonic Band, Houston Underground Competition Finalist, BOA Marching Band Finalist, UIL State Finalist, DECA State Finalist, DECA State Qualifier x2</p>
+    <div class="container">
+      <div class="card reveal">
+        <h2>Awards &amp; Additional Information</h2>
+        <p>Awards: Coppell High School Most Improved x2, TMEA Wind Ensemble, TMEA Symphonic Band, Houston Underground Competition Finalist, BOA Marching Band Finalist, UIL State Finalist, DECA State Finalist, DECA State Qualifier x2</p>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2024 Sampat Bandlamudi. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2024 Sampat Bandlamudi. All rights reserved.</p>
+    </div>
   </footer>
 
-  <!-- JavaScript: Scroll Reveal, Theme Toggle, and Custom Cursor -->
+  <!-- JavaScript: Scroll Reveal, Theme Toggle, and Fog Effect -->
   <script>
-    // Scroll Reveal Functionality
+    // Reveal sections on scroll
     function revealElements() {
       const reveals = document.querySelectorAll('.reveal');
       const windowHeight = window.innerHeight;
       reveals.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if(elementTop < windowHeight - 50) {
+        if(el.getBoundingClientRect().top < windowHeight - 50) {
           el.classList.add('active');
         }
       });
     }
     window.addEventListener('scroll', revealElements);
-    // Trigger reveal on page load
     revealElements();
 
-    // Theme Toggle Functionality
+    // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', () => {
       const htmlEl = document.documentElement;
@@ -322,11 +320,11 @@
       }
     });
 
-    // Custom Cursor Effect
-    const cursor = document.getElementById('cursor');
+    // Fog Effect following the cursor (keeping the default cursor visible)
+    const fog = document.getElementById('fog');
     document.addEventListener('mousemove', (e) => {
-      cursor.style.top = e.clientY + 'px';
-      cursor.style.left = e.clientX + 'px';
+      // Offset the fog element so its center aligns with the mouse pointer
+      fog.style.transform = `translate(${e.clientX - fog.offsetWidth/2}px, ${e.clientY - fog.offsetHeight/2}px)`;
     });
   </script>
 </body>
