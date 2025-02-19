@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sampat Bandlamudi - Resume</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
-    /* Reset and basic styles */
+    /* CSS Variables for Themes */
+    :root {
+      --bg-color: #f9f9f9;
+      --text-color: #333;
+      --card-bg: #fff;
+      --accent-color: #2575fc;
+      --nav-bg: #fff;
+    }
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --card-bg: #1e1e1e;
+      --accent-color: #66aaff;
+      --nav-bg: #1e1e1e;
+    }
+    
+    /* Global Styles */
     * {
       margin: 0;
       padding: 0;
@@ -15,46 +31,62 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f9f9f9;
+      color: var(--text-color);
+      background: var(--bg-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: none; /* Hide default cursor */
     }
     a {
       text-decoration: none;
       color: inherit;
     }
-
+    
     /* Navigation */
     nav {
-      background: #fff;
+      background: var(--nav-bg);
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 1000;
+      transition: background-color 0.3s ease;
     }
     nav ul {
       display: flex;
       justify-content: center;
       list-style: none;
       padding: 10px 0;
+      align-items: center;
     }
     nav ul li {
       margin: 0 15px;
     }
     nav ul li a {
       font-weight: bold;
-      color: #333;
+      color: var(--text-color);
       transition: color 0.3s ease;
     }
     nav ul li a:hover {
-      color: #2575fc;
+      color: var(--accent-color);
     }
-
+    #theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+    #theme-toggle:hover {
+      color: var(--accent-color);
+    }
+    
     /* Header */
     header {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      background: linear-gradient(135deg, #6a11cb, var(--accent-color));
       color: #fff;
       padding: 50px 20px;
       text-align: center;
+      transition: background 0.3s ease;
     }
     header h1 {
       font-size: 3rem;
@@ -63,7 +95,7 @@
     header p {
       font-size: 1.2rem;
     }
-
+    
     /* Sections */
     section {
       padding: 50px 20px;
@@ -73,20 +105,24 @@
       margin: auto;
     }
     .card {
-      background: #fff;
+      background: var(--card-bg);
       padding: 30px;
       margin-bottom: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
     .card h2 {
-      border-bottom: 2px solid #2575fc;
+      border-bottom: 2px solid var(--accent-color);
       display: inline-block;
       padding-bottom: 5px;
       margin-bottom: 20px;
     }
-
-    /* Grid for projects */
+    
+    /* Grid for Projects */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -96,18 +132,23 @@
       padding: 15px;
       border: 1px solid #eee;
       border-radius: 8px;
-      background: #fdfdfd;
+      background: var(--card-bg);
+      transition: transform 0.3s ease;
     }
-
+    .grid > div:hover {
+      transform: translateY(-5px);
+    }
+    
     /* Footer */
     footer {
-      background: #333;
-      color: #fff;
+      background: var(--nav-bg);
+      color: var(--text-color);
       text-align: center;
       padding: 20px;
+      transition: background-color 0.3s ease;
     }
-
-    /* Scroll reveal animation */
+    
+    /* Scroll Reveal Animation */
     .reveal {
       opacity: 0;
       transform: translateY(20px);
@@ -117,8 +158,8 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Responsive text sizes */
+    
+    /* Responsive Text Sizes */
     @media (max-width: 768px) {
       header h1 {
         font-size: 2.5rem;
@@ -127,9 +168,27 @@
         font-size: 1rem;
       }
     }
+    
+    /* Custom Cursor */
+    #cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--accent-color);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease-out, background-color 0.3s ease;
+      z-index: 10000;
+    }
   </style>
 </head>
 <body>
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+
   <!-- Navigation -->
   <nav>
     <ul>
@@ -139,6 +198,9 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#awards">Awards</a></li>
+      <li style="margin-left: auto; margin-right: 20px;">
+        <button id="theme-toggle">🌙</button>
+      </li>
     </ul>
   </nav>
 
@@ -230,8 +292,9 @@
     <p>&copy; 2024 Sampat Bandlamudi. All rights reserved.</p>
   </footer>
 
-  <!-- JavaScript for Scroll Reveal -->
+  <!-- JavaScript: Scroll Reveal, Theme Toggle, and Custom Cursor -->
   <script>
+    // Scroll Reveal Functionality
     function revealElements() {
       const reveals = document.querySelectorAll('.reveal');
       const windowHeight = window.innerHeight;
@@ -245,6 +308,26 @@
     window.addEventListener('scroll', revealElements);
     // Trigger reveal on page load
     revealElements();
+
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      const htmlEl = document.documentElement;
+      if(htmlEl.getAttribute('data-theme') === 'light'){
+        htmlEl.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+      } else {
+        htmlEl.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '🌙';
+      }
+    });
+
+    // Custom Cursor Effect
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.top = e.clientY + 'px';
+      cursor.style.left = e.clientX + 'px';
+    });
   </script>
 </body>
 </html>
