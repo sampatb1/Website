@@ -1,53 +1,125 @@
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  background: #f4f4f4;
-  color: #333;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sam Pat Bandlamudi - Data Scientist</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Sam Pat Bandlamudi</h1>
+    <p>
+      Email: <a href="mailto:sam.bandlamudi@gmail.com">sam.bandlamudi@gmail.com</a> • 
+      Phone: (916)-799-6198 • Irving, TX
+    </p>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills & Certifications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#awards">Awards</a></li>
+    </ul>
+  </nav>
 
-header, nav, section, footer {
-  margin: 20px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+  <section id="education">
+    <h2>Education</h2>
+    <h3>The University of Texas at Dallas</h3>
+    <p>B.S. in Data Science | Richardson, TX | Expected Graduation: May 2026</p>
+    <p>
+      <strong>Relevant Courses:</strong> Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)
+    </p>
+  </section>
 
-header h1 {
-  margin-top: 0;
-}
+  <section id="skills">
+    <h2>Skills & Certifications</h2>
+    <p><strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS</p>
+    <p><strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows</p>
+    <p>
+      <strong>Frameworks & Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova
+    </p>
+    <p>
+      <strong>Certifications:</strong> Introduction to Relational Database and SQL, Fundamentals of Project Planning and Management, Introduction to Programming Using Python, Data Science and AI Fundamentals
+    </p>
+  </section>
 
-nav ul {
-  list-style: none;
-  padding: 0;
-}
+  <section id="projects">
+    <h2>Projects</h2>
+    <article>
+      <h3>Netflix Content Release Strategy Analysis</h3>
+      <p><strong>Technologies:</strong> R, ggplot2, dplyr, tidyverse</p>
+      <p><em>September - October 2024</em></p>
+      <ul>
+        <li>Developed classification and time-series forecasting models to predict optimal content release dates, increasing predicted engagement by over 20%.</li>
+        <li>Leveraged clustering and regression techniques to segment genres and identify seasonal trends with 85% accuracy.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Weather API Integration and Bot Development</h3>
+      <p><strong>Technologies:</strong> Java, Python, TensorFlow, Pircbot</p>
+      <p><em>July - September 2024</em></p>
+      <ul>
+        <li>Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15%.</li>
+        <li>Built an IRC bot that processed over 10,000 API calls, reducing user query response time by 30% through machine learning optimizations.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Real Estate Market Analysis</h3>
+      <p><strong>Technologies:</strong> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</p>
+      <p><em>July - October 2024</em></p>
+      <ul>
+        <li>Designed ensemble regression models and feature engineering pipelines that predicted property values with a mean absolute error reduction of 25%.</li>
+        <li>Developed interactive dashboards that visualized trends for over 50+ regions, aiding data-driven investment decisions.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>Senior Shield</h3>
+      <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+      <p><em>Axxess Hackathon 2024, February 2024</em></p>
+      <ul>
+        <li>Led a team to create a cross-platform app integrating AI-based anomaly detection, reducing false alerts by 20% compared to standard monitoring tools.</li>
+        <li>Designed a user-centric interface and implemented predictive analytics to provide proactive care recommendations.</li>
+      </ul>
+    </article>
+  </section>
 
-nav ul li {
-  display: inline;
-  margin-right: 15px;
-}
+  <section id="experience">
+    <h2>Leadership & Work Experience</h2>
+    <article>
+      <h3>Alliance Ground International</h3>
+      <p>Passenger Service Agent | May 2024 - Present</p>
+      <ul>
+        <li>Managed inquiries and resolved issues regarding flight operations and luggage transfers.</li>
+        <li>Worked under high pressure to ensure smooth airline functions and adherence to safety protocols.</li>
+      </ul>
+    </article>
+    <article>
+      <h3>BizInstitution</h3>
+      <p>Cofounder / President | August 2022 - May 2024</p>
+      <ul>
+        <li>Founded and led an organization dedicated to leveraging data science and AI to modernize technical education for underserved communities.</li>
+        <li>Directed a team of 10+ in designing data-driven curricula and AI-assisted learning modules in subjects such as calculus and business law.</li>
+      </ul>
+    </article>
+  </section>
 
-a {
-  text-decoration: none;
-  color: #007bff;
-}
+  <section id="awards">
+    <h2>Awards & Additional Information</h2>
+    <ul>
+      <li>Coppell High School Most Improved x2</li>
+      <li>TMEA Wind Ensemble, TMEA Symphonic Band</li>
+      <li>Houston Underground Competition Finalist</li>
+      <li>BOA Marching Band Finalist</li>
+      <li>UIL State Finalist</li>
+      <li>DECA State Finalist, DECA State Qualifier x2</li>
+    </ul>
+  </section>
 
-a:hover {
-  text-decoration: underline;
-}
-
-section h2 {
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 5px;
-}
-
-article {
-  margin-bottom: 20px;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.9em;
-}
+  <footer>
+    <p>&copy; 2024 Sam Pat Bandlamudi. All rights reserved.</p>
+  </footer>
+</body>
+</html>
