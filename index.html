@@ -3,88 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your New Website</title>
-  <style>
-    /* Reset & Base Styles */
-    body, html {
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-      font-family: 'Arial', sans-serif;
-    }
-    /* Navigation Bar */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 1rem;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-    }
-    nav a {
-      margin: 0 15px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      background: url('your-hero-image.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      animation: fadeIn 2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    /* Content Sections */
-    section {
-      padding: 100px 20px;
-    }
-  </style>
+  <title>Seera Inspired Website</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <!-- Fixed Navigation -->
+  <header class="fixed-header">
+    <nav>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <!-- Hero Section -->
-  <div class="hero" id="home">
-    <h1>Welcome to Our Site</h1>
-  </div>
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <h1>Welcome to Our World</h1>
+      <p>Your tagline or introduction goes here.</p>
+      <a href="#about" class="btn">Discover More</a>
+    </div>
+  </section>
 
   <!-- About Section -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Replace this with your about section content.</p>
+  <section id="about" class="about-section">
+    <div class="content-wrapper">
+      <h2>About Us</h2>
+      <p>Detail your story and mission here.</p>
+    </div>
   </section>
 
   <!-- Services Section -->
-  <section id="services">
-    <h2>Our Services</h2>
-    <p>Details about your services.</p>
+  <section id="services" class="services-section">
+    <div class="content-wrapper">
+      <h2>Our Services</h2>
+      <div class="service-cards">
+        <div class="card">
+          <h3>Service One</h3>
+          <p>Details about the first service.</p>
+        </div>
+        <div class="card">
+          <h3>Service Two</h3>
+          <p>Details about the second service.</p>
+        </div>
+        <div class="card">
+          <h3>Service Three</h3>
+          <p>Details about the third service.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Contact details or a form can go here.</p>
+  <section id="contact" class="contact-section">
+    <div class="content-wrapper">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message"></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
   </section>
 
+  <!-- GSAP Library for Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
