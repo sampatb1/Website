@@ -5,19 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sampat Bandlamudi - Resume</title>
   <style>
-    /* Base Variables and Global Styles */
     :root {
       --bg-color: #ffffff;
       --text-color: #333333;
-      --accent-color: #6A0DAD;
-      --transition-duration: 0.4s;
+      --accent-color: #6A0DAD; /* purple */
+      --transition-duration: 0.3s; /* faster transitions */
       --cursor-size: 40px;
     }
-    
     html {
       scroll-behavior: smooth;
     }
-    
     body {
       margin: 0;
       padding: 0;
@@ -27,12 +24,31 @@
       transition: background-color var(--transition-duration) ease,
                   color var(--transition-duration) ease;
     }
-    
+    /* Start in dark mode by default */
     .dark-mode {
       --bg-color: #121212;
       --text-color: #EEEEEE;
     }
-    
+    /* Fixed Toggle Button */
+    #mode-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent-color);
+      color: #fff;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-duration) ease;
+      z-index: 1001;
+      outline: none;
+    }
     /* Navigation Header */
     .nav-header {
       position: fixed;
@@ -48,49 +64,23 @@
       align-items: center;
       transition: background var(--transition-duration);
     }
-    
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-    
     .nav-logo {
       font-size: 1.5rem;
       text-decoration: none;
       color: var(--accent-color);
       font-weight: bold;
+      text-transform: lowercase;
     }
-    
     .nav-menu a {
       margin-left: 1.5rem;
       text-decoration: none;
       color: var(--text-color);
       transition: color var(--transition-duration);
+      text-transform: lowercase;
     }
-    
     .nav-menu a:hover {
       color: var(--accent-color);
     }
-    
-    /* Mode Toggle Button with Icons */
-    #mode-toggle {
-      background: var(--accent-color);
-      color: #fff;
-      border: none;
-      padding: 0.5rem;
-      cursor: pointer;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition-duration) ease;
-      outline: none;
-    }
-    
     /* Landing Section */
     .landing {
       min-height: 100vh;
@@ -99,35 +89,27 @@
       justify-content: center;
       text-align: center;
       background: var(--bg-color);
-      padding-top: 80px; /* account for fixed header */
+      padding-top: 80px;
       opacity: 0;
-      animation: fadeUp 1s forwards;
+      animation: fadeUp 0.5s forwards;
     }
-    
     .landing-content h1 {
       margin: 0;
       text-transform: lowercase;
       opacity: 0;
-      animation: fadeUp 1s forwards;
+      animation: fadeUp 0.5s forwards;
     }
-    
+    /* Increase font sizes for a bigger title section */
     .landing-content h:nth-child(1) {
-      animation-delay: 0.3s;
-      font-size: 3.5rem;
+      animation-delay: 0.15s;
+      font-size: 5rem;
     }
-    
     .landing-content h:nth-child(2) {
-      animation-delay: 0.6s;
-      font-size: 4rem;
+      animation-delay: 0.3s;
+      font-size: 6.5rem;
+      /* Set name color to purple */
+      color: var(--accent-color);
     }
-    
-    /* "sampat" initially white then transitions to green */
-    #name {
-      color: white;
-      animation: colorChange 2s forwards;
-      animation-delay: 1s;
-    }
-    
     /* Typewriter container */
     .welcome {
       font-size: 1.5rem;
@@ -138,28 +120,24 @@
       border-right: 2px solid var(--accent-color);
       width: 0;
       opacity: 0;
-      animation: typewriter 3s 1.5s forwards, blink 0.75s 4.5s infinite;
+      animation: typewriter 2s 0.8s forwards, blink 0.5s 2.8s infinite;
     }
-    
     /* Main Content and Sections */
     main {
       max-width: 900px;
       margin: 0 auto;
       padding: 2rem 1rem;
     }
-    
     .content-section {
       margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-    
     .content-section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
     .content-section h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
@@ -167,41 +145,29 @@
       padding-bottom: 0.5rem;
       text-transform: lowercase;
     }
-    
     .content-section h3 {
       margin-top: 1.5rem;
       font-size: 1.4rem;
       color: var(--accent-color);
       text-transform: lowercase;
     }
-    
     .content-section p, .content-section li {
       line-height: 1.6;
       font-size: 1rem;
     }
-    
     /* Fade Up Animation */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
-    /* Color Change Animation for Name */
-    @keyframes colorChange {
-      from { color: white; }
-      to { color: green; }
-    }
-    
     /* Typewriter Effect */
     @keyframes typewriter {
       from { width: 0; opacity: 1; }
       to { width: 100%; opacity: 1; }
     }
-    
     @keyframes blink {
       50% { border-color: transparent; }
     }
-    
     /* Custom Cursor Fog (immediately following the cursor) */
     .cursor-fog {
       position: fixed;
@@ -218,7 +184,6 @@
       filter: blur(8px);
       z-index: 9999;
     }
-    
     /* Responsive Adjustments */
     @media (max-width: 600px) {
       .nav-logo {
@@ -229,10 +194,10 @@
         height: 40px;
       }
       .landing-content h:nth-child(1) {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
       }
       .landing-content h:nth-child(2) {
-        font-size: 3rem;
+        font-size: 4rem;
       }
       .welcome {
         font-size: 1.2rem;
@@ -240,32 +205,28 @@
     }
   </style>
 </head>
-<body>
+<body class="dark-mode">
+  <!-- Fixed Toggle Button -->
+  <button id="mode-toggle">
+    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24">
+      <path d="M6.76 4.84l-1.8-1.79L3.51 5.5l1.79 1.79 1.46-1.45zM1 11h3v2H1v-2zm10-9h2v3h-2V2zm7.64 3.55l-1.79-1.79-1.46 1.45 1.79 1.79 1.46-1.45zM17 11h3v2h-3v-2zm-5 5a4 4 0 110-8 4 4 0 010 8zm5.24 2.16l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45zM13 22h-2v-3h2v3zm-7.64-3.55l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45z"/>
+    </svg>
+    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24" style="display: none;">
+      <path d="M12.3 2.3a9 9 0 107.4 7.4 7 7 0 01-7.4-7.4z"/>
+    </svg>
+  </button>
   <!-- Navigation Header -->
   <header class="nav-header">
-    <div class="nav-container">
-      <a href="#landing" class="nav-logo">sampat</a>
-      <nav class="nav-menu">
-        <a href="#landing">home</a>
-        <a href="#education">education</a>
-        <a href="#skills">skills</a>
-        <a href="#projects">projects</a>
-        <a href="#experience">experience</a>
-        <a href="#additional">additional</a>
-      </nav>
-      <button id="mode-toggle">
-        <!-- Sun Icon (for light mode) -->
-        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24">
-          <path d="M6.76 4.84l-1.8-1.79L3.51 5.5l1.79 1.79 1.46-1.45zM1 11h3v2H1v-2zm10-9h2v3h-2V2zm7.64 3.55l-1.79-1.79-1.46 1.45 1.79 1.79 1.46-1.45zM17 11h3v2h-3v-2zm-5 5a4 4 0 110-8 4 4 0 010 8zm5.24 2.16l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45zM13 22h-2v-3h2v3zm-7.64-3.55l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45z"/>
-        </svg>
-        <!-- Moon Icon (hidden in light mode) -->
-        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24" style="display: none;">
-          <path d="M12.3 2.3a9 9 0 107.4 7.4 7 7 0 01-7.4-7.4z"/>
-        </svg>
-      </button>
-    </div>
+    <a href="#landing" class="nav-logo">sampat</a>
+    <nav class="nav-menu">
+      <a href="#landing">home</a>
+      <a href="#education">education</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#additional">additional</a>
+    </nav>
   </header>
-  
   <!-- Landing Section -->
   <section id="landing" class="landing">
     <div class="landing-content">
@@ -274,7 +235,6 @@
       <p class="welcome" id="welcome-text"></p>
     </div>
   </section>
-  
   <!-- Main Resume Content -->
   <main>
     <!-- Education Section -->
@@ -283,7 +243,6 @@
       <p><strong>The University of Texas at Dallas</strong> | B.S. in Data Science | Richardson, TX | Expected Graduation: May 2026</p>
       <p>Relevant Courses: Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)</p>
     </section>
-    
     <!-- Skills and Certifications -->
     <section id="skills" class="content-section">
       <h2>skills & certifications</h2>
@@ -292,53 +251,42 @@
       <p><strong>Frameworks and Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova</p>
       <p><strong>Certifications:</strong> Introduction to Relational Database and SQL, Fundamentals of Project Planning and Management, Introduction to Programming Using Python, Data Science and AI Fundamentals</p>
     </section>
-    
     <!-- Projects -->
     <section id="projects" class="content-section">
       <h2>academic & personal projects</h2>
-      
       <h3>netflix content release strategy analysis</h3>
       <p><em>Technologies:</em> R, ggplot2, dplyr, tidyverse</p>
       <p>Developed classification and time-series forecasting models to predict optimal content release dates, increasing predicted engagement by over 20%. Leveraged clustering and regression techniques to segment genres and identify seasonal trends with 85% accuracy.</p>
-      
       <h3>weather api integration and bot development</h3>
       <p><em>Technologies:</em> Java, Python, TensorFlow, Pircbot</p>
       <p>Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15%. Built an IRC bot that processed over 10,000 API calls, reducing user query response time by 30% through machine learning optimizations.</p>
-      
       <h3>real estate market analysis</h3>
       <p><em>Technologies:</em> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</p>
       <p>Designed ensemble regression models and feature engineering pipelines that predicted property values with a mean absolute error reduction of 25%. Developed interactive dashboards that visualized trends for over 50+ regions, aiding data-driven investment decisions.</p>
-      
       <h3>senior shield</h3>
       <p><em>Technologies:</em> HTML, CSS, JavaScript</p>
       <p>Led a team at Axxess Hackathon 2024 to create a cross-platform app integrating AI-based anomaly detection, reducing false alerts by 20% compared to standard monitoring tools. Designed a user-centric interface and implemented predictive analytics to provide proactive care recommendations.</p>
     </section>
-    
     <!-- Experience -->
     <section id="experience" class="content-section">
       <h2>leadership & work experience</h2>
-      
       <h3>alliance ground international - passenger service agent</h3>
       <p>May 2024 - Present</p>
       <p>Managed inquiries and resolved issues regarding flight operations as well as luggage transfers. Worked under high pressure to ensure smooth airline functions and uphold safety protocols.</p>
-      
       <h3>bizinstitution - cofounder / president</h3>
       <p>August 2022 - May 2024</p>
       <p>Founded and led an organization dedicated to leveraging data science and AI to modernize technical education for underserved communities. Directed a team of 10+ in designing data-driven curricula and AI-assisted learning modules in subjects such as calculus and business law.</p>
     </section>
-    
     <!-- Additional Information -->
     <section id="additional" class="content-section">
       <h2>additional information</h2>
       <p><strong>Awards:</strong> Coppell High School Most Improved x2, TMEA Wind Ensemble, TMEA Symphonic Band, Houston Underground Competition Finalist, BOA Marching Band Finalist, UIL State Finalist, DECA State Finalist, DECA State Qualifier x2</p>
     </section>
   </main>
-  
-  <!-- Custom Cursor Fog Effect (immediately following the cursor) -->
+  <!-- Custom Cursor Fog -->
   <div class="cursor-fog"></div>
-  
   <script>
-    // Mode Toggle: Swap between light and dark mode, updating icons accordingly.
+    // Mode Toggle: Swap between dark and light mode, updating icons accordingly.
     const modeToggle = document.getElementById('mode-toggle');
     const sunIcon = document.getElementById('sun-icon');
     const moonIcon = document.getElementById('moon-icon');
@@ -377,16 +325,14 @@
       if (index < welcomeText.length) {
         document.getElementById("welcome-text").innerHTML += welcomeText.charAt(index);
         index++;
-        setTimeout(typeWriter, 100);
+        setTimeout(typeWriter, 50);
       }
     }
-    // Start typewriter effect after a delay
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById("welcome-text").style.opacity = 1;
-        document.getElementById("welcome-text").style.width = "100%";
         typeWriter();
-      }, 1500);
+      }, 800);
     });
   </script>
 </body>
