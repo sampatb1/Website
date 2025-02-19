@@ -9,8 +9,8 @@
       --bg-color: #ffffff;
       --text-color: #333333;
       --accent-color: #6A0DAD; /* purple */
-      --transition-duration: 0.3s; /* faster transitions */
-      --cursor-size: 40px;
+      --transition-duration: 0.3s;
+      --fog-size: 80px;
     }
     html {
       scroll-behavior: smooth;
@@ -29,7 +29,7 @@
       --bg-color: #121212;
       --text-color: #EEEEEE;
     }
-    /* Fixed Toggle Button */
+    /* Toggle Button (remains top-right) */
     #mode-toggle {
       position: fixed;
       top: 1rem;
@@ -49,34 +49,29 @@
       z-index: 1001;
       outline: none;
     }
-    /* Navigation Header */
+    /* Centered Navigation Header */
     .nav-header {
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
       background: var(--bg-color);
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       z-index: 1000;
       padding: 1rem 2rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       transition: background var(--transition-duration);
     }
-    .nav-logo {
-      font-size: 1.5rem;
-      text-decoration: none;
-      color: var(--accent-color);
-      font-weight: bold;
-      text-transform: lowercase;
-    }
     .nav-menu a {
-      margin-left: 1.5rem;
+      margin: 0 1rem;
       text-decoration: none;
       color: var(--text-color);
       transition: color var(--transition-duration);
       text-transform: lowercase;
+      font-size: 1.1rem;
     }
     .nav-menu a:hover {
       color: var(--accent-color);
@@ -88,29 +83,34 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: var(--bg-color);
-      padding-top: 80px;
+      background: #000;  /* black landing background */
+      padding-top: 80px; /* account for fixed header */
       opacity: 0;
-      animation: fadeUp 0.5s forwards;
+      animation: fadeUp 1s forwards;
     }
     .landing-content h1 {
       margin: 0;
       text-transform: lowercase;
       opacity: 0;
-      animation: fadeUp 0.5s forwards;
+      animation: fadeUp 1s forwards;
     }
     /* Increase font sizes for a bigger title section */
     .landing-content h:nth-child(1) {
-      animation-delay: 0.15s;
-      font-size: 5rem;
+      animation-delay: 0.5s;
+      font-size: 6rem;
     }
     .landing-content h:nth-child(2) {
-      animation-delay: 0.3s;
-      font-size: 6.5rem;
-      /* Set name color to purple */
-      color: var(--accent-color);
+      animation-delay: 1s;
+      font-size: 8rem;
+      /* Initially white; will change color via keyframes */
+      color: white;
     }
-    /* Typewriter container */
+    /* "sampat" turns purple after 2 seconds */
+    #name {
+      animation: colorChange 1s forwards;
+      animation-delay: 2s;
+    }
+    /* Typewriter effect for the welcome message */
     .welcome {
       font-size: 1.5rem;
       margin-top: 1rem;
@@ -120,7 +120,7 @@
       border-right: 2px solid var(--accent-color);
       width: 0;
       opacity: 0;
-      animation: typewriter 2s 0.8s forwards, blink 0.5s 2.8s infinite;
+      animation: typewriter 2s 1.2s forwards, blink 0.5s 3.2s infinite;
     }
     /* Main Content and Sections */
     main {
@@ -155,12 +155,15 @@
       line-height: 1.6;
       font-size: 1rem;
     }
-    /* Fade Up Animation */
+    /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* Typewriter Effect */
+    @keyframes colorChange {
+      from { color: white; }
+      to { color: var(--accent-color); }
+    }
     @keyframes typewriter {
       from { width: 0; opacity: 1; }
       to { width: 100%; opacity: 1; }
@@ -173,10 +176,10 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: var(--cursor-size);
-      height: var(--cursor-size);
-      margin-top: calc(-1 * var(--cursor-size) / 2);
-      margin-left: calc(-1 * var(--cursor-size) / 2);
+      width: var(--fog-size);
+      height: var(--fog-size);
+      margin-top: calc(-1 * var(--fog-size) / 2);
+      margin-left: calc(-1 * var(--fog-size) / 2);
       background: var(--accent-color);
       border-radius: 50%;
       opacity: 0.15;
@@ -186,21 +189,22 @@
     }
     /* Responsive Adjustments */
     @media (max-width: 600px) {
-      .nav-logo {
-        font-size: 1.2rem;
-      }
       #mode-toggle {
         width: 40px;
         height: 40px;
       }
       .landing-content h:nth-child(1) {
-        font-size: 3.5rem;
+        font-size: 4rem;
       }
       .landing-content h:nth-child(2) {
-        font-size: 4rem;
+        font-size: 5rem;
       }
       .welcome {
         font-size: 1.2rem;
+      }
+      .nav-menu a {
+        margin: 0 0.5rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -215,9 +219,8 @@
       <path d="M12.3 2.3a9 9 0 107.4 7.4 7 7 0 01-7.4-7.4z"/>
     </svg>
   </button>
-  <!-- Navigation Header -->
+  <!-- Centered Navigation Header -->
   <header class="nav-header">
-    <a href="#landing" class="nav-logo">sampat</a>
     <nav class="nav-menu">
       <a href="#landing">home</a>
       <a href="#education">education</a>
@@ -300,7 +303,6 @@
         moonIcon.style.display = 'none';
       }
     });
-    
     // Intersection Observer for scroll-triggered fade-in effects.
     const sections = document.querySelectorAll('.content-section, .landing');
     const observer = new IntersectionObserver(entries => {
@@ -311,13 +313,11 @@
       });
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
-    
-    // Custom Cursor Fog Effect: Immediately follows the mouse pointer.
+    // Custom Cursor Fog: Immediately follows the mouse pointer.
     const cursorFog = document.querySelector('.cursor-fog');
     document.addEventListener('mousemove', (e) => {
       cursorFog.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     });
-    
     // Typewriter Effect for "welcome to my website"
     const welcomeText = "welcome to my website";
     let index = 0;
@@ -325,14 +325,14 @@
       if (index < welcomeText.length) {
         document.getElementById("welcome-text").innerHTML += welcomeText.charAt(index);
         index++;
-        setTimeout(typeWriter, 50);
+        setTimeout(typeWriter, 75);
       }
     }
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById("welcome-text").style.opacity = 1;
         typeWriter();
-      }, 800);
+      }, 1200);
     });
   </script>
 </body>
