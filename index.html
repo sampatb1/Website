@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Fixed Navigation -->
+  <!-- Fixed Navigation with Theme Toggle -->
   <header class="fixed-header">
     <nav>
       <ul>
@@ -18,6 +18,7 @@
         <li><a href="#experience">Experience</a></li>
         <li><a href="#awards">Awards</a></li>
       </ul>
+      <button id="theme-toggle">Toggle Theme</button>
     </nav>
   </header>
 
@@ -30,7 +31,7 @@
   </section>
 
   <!-- Education Section -->
-  <section id="education" class="education-section">
+  <section id="education" class="education-section section">
     <div class="content-wrapper">
       <h2>Education</h2>
       <div class="item">
@@ -49,7 +50,7 @@
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="skills-section">
+  <section id="skills" class="skills-section section">
     <div class="content-wrapper">
       <h2>Skills and Certifications</h2>
       <div class="item">
@@ -73,11 +74,11 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="projects-section">
+  <section id="projects" class="projects-section section">
     <div class="content-wrapper">
       <h2>Academic and Personal Projects</h2>
 
-      <div class="project-item">
+      <div class="project-item item">
         <h3>Netflix Content Release Strategy Analysis</h3>
         <p>
           <em>Technologies:</em> R, ggplot2, dplyr, tidyverse | <strong>Duration:</strong>
@@ -91,7 +92,7 @@
         </p>
       </div>
 
-      <div class="project-item">
+      <div class="project-item item">
         <h3>Weather API Integration and Bot Development</h3>
         <p>
           <em>Technologies:</em> Java, Python, TensorFlow, Pircbot | <strong>Duration:</strong>
@@ -104,7 +105,7 @@
         </p>
       </div>
 
-      <div class="project-item">
+      <div class="project-item item">
         <h3>Real Estate Market Analysis</h3>
         <p>
           <em>Technologies:</em> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn |
@@ -118,7 +119,7 @@
         </p>
       </div>
 
-      <div class="project-item">
+      <div class="project-item item">
         <h3>Senior Shield</h3>
         <p>
           <em>Technologies:</em> HTML, CSS, Javascript | <strong>Event:</strong> Axxess Hackathon
@@ -135,11 +136,11 @@
   </section>
 
   <!-- Experience Section -->
-  <section id="experience" class="experience-section">
+  <section id="experience" class="experience-section section">
     <div class="content-wrapper">
       <h2>Leadership and Work Experience</h2>
 
-      <div class="experience-item">
+      <div class="experience-item item">
         <h3>Alliance Ground International - Passenger Service Agent</h3>
         <p><strong>Duration:</strong> May 2024 - Present</p>
         <p>
@@ -149,7 +150,7 @@
         </p>
       </div>
 
-      <div class="experience-item">
+      <div class="experience-item item">
         <h3>BizInstitution - Cofounder / President</h3>
         <p><strong>Duration:</strong> August 2022 - May 2024</p>
         <p>
@@ -163,7 +164,7 @@
   </section>
 
   <!-- Awards Section -->
-  <section id="awards" class="awards-section">
+  <section id="awards" class="awards-section section">
     <div class="content-wrapper">
       <h2>Additional Information & Awards</h2>
       <p>
@@ -173,6 +174,9 @@
       </p>
     </div>
   </section>
+
+  <!-- Custom Cursor Glow -->
+  <div class="cursor-glow"></div>
 
   <!-- GSAP Library for Animations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
