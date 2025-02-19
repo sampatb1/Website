@@ -9,6 +9,8 @@
       --bg-color: #ffffff;
       --text-color: #333333;
       --accent-color: #6A0DAD;
+      --transition-duration: 0.4s;
+      --cursor-size: 40px;
     }
     
     body {
@@ -17,8 +19,8 @@
       background-color: var(--bg-color);
       color: var(--text-color);
       font-family: 'Open Sans', sans-serif;
-      transition: background-color 0.3s, color 0.3s;
-      cursor: none; /* Hides the default cursor */
+      transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+      /* Default cursor remains visible */
     }
     
     .dark-mode {
@@ -30,6 +32,8 @@
       padding: 2rem;
       text-align: center;
       border-bottom: 2px solid var(--accent-color);
+      opacity: 0;
+      animation: fadeIn var(--transition-duration) forwards;
     }
     
     header h1 {
@@ -42,6 +46,7 @@
       font-size: 1rem;
     }
     
+    /* Toggle Button with Icon */
     #mode-toggle {
       position: fixed;
       top: 1rem;
@@ -49,20 +54,32 @@
       background: var(--accent-color);
       color: #fff;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-duration) ease;
       z-index: 10000;
+      outline: none;
     }
     
     main {
       max-width: 900px;
       margin: 2rem auto;
       padding: 0 1rem;
+      opacity: 0;
+      animation: fadeIn var(--transition-duration) 0.3s forwards;
     }
     
     section {
       margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp var(--transition-duration) forwards;
     }
     
     section h2 {
@@ -83,20 +100,30 @@
       font-size: 1rem;
     }
     
-    /* Custom Cursor Effect */
-    .custom-cursor {
+    /* Fade in animations */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Custom Cursor Fog Effect */
+    .cursor-fog {
       position: fixed;
       top: 0;
       left: 0;
-      width: 40px;
-      height: 40px;
-      margin-top: -20px;
-      margin-left: -20px;
-      border: 2px solid var(--accent-color);
+      width: var(--cursor-size);
+      height: var(--cursor-size);
+      margin-top: calc(-1 * var(--cursor-size) / 2);
+      margin-left: calc(-1 * var(--cursor-size) / 2);
+      background: var(--accent-color);
       border-radius: 50%;
+      opacity: 0.15;
       pointer-events: none;
-      transition: transform 0.1s ease-out, opacity 0.3s;
-      opacity: 0.7;
+      transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+      filter: blur(8px);
       z-index: 9999;
     }
     
@@ -106,16 +133,25 @@
         font-size: 2rem;
       }
       #mode-toggle {
-        padding: 0.4rem 0.8rem;
-        top: 0.5rem;
-        right: 0.5rem;
+        width: 40px;
+        height: 40px;
+        padding: 0.3rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Light/Dark Mode Toggle -->
-  <button id="mode-toggle">Toggle Mode</button>
+  <!-- Toggle Button with Sun/Moon Icons -->
+  <button id="mode-toggle">
+    <!-- Sun Icon (default light mode) -->
+    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24">
+      <path d="M6.76 4.84l-1.8-1.79L3.51 5.5l1.79 1.79 1.46-1.45zM1 11h3v2H1v-2zm10-9h2v3h-2V2zm7.64 3.55l-1.79-1.79-1.46 1.45 1.79 1.79 1.46-1.45zM17 11h3v2h-3v-2zm-5 5a4 4 0 110-8 4 4 0 010 8zm5.24 2.16l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45zM13 22h-2v-3h2v3zm-7.64-3.55l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45z"/>
+    </svg>
+    <!-- Moon Icon (hidden in light mode) -->
+    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24" style="display: none;">
+      <path d="M12.3 2.3a9 9 0 107.4 7.4 7 7 0 01-7.4-7.4z"/>
+    </svg>
+  </button>
   
   <!-- Header with Contact Information -->
   <header>
@@ -126,14 +162,14 @@
   <!-- Main Content -->
   <main>
     <!-- Education Section -->
-    <section id="education">
+    <section id="education" style="animation-delay: 0.4s;">
       <h2>Education</h2>
       <p><strong>The University of Texas at Dallas</strong> | B.S. in Data Science | Richardson, TX | Expected Graduation: May 2026</p>
       <p>Relevant Courses: Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)</p>
     </section>
     
     <!-- Skills and Certifications -->
-    <section id="skills">
+    <section id="skills" style="animation-delay: 0.6s;">
       <h2>Skills & Certifications</h2>
       <p><strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS</p>
       <p><strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows</p>
@@ -142,7 +178,7 @@
     </section>
     
     <!-- Projects -->
-    <section id="projects">
+    <section id="projects" style="animation-delay: 0.8s;">
       <h2>Academic & Personal Projects</h2>
       
       <h3>Netflix Content Release Strategy Analysis</h3>
@@ -163,7 +199,7 @@
     </section>
     
     <!-- Experience -->
-    <section id="experience">
+    <section id="experience" style="animation-delay: 1s;">
       <h2>Leadership & Work Experience</h2>
       
       <h3>Alliance Ground International - Passenger Service Agent</h3>
@@ -176,26 +212,36 @@
     </section>
     
     <!-- Additional Information -->
-    <section id="additional">
+    <section id="additional" style="animation-delay: 1.2s;">
       <h2>Additional Information</h2>
       <p><strong>Awards:</strong> Coppell High School Most Improved x2, TMEA Wind Ensemble, TMEA Symphonic Band, Houston Underground Competition Finalist, BOA Marching Band Finalist, UIL State Finalist, DECA State Finalist, DECA State Qualifier x2</p>
     </section>
   </main>
   
-  <!-- Custom Cursor Element -->
-  <div class="custom-cursor"></div>
+  <!-- Custom Cursor Fog Element -->
+  <div class="cursor-fog"></div>
   
   <script>
-    // Toggle between light and dark mode
+    // Toggle between light and dark mode and update icons accordingly.
     const modeToggle = document.getElementById('mode-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    
     modeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
+      if(document.body.classList.contains('dark-mode')) {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
     });
     
-    // Custom Cursor Effect
-    const cursor = document.querySelector('.custom-cursor');
+    // Cursor Fog Effect: The fog element follows the pointer with a smooth transition.
+    const cursorFog = document.querySelector('.cursor-fog');
     document.addEventListener('mousemove', (e) => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      cursorFog.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     });
   </script>
 </body>
