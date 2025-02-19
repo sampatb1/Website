@@ -99,18 +99,46 @@
       justify-content: center;
       text-align: center;
       background: var(--bg-color);
-      transition: background var(--transition-duration);
-      padding-top: 80px; /* To account for fixed header */
+      padding-top: 80px; /* account for fixed header */
+      opacity: 0;
+      animation: fadeUp 1s forwards;
     }
     
-    .landing h1 {
-      font-size: 4rem;
-      text-transform: lowercase;
+    .landing-content h1 {
       margin: 0;
+      text-transform: lowercase;
+      opacity: 0;
+      animation: fadeUp 1s forwards;
     }
     
-    .landing .highlight {
-      color: var(--accent-color);
+    .landing-content h:nth-child(1) {
+      animation-delay: 0.3s;
+      font-size: 3.5rem;
+    }
+    
+    .landing-content h:nth-child(2) {
+      animation-delay: 0.6s;
+      font-size: 4rem;
+    }
+    
+    /* "sampat" initially white then transitions to green */
+    #name {
+      color: white;
+      animation: colorChange 2s forwards;
+      animation-delay: 1s;
+    }
+    
+    /* Typewriter container */
+    .welcome {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid var(--accent-color);
+      width: 0;
+      opacity: 0;
+      animation: typewriter 3s 1.5s forwards, blink 0.75s 4.5s infinite;
     }
     
     /* Main Content and Sections */
@@ -137,17 +165,41 @@
       margin-bottom: 0.5rem;
       border-bottom: 2px solid var(--accent-color);
       padding-bottom: 0.5rem;
+      text-transform: lowercase;
     }
     
     .content-section h3 {
       margin-top: 1.5rem;
       font-size: 1.4rem;
       color: var(--accent-color);
+      text-transform: lowercase;
     }
     
     .content-section p, .content-section li {
       line-height: 1.6;
       font-size: 1rem;
+    }
+    
+    /* Fade Up Animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Color Change Animation for Name */
+    @keyframes colorChange {
+      from { color: white; }
+      to { color: green; }
+    }
+    
+    /* Typewriter Effect */
+    @keyframes typewriter {
+      from { width: 0; opacity: 1; }
+      to { width: 100%; opacity: 1; }
+    }
+    
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
     
     /* Custom Cursor Fog (immediately following the cursor) */
@@ -165,7 +217,6 @@
       pointer-events: none;
       filter: blur(8px);
       z-index: 9999;
-      /* No transition for immediate response */
     }
     
     /* Responsive Adjustments */
@@ -177,8 +228,14 @@
         width: 40px;
         height: 40px;
       }
-      .landing h1 {
+      .landing-content h:nth-child(1) {
+        font-size: 2.5rem;
+      }
+      .landing-content h:nth-child(2) {
         font-size: 3rem;
+      }
+      .welcome {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -212,7 +269,9 @@
   <!-- Landing Section -->
   <section id="landing" class="landing">
     <div class="landing-content">
-      <h1>hi, im <span class="highlight">sampat</span></h1>
+      <h1>hi, im</h1>
+      <h1><span id="name">sampat</span></h1>
+      <p class="welcome" id="welcome-text"></p>
     </div>
   </section>
   
@@ -309,6 +368,25 @@
     const cursorFog = document.querySelector('.cursor-fog');
     document.addEventListener('mousemove', (e) => {
       cursorFog.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+    
+    // Typewriter Effect for "welcome to my website"
+    const welcomeText = "welcome to my website";
+    let index = 0;
+    function typeWriter() {
+      if (index < welcomeText.length) {
+        document.getElementById("welcome-text").innerHTML += welcomeText.charAt(index);
+        index++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    // Start typewriter effect after a delay
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById("welcome-text").style.opacity = 1;
+        document.getElementById("welcome-text").style.width = "100%";
+        typeWriter();
+      }, 1500);
     });
   </script>
 </body>
