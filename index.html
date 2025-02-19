@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sampat Bandlamudi - Resume</title>
   <style>
+    /* Base Variables and Global Styles */
     :root {
       --bg-color: #ffffff;
       --text-color: #333333;
@@ -13,14 +14,18 @@
       --cursor-size: 40px;
     }
     
+    html {
+      scroll-behavior: smooth;
+    }
+    
     body {
       margin: 0;
       padding: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
       font-family: 'Open Sans', sans-serif;
-      transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
-      /* Default cursor remains visible */
+      transition: background-color var(--transition-duration) ease,
+                  color var(--transition-duration) ease;
     }
     
     .dark-mode {
@@ -28,29 +33,49 @@
       --text-color: #EEEEEE;
     }
     
-    header {
-      padding: 2rem;
-      text-align: center;
-      border-bottom: 2px solid var(--accent-color);
-      opacity: 0;
-      animation: fadeIn var(--transition-duration) forwards;
-    }
-    
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    
-    header p {
-      margin: 0.5rem 0 0;
-      font-size: 1rem;
-    }
-    
-    /* Toggle Button with Icon */
-    #mode-toggle {
+    /* Navigation Header */
+    .nav-header {
       position: fixed;
-      top: 1rem;
-      right: 1rem;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--bg-color);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background var(--transition-duration);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .nav-logo {
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+    
+    .nav-menu a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: color var(--transition-duration);
+    }
+    
+    .nav-menu a:hover {
+      color: var(--accent-color);
+    }
+    
+    /* Mode Toggle Button with Icons */
+    #mode-toggle {
       background: var(--accent-color);
       color: #fff;
       border: none;
@@ -63,53 +88,69 @@
       align-items: center;
       justify-content: center;
       transition: background var(--transition-duration) ease;
-      z-index: 10000;
       outline: none;
     }
     
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      opacity: 0;
-      animation: fadeIn var(--transition-duration) 0.3s forwards;
+    /* Landing Section */
+    .landing {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--bg-color);
+      transition: background var(--transition-duration);
+      padding-top: 80px; /* To account for fixed header */
     }
     
-    section {
+    .landing h1 {
+      font-size: 4rem;
+      text-transform: lowercase;
+      margin: 0;
+    }
+    
+    .landing .highlight {
+      color: var(--accent-color);
+    }
+    
+    /* Main Content and Sections */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    .content-section {
       margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp var(--transition-duration) forwards;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
     
-    section h2 {
+    .content-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .content-section h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
       border-bottom: 2px solid var(--accent-color);
       padding-bottom: 0.5rem;
     }
     
-    section h3 {
+    .content-section h3 {
       margin-top: 1.5rem;
       font-size: 1.4rem;
       color: var(--accent-color);
     }
     
-    section p, section li {
+    .content-section p, .content-section li {
       line-height: 1.6;
       font-size: 1rem;
     }
     
-    /* Fade in animations */
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Custom Cursor Fog Effect */
+    /* Custom Cursor Fog (immediately following the cursor) */
     .cursor-fog {
       position: fixed;
       top: 0;
@@ -122,55 +163,71 @@
       border-radius: 50%;
       opacity: 0.15;
       pointer-events: none;
-      transition: transform 0.15s ease-out, opacity 0.15s ease-out;
       filter: blur(8px);
       z-index: 9999;
+      /* No transition for immediate response */
     }
     
-    /* Responsive adjustments */
+    /* Responsive Adjustments */
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
+      .nav-logo {
+        font-size: 1.2rem;
       }
       #mode-toggle {
         width: 40px;
         height: 40px;
-        padding: 0.3rem;
+      }
+      .landing h1 {
+        font-size: 3rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Toggle Button with Sun/Moon Icons -->
-  <button id="mode-toggle">
-    <!-- Sun Icon (default light mode) -->
-    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24">
-      <path d="M6.76 4.84l-1.8-1.79L3.51 5.5l1.79 1.79 1.46-1.45zM1 11h3v2H1v-2zm10-9h2v3h-2V2zm7.64 3.55l-1.79-1.79-1.46 1.45 1.79 1.79 1.46-1.45zM17 11h3v2h-3v-2zm-5 5a4 4 0 110-8 4 4 0 010 8zm5.24 2.16l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45zM13 22h-2v-3h2v3zm-7.64-3.55l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45z"/>
-    </svg>
-    <!-- Moon Icon (hidden in light mode) -->
-    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24" style="display: none;">
-      <path d="M12.3 2.3a9 9 0 107.4 7.4 7 7 0 01-7.4-7.4z"/>
-    </svg>
-  </button>
-  
-  <!-- Header with Contact Information -->
-  <header>
-    <h1>Sampat Bandlamudi</h1>
-    <p>sam.bandlamudi@gmail.com • (916)-799-6198 • Dallas-Fort Worth, TX</p>
+  <!-- Navigation Header -->
+  <header class="nav-header">
+    <div class="nav-container">
+      <a href="#landing" class="nav-logo">sampat</a>
+      <nav class="nav-menu">
+        <a href="#landing">home</a>
+        <a href="#education">education</a>
+        <a href="#skills">skills</a>
+        <a href="#projects">projects</a>
+        <a href="#experience">experience</a>
+        <a href="#additional">additional</a>
+      </nav>
+      <button id="mode-toggle">
+        <!-- Sun Icon (for light mode) -->
+        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24">
+          <path d="M6.76 4.84l-1.8-1.79L3.51 5.5l1.79 1.79 1.46-1.45zM1 11h3v2H1v-2zm10-9h2v3h-2V2zm7.64 3.55l-1.79-1.79-1.46 1.45 1.79 1.79 1.46-1.45zM17 11h3v2h-3v-2zm-5 5a4 4 0 110-8 4 4 0 010 8zm5.24 2.16l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45zM13 22h-2v-3h2v3zm-7.64-3.55l1.79 1.79 1.46-1.45-1.79-1.79-1.46 1.45z"/>
+        </svg>
+        <!-- Moon Icon (hidden in light mode) -->
+        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="#fff" viewBox="0 0 24 24" style="display: none;">
+          <path d="M12.3 2.3a9 9 0 107.4 7.4 7 7 0 01-7.4-7.4z"/>
+        </svg>
+      </button>
+    </div>
   </header>
   
-  <!-- Main Content -->
+  <!-- Landing Section -->
+  <section id="landing" class="landing">
+    <div class="landing-content">
+      <h1>hi, im <span class="highlight">sampat</span></h1>
+    </div>
+  </section>
+  
+  <!-- Main Resume Content -->
   <main>
     <!-- Education Section -->
-    <section id="education" style="animation-delay: 0.4s;">
-      <h2>Education</h2>
+    <section id="education" class="content-section">
+      <h2>education</h2>
       <p><strong>The University of Texas at Dallas</strong> | B.S. in Data Science | Richardson, TX | Expected Graduation: May 2026</p>
       <p>Relevant Courses: Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)</p>
     </section>
     
     <!-- Skills and Certifications -->
-    <section id="skills" style="animation-delay: 0.6s;">
-      <h2>Skills & Certifications</h2>
+    <section id="skills" class="content-section">
+      <h2>skills & certifications</h2>
       <p><strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS</p>
       <p><strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows</p>
       <p><strong>Frameworks and Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova</p>
@@ -178,55 +235,54 @@
     </section>
     
     <!-- Projects -->
-    <section id="projects" style="animation-delay: 0.8s;">
-      <h2>Academic & Personal Projects</h2>
+    <section id="projects" class="content-section">
+      <h2>academic & personal projects</h2>
       
-      <h3>Netflix Content Release Strategy Analysis</h3>
+      <h3>netflix content release strategy analysis</h3>
       <p><em>Technologies:</em> R, ggplot2, dplyr, tidyverse</p>
       <p>Developed classification and time-series forecasting models to predict optimal content release dates, increasing predicted engagement by over 20%. Leveraged clustering and regression techniques to segment genres and identify seasonal trends with 85% accuracy.</p>
       
-      <h3>Weather API Integration and Bot Development</h3>
+      <h3>weather api integration and bot development</h3>
       <p><em>Technologies:</em> Java, Python, TensorFlow, Pircbot</p>
       <p>Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15%. Built an IRC bot that processed over 10,000 API calls, reducing user query response time by 30% through machine learning optimizations.</p>
       
-      <h3>Real Estate Market Analysis</h3>
+      <h3>real estate market analysis</h3>
       <p><em>Technologies:</em> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</p>
       <p>Designed ensemble regression models and feature engineering pipelines that predicted property values with a mean absolute error reduction of 25%. Developed interactive dashboards that visualized trends for over 50+ regions, aiding data-driven investment decisions.</p>
       
-      <h3>Senior Shield</h3>
+      <h3>senior shield</h3>
       <p><em>Technologies:</em> HTML, CSS, JavaScript</p>
       <p>Led a team at Axxess Hackathon 2024 to create a cross-platform app integrating AI-based anomaly detection, reducing false alerts by 20% compared to standard monitoring tools. Designed a user-centric interface and implemented predictive analytics to provide proactive care recommendations.</p>
     </section>
     
     <!-- Experience -->
-    <section id="experience" style="animation-delay: 1s;">
-      <h2>Leadership & Work Experience</h2>
+    <section id="experience" class="content-section">
+      <h2>leadership & work experience</h2>
       
-      <h3>Alliance Ground International - Passenger Service Agent</h3>
+      <h3>alliance ground international - passenger service agent</h3>
       <p>May 2024 - Present</p>
       <p>Managed inquiries and resolved issues regarding flight operations as well as luggage transfers. Worked under high pressure to ensure smooth airline functions and uphold safety protocols.</p>
       
-      <h3>BizInstitution - Cofounder / President</h3>
+      <h3>bizinstitution - cofounder / president</h3>
       <p>August 2022 - May 2024</p>
       <p>Founded and led an organization dedicated to leveraging data science and AI to modernize technical education for underserved communities. Directed a team of 10+ in designing data-driven curricula and AI-assisted learning modules in subjects such as calculus and business law.</p>
     </section>
     
     <!-- Additional Information -->
-    <section id="additional" style="animation-delay: 1.2s;">
-      <h2>Additional Information</h2>
+    <section id="additional" class="content-section">
+      <h2>additional information</h2>
       <p><strong>Awards:</strong> Coppell High School Most Improved x2, TMEA Wind Ensemble, TMEA Symphonic Band, Houston Underground Competition Finalist, BOA Marching Band Finalist, UIL State Finalist, DECA State Finalist, DECA State Qualifier x2</p>
     </section>
   </main>
   
-  <!-- Custom Cursor Fog Element -->
+  <!-- Custom Cursor Fog Effect (immediately following the cursor) -->
   <div class="cursor-fog"></div>
   
   <script>
-    // Toggle between light and dark mode and update icons accordingly.
+    // Mode Toggle: Swap between light and dark mode, updating icons accordingly.
     const modeToggle = document.getElementById('mode-toggle');
     const sunIcon = document.getElementById('sun-icon');
     const moonIcon = document.getElementById('moon-icon');
-    
     modeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       if(document.body.classList.contains('dark-mode')) {
@@ -238,7 +294,18 @@
       }
     });
     
-    // Cursor Fog Effect: The fog element follows the pointer with a smooth transition.
+    // Intersection Observer for scroll-triggered fade-in effects.
+    const sections = document.querySelectorAll('.content-section, .landing');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+    
+    // Custom Cursor Fog Effect: Immediately follows the mouse pointer.
     const cursorFog = document.querySelector('.cursor-fog');
     document.addEventListener('mousemove', (e) => {
       cursorFog.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
