@@ -1,125 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sam Pat Bandlamudi - Data Scientist</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sampat Bandlamudi - Resume</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    /* Reset and basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navigation */
+    nav {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 10px 0;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      font-weight: bold;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #2575fc;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 50px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: #fff;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      border-bottom: 2px solid #2575fc;
+      display: inline-block;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+
+    /* Grid for projects */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .grid > div {
+      padding: 15px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      background: #fdfdfd;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Scroll reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive text sizes */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Sam Pat Bandlamudi</h1>
-    <p>
-      Email: <a href="mailto:sam.bandlamudi@gmail.com">sam.bandlamudi@gmail.com</a> • 
-      Phone: (916)-799-6198 • Irving, TX
-    </p>
-  </header>
-  
+  <!-- Navigation -->
   <nav>
     <ul>
+      <li><a href="#about">About</a></li>
       <li><a href="#education">Education</a></li>
-      <li><a href="#skills">Skills & Certifications</a></li>
+      <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#awards">Awards</a></li>
     </ul>
   </nav>
 
+  <!-- Header / About -->
+  <header id="about">
+    <div class="container">
+      <h1>Sampat Bandlamudi</h1>
+      <p>sam.bandlamudi@gmail.com • (916)-799-6198 • Irving, TX</p>
+    </div>
+  </header>
+
+  <!-- Education Section -->
   <section id="education">
-    <h2>Education</h2>
-    <h3>The University of Texas at Dallas</h3>
-    <p>B.S. in Data Science | Richardson, TX | Expected Graduation: May 2026</p>
-    <p>
-      <strong>Relevant Courses:</strong> Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)
-    </p>
+    <div class="container card reveal">
+      <h2>Education</h2>
+      <p><strong>The University of Texas at Dallas</strong> | B.S. in Data Science | Richardson, TX</p>
+      <p>Expected Graduation: May 2026</p>
+      <p><em>Relevant Courses:</em> Data Structures and Introduction to Algorithmic Analysis, Linear Algebra, Applied Linear Models, Introduction to Statistical Learning, Data Analysis in R, Discrete Math and Combinatorics, Computer Science (Java and C++)</p>
+    </div>
   </section>
 
+  <!-- Skills and Certifications -->
   <section id="skills">
-    <h2>Skills & Certifications</h2>
-    <p><strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS</p>
-    <p><strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows</p>
-    <p>
-      <strong>Frameworks & Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova
-    </p>
-    <p>
-      <strong>Certifications:</strong> Introduction to Relational Database and SQL, Fundamentals of Project Planning and Management, Introduction to Programming Using Python, Data Science and AI Fundamentals
-    </p>
+    <div class="container card reveal">
+      <h2>Skills and Certifications</h2>
+      <p><strong>Programming Languages:</strong> Java, C++, Python, R, HTML/CSS</p>
+      <p><strong>Platforms:</strong> Jupyter Notebook, git, macOS, Windows</p>
+      <p><strong>Frameworks and Libraries:</strong> TensorFlow, PyTorch, Keras, Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn, Apache Cordova</p>
+      <p><strong>Certifications:</strong> Introduction to Relational Database and SQL, Fundamentals of Project Planning and Management, Introduction to Programming Using Python, Data Science and AI Fundamentals</p>
+    </div>
   </section>
 
+  <!-- Projects Section -->
   <section id="projects">
-    <h2>Projects</h2>
-    <article>
-      <h3>Netflix Content Release Strategy Analysis</h3>
-      <p><strong>Technologies:</strong> R, ggplot2, dplyr, tidyverse</p>
-      <p><em>September - October 2024</em></p>
-      <ul>
-        <li>Developed classification and time-series forecasting models to predict optimal content release dates, increasing predicted engagement by over 20%.</li>
-        <li>Leveraged clustering and regression techniques to segment genres and identify seasonal trends with 85% accuracy.</li>
-      </ul>
-    </article>
-    <article>
-      <h3>Weather API Integration and Bot Development</h3>
-      <p><strong>Technologies:</strong> Java, Python, TensorFlow, Pircbot</p>
-      <p><em>July - September 2024</em></p>
-      <ul>
-        <li>Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15%.</li>
-        <li>Built an IRC bot that processed over 10,000 API calls, reducing user query response time by 30% through machine learning optimizations.</li>
-      </ul>
-    </article>
-    <article>
-      <h3>Real Estate Market Analysis</h3>
-      <p><strong>Technologies:</strong> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn</p>
-      <p><em>July - October 2024</em></p>
-      <ul>
-        <li>Designed ensemble regression models and feature engineering pipelines that predicted property values with a mean absolute error reduction of 25%.</li>
-        <li>Developed interactive dashboards that visualized trends for over 50+ regions, aiding data-driven investment decisions.</li>
-      </ul>
-    </article>
-    <article>
-      <h3>Senior Shield</h3>
-      <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
-      <p><em>Axxess Hackathon 2024, February 2024</em></p>
-      <ul>
-        <li>Led a team to create a cross-platform app integrating AI-based anomaly detection, reducing false alerts by 20% compared to standard monitoring tools.</li>
-        <li>Designed a user-centric interface and implemented predictive analytics to provide proactive care recommendations.</li>
-      </ul>
-    </article>
+    <div class="container card reveal">
+      <h2>Academic and Personal Projects</h2>
+      <div class="grid">
+        <div>
+          <h3>Netflix Content Release Strategy Analysis</h3>
+          <p><em>Tools:</em> R, ggplot2, dplyr, tidyverse | Sept - Oct 2024</p>
+          <p>Developed classification and time-series forecasting models to predict optimal content release dates, increasing predicted engagement by over 20%. Utilized clustering and regression techniques for genre segmentation and seasonal trends.</p>
+        </div>
+        <div>
+          <h3>Weather API Integration and Bot Development</h3>
+          <p><em>Tools:</em> Java, Python, TensorFlow, Pircbot | July - Sept 2024</p>
+          <p>Integrated public weather APIs with an AI module using historical data, improving forecast accuracy by 15%. Developed an IRC bot that processed over 10,000 API calls, reducing user query response time by 30%.</p>
+        </div>
+        <div>
+          <h3>Real Estate Market Analysis</h3>
+          <p><em>Tools:</em> Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn | July - Oct 2024</p>
+          <p>Designed ensemble regression models and feature engineering pipelines that predicted property values with a mean absolute error reduction of 25%. Created interactive dashboards for data-driven decisions across 50+ regions.</p>
+        </div>
+        <div>
+          <h3>Senior Shield</h3>
+          <p><em>Tools:</em> HTML, CSS, JavaScript | Axxess Hackathon 2024 (Feb 2024)</p>
+          <p>Led a team to create a cross-platform app integrating AI-based anomaly detection, reducing false alerts by 20%. Focused on user-centric design and predictive analytics.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
+  <!-- Experience Section -->
   <section id="experience">
-    <h2>Leadership & Work Experience</h2>
-    <article>
-      <h3>Alliance Ground International</h3>
-      <p>Passenger Service Agent | May 2024 - Present</p>
-      <ul>
-        <li>Managed inquiries and resolved issues regarding flight operations and luggage transfers.</li>
-        <li>Worked under high pressure to ensure smooth airline functions and adherence to safety protocols.</li>
-      </ul>
-    </article>
-    <article>
-      <h3>BizInstitution</h3>
-      <p>Cofounder / President | August 2022 - May 2024</p>
-      <ul>
-        <li>Founded and led an organization dedicated to leveraging data science and AI to modernize technical education for underserved communities.</li>
-        <li>Directed a team of 10+ in designing data-driven curricula and AI-assisted learning modules in subjects such as calculus and business law.</li>
-      </ul>
-    </article>
+    <div class="container card reveal">
+      <h2>Leadership and Work Experience</h2>
+      <div>
+        <h3>Alliance Ground International</h3>
+        <p><strong>Passenger Service Agent</strong> | May 2024 - Present</p>
+        <p>Managed inquiries and resolved issues regarding flight operations and luggage transfers, ensuring safety protocols in high-pressure situations.</p>
+      </div>
+      <div style="margin-top:20px;">
+        <h3>BizInstitution</h3>
+        <p><strong>Cofounder / President</strong> | August 2022 - May 2024</p>
+        <p>Founded and led an organization dedicated to leveraging data science and AI to modernize technical education. Directed a team of 10+ in designing data-driven curricula and AI-assisted learning modules.</p>
+      </div>
+    </div>
   </section>
 
+  <!-- Awards and Additional Information -->
   <section id="awards">
-    <h2>Awards & Additional Information</h2>
-    <ul>
-      <li>Coppell High School Most Improved x2</li>
-      <li>TMEA Wind Ensemble, TMEA Symphonic Band</li>
-      <li>Houston Underground Competition Finalist</li>
-      <li>BOA Marching Band Finalist</li>
-      <li>UIL State Finalist</li>
-      <li>DECA State Finalist, DECA State Qualifier x2</li>
-    </ul>
+    <div class="container card reveal">
+      <h2>Additional Information &amp; Awards</h2>
+      <p>Awards: Coppell High School Most Improved x2, TMEA Wind Ensemble, TMEA Symphonic Band, Houston Underground Competition Finalist, BOA Marching Band Finalist, UIL State Finalist, DECA State Finalist, DECA State Qualifier x2</p>
+    </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2024 Sam Pat Bandlamudi. All rights reserved.</p>
+    <p>&copy; 2024 Sampat Bandlamudi. All rights reserved.</p>
   </footer>
+
+  <!-- JavaScript for Scroll Reveal -->
+  <script>
+    function revealElements() {
+      const reveals = document.querySelectorAll('.reveal');
+      const windowHeight = window.innerHeight;
+      reveals.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        if(elementTop < windowHeight - 50) {
+          el.classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealElements);
+    // Trigger reveal on page load
+    revealElements();
+  </script>
 </body>
 </html>
