@@ -16,19 +16,21 @@
             --grad-color-1: #3b82f6;
             --grad-color-2: #a855f7;
             --grad-color-3: #ec4899;
-            
+
             /* Light Theme */
             --bg-color-start: #ffffff;
             --bg-color-end: #f0f2f5;
             --text-color: #1a1a1a;
-            --primary-color: #a855f7; /* Static fallback color from gradient */
             --secondary-color: #4a4a4a;
             --card-bg-color: rgba(255, 255, 255, 0.7);
             --header-bg-color: rgba(245, 247, 250, 0.8);
             --card-border-color: #e2e8f0;
             --glow-color: rgba(168, 85, 247, 0.2);
             --nav-link-color: #5f5f5f;
-            --nav-link-active-bg: rgba(168, 85, 247, 0.1);
+            /* Tag Colors */
+            --tag-1-color: #3b82f6; --tag-1-bg: rgba(59, 130, 246, 0.1);
+            --tag-2-color: #a855f7; --tag-2-bg: rgba(168, 85, 247, 0.1);
+            --tag-3-color: #ec4899; --tag-3-bg: rgba(236, 72, 153, 0.1);
         }
 
         body.dark-theme {
@@ -36,14 +38,16 @@
             --bg-color-start: #000000;
             --bg-color-end: #0c0a12;
             --text-color: #e0e0e0;
-            --primary-color: #a855f7; /* Static fallback color from gradient */
             --secondary-color: #a0a0a0;
             --card-bg-color: rgba(17, 17, 17, 0.7);
             --header-bg-color: rgba(5, 5, 5, 0.8);
             --card-border-color: #222;
             --glow-color: rgba(168, 85, 247, 0.15);
             --nav-link-color: #888;
-            --nav-link-active-bg: rgba(168, 85, 247, 0.1);
+            /* Tag Colors */
+            --tag-1-color: #5d9eff; --tag-1-bg: rgba(59, 130, 246, 0.1);
+            --tag-2-color: #c084fc; --tag-2-bg: rgba(168, 85, 247, 0.1);
+            --tag-3-color: #f472b6; --tag-3-bg: rgba(236, 72, 153, 0.1);
         }
 
         /* Base & Animated Background */
@@ -74,23 +78,7 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        .animated-gradient-text {
-            background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: waveAnimation 5s ease infinite;
-        }
         
-        .animated-gradient-border {
-            border-color: transparent;
-            background: linear-gradient(var(--card-bg-color), var(--card-bg-color)) padding-box,
-                        linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)) border-box;
-            background-size: 200% 200%;
-            animation: waveAnimation 5s ease infinite;
-        }
-
         /* Typography */
         h1, h2, h3, .header-logo {
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
@@ -98,12 +86,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: waveAnimation 5s ease infinite;
-            color: var(--primary-color); /* Fallback */
+            color: var(--grad-color-2); /* Fallback */
         }
         h2 { font-size: 1.25rem; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; color: var(--secondary-color); -webkit-text-fill-color: unset;} /* h2 has different style */
         h3 { color: var(--text-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; transition: color 0.3s ease; -webkit-text-fill-color: unset; }
         p { color: var(--secondary-color); margin-bottom: 1rem; line-height: 1.7; }
-        a { color: var(--primary-color); text-decoration: none; transition: opacity 0.3s ease; }
+        a { color: var(--grad-color-2); text-decoration: none; transition: opacity 0.3s ease; }
         a:hover { opacity: 0.8; }
 
         /* Sticky Header */
@@ -114,16 +102,36 @@
         .header-nav a { font-weight: 600; font-size: 0.9rem; color: var(--nav-link-color); position: relative; padding: 0.5rem 0; }
         .header-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)); background-size: 200%; transition: width 0.3s ease; }
         .header-nav a:hover::after, .header-nav a.active::after { width: 100%; }
-        .header-nav a.active { color: var(--primary-color); }
+        .header-nav a.active {
+             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: waveAnimation 5s ease infinite;
+        }
 
         /* Hero Section */
         #hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         #hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); min-height: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 1rem; }
-        .typing-cursor { display: inline-block; width: 4px; height: clamp(2.2rem, 7vw, 4rem); background-color: var(--primary-color); animation: blink 0.7s infinite; margin-left: 8px; vertical-align: text-bottom; }
+        .typing-cursor { display: inline-block; width: 4px; height: clamp(2.2rem, 7vw, 4rem); animation: blink 0.7s infinite; margin-left: 8px; vertical-align: text-bottom;
+            background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
+            background-size: 200% 200%;
+            animation: waveAnimation 5s ease infinite, blink 0.7s infinite;
+        }
         @keyframes blink { 50% { opacity: 0; } }
         #hero p { font-size: 1.1rem; max-width: 500px; margin: 1.5rem auto; }
-        .cta-button { display: inline-block; padding: 0.75rem 1.5rem; border: 2px solid; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; color: var(--primary-color); }
-        .cta-button:hover { color: white; border-color: transparent; background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)); background-size: 200% 200%; animation: waveAnimation 5s ease infinite; box-shadow: 0 5px 15px var(--glow-color);}
+        .cta-button { display: inline-block; padding: 0.75rem 1.5rem; border: 2px solid; border-radius: 50px; font-weight: 600; transition: all 0.3s ease;
+             border-image: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)) 1;
+        }
+        .cta-button span {
+            background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: waveAnimation 5s ease infinite;
+        }
+        .cta-button:hover { color: white; border-image: none; border-color: transparent; background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)); background-size: 200% 200%; animation: waveAnimation 5s ease infinite; box-shadow: 0 5px 15px var(--glow-color);}
+        .cta-button:hover span { -webkit-text-fill-color: white; background: none; animation: none; }
         
         /* Fade-in Animation */
         .fade-in-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
@@ -132,8 +140,8 @@
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
         
         /* Content Sections */
-        .content-section { padding: 4rem 0; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        #about.content-section { padding-top: 4rem; }
+        .content-section { padding: 2rem 0; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        #experience.content-section { padding-top: 4rem; }
         .content-section.visible { opacity: 1; transform: translateY(0); }
 
         /* Experience Section Cards */
@@ -142,7 +150,10 @@
         .experience-item .date { font-size: 0.8rem; color: var(--secondary-color); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
         .experience-item ul { padding-left: 1.2rem; color: var(--secondary-color); }
         .tech-tags { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .tech-tags .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 50px; background-color: var(--nav-link-active-bg); color: var(--primary-color); }
+        .tech-tags .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 50px; }
+        .tag.c1 { background-color: var(--tag-1-bg); color: var(--tag-1-color); }
+        .tag.c2 { background-color: var(--tag-2-bg); color: var(--tag-2-color); }
+        .tag.c3 { background-color: var(--tag-3-bg); color: var(--tag-3-color); }
 
         /* Skills Section */
         #skills .skills-container { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--card-border-color); }
@@ -160,8 +171,8 @@
         @media (max-width: 768px) {
             .header-nav { display: none; }
             #skills ul { columns: 1; }
-            .content-section { padding: 3rem 0; }
-            #about.content-section { padding-top: 3rem; }
+            .content-section { padding: 2rem 0; }
+            #experience.content-section { padding-top: 3rem; }
         }
 
     </style>
@@ -187,7 +198,7 @@
         <section id="hero">
             <h1 id="typing-text"></h1>
             <p class="fade-in-up subtext">A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
-            <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">View My Resume</a>
+            <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button"><span>View My Resume</span></a>
         </section>
 
         <section id="about" class="content-section">
@@ -206,7 +217,7 @@
                         <li>Performed comprehensive EDA, data preprocessing, and model validation.</li>
                     </ul>
                     <div class="tech-tags">
-                        <span class="tag">R</span><span class="tag">Regression</span><span class="tag">Data Cleaning</span>
+                        <span class="tag c1">R</span><span class="tag c2">Regression</span><span class="tag c3">Data Cleaning</span>
                     </div>
                 </div>
                 <div class="experience-item">
@@ -217,7 +228,7 @@
                         <li>Used K-Means clustering to segment genres, achieving 90% accuracy in predicting peak demand.</li>
                     </ul>
                      <div class="tech-tags">
-                        <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Clustering</span><span class="tag">Classification</span>
+                        <span class="tag c1">Python</span><span class="tag c2">Scikit-learn</span><span class="tag c3">Clustering</span><span class="tag c1">Classification</span>
                     </div>
                 </div>
                 <div class="experience-item">
@@ -228,7 +239,7 @@
                         <li>Developed an IRC bot that handled over 10,000 API calls, reducing response time by 30%.</li>
                     </ul>
                      <div class="tech-tags">
-                        <span class="tag">Python</span><span class="tag">API Integration</span><span class="tag">Machine Learning</span>
+                        <span class="tag c1">Python</span><span class="tag c2">API Integration</span><span class="tag c3">Machine Learning</span>
                     </div>
                 </div>
                 <div class="experience-item">
@@ -239,7 +250,7 @@
                         <li>Designed the UI in HTML/CSS and implemented secure user authentication.</li>
                     </ul>
                      <div class="tech-tags">
-                        <span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Apache Cordova</span>
+                        <span class="tag c1">HTML/CSS</span><span class="tag c2">JavaScript</span><span class="tag c3">Apache Cordova</span>
                     </div>
                 </div>
             </div>
