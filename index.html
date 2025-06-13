@@ -44,9 +44,9 @@
             --glow-color: rgba(168, 85, 247, 0.15);
             --nav-link-color: #888;
             /* Tag Colors */
-            --tag-1-color: #5d9eff; --tag-1-bg: rgba(59, 130, 246, 0.1);
-            --tag-2-color: #c084fc; --tag-2-bg: rgba(168, 85, 247, 0.1);
-            --tag-3-color: #f472b6; --tag-3-bg: rgba(236, 72, 153, 0.1);
+            --tag-1-color: #5d9eff; --tag-1-bg: rgba(93, 158, 255, 0.15);
+            --tag-2-color: #c084fc; --tag-2-bg: rgba(192, 132, 252, 0.15);
+            --tag-3-color: #f472b6; --tag-3-bg: rgba(244, 114, 182, 0.15);
         }
 
         /* Base & Animated Background */
@@ -58,7 +58,7 @@
             background: linear-gradient(45deg, var(--bg-color-start), var(--bg-color-end));
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            transition: color 0.4s ease;
+            transition: color 0.4s ease, background 0.4s ease;
         }
 
         @keyframes gradientBG {
@@ -109,14 +109,14 @@
         .header-nav a:hover::after, .header-nav a.active::after { width: 100%; }
         .header-nav a.active {
              background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: waveAnimation 5s ease infinite;
+             background-size: 200% 200%;
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             animation: waveAnimation 5s ease infinite;
         }
 
         /* Hero Section */
-        #hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+        #hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 5rem 0; }
         #hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); min-height: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 1rem; }
         .typing-cursor { display: inline-block; width: 4px; height: clamp(2.2rem, 7vw, 4rem); animation: blink 0.7s infinite; margin-left: 8px; vertical-align: text-bottom;
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
@@ -221,16 +221,61 @@
         .experience-list .experience-item:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
         .experience-item .date { font-size: 0.8rem; color: var(--secondary-color); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.4s ease; }
         .experience-item ul { padding-left: 1.2rem; color: var(--secondary-color); transition: color 0.4s ease; }
-        .tech-tags { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .tech-tags .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 50px; transition: color 0.4s ease, background-color 0.4s ease; }
-        .tag.c1 { background-color: var(--tag-1-bg); color: var(--tag-1-color); }
-        .tag.c2 { background-color: var(--tag-2-bg); color: var(--tag-2-color); }
-        .tag.c3 { background-color: var(--tag-3-bg); color: var(--tag-3-color); }
+        
+        /* General Tag styling (used for Experience and Skills) */
+        .tech-tags, .skill-pills { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 0.75rem; 
+        }
+        .tag, .skill-pill {
+            font-weight: 500;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+        .tech-tags { margin-top: 1.5rem; }
+        .tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+        }
+        .skill-pill {
+            font-size: 0.9rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid transparent;
+        }
 
-        /* Skills Section */
-        #skills .skills-container { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--card-border-color); transition: background-color 0.4s ease, border-color 0.4s ease; }
-        #skills ul { list-style: none; columns: 2; column-gap: 2rem; }
-        #skills li { margin-bottom: 0.75rem; font-weight: 500; transition: color 0.4s ease; }
+        /* Color classes for tags and pills */
+        .c1 { background-color: var(--tag-1-bg); color: var(--tag-1-color); }
+        .c2 { background-color: var(--tag-2-bg); color: var(--tag-2-color); }
+        .c3 { background-color: var(--tag-3-bg); color: var(--tag-3-color); }
+
+        .tag:hover, .skill-pill:hover {
+            transform: translateY(-4px);
+            filter: brightness(1.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        body.dark-theme .tag:hover, body.dark-theme .skill-pill:hover {
+            box-shadow: 0 4px 25px var(--glow-color);
+        }
+
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+        .skill-category h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--card-border-color);
+            /* Resetting gradient styles from other headings */
+            background: none;
+            -webkit-text-fill-color: var(--text-color);
+            animation: none;
+        }
         
         /* Footer */
         .main-footer { text-align: center; padding: 4rem 2rem 2rem; }
@@ -251,7 +296,7 @@
         }
         .theme-toggle-button:hover {
             color: var(--text-color);
-            background-color: var(--nav-link-active-bg);
+            background-color: var(--card-border-color);
         }
         .theme-toggle-button svg {
             width: 24px;
@@ -280,10 +325,14 @@
         /* Mobile adjustments */
         @media (max-width: 768px) {
             .header-nav { display: none; }
-            #skills ul { columns: 1; }
             .content-section { padding: 3rem 0; }
             #about .about-container { grid-template-columns: 1fr; gap: 1rem; }
             .about-heading { font-size: 4rem; text-align: center; margin-bottom: 1rem; }
+            .skills-grid { gap: 2rem; }
+            .skill-pill {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
         }
 
     </style>
@@ -311,11 +360,11 @@
     <main class="container">
         <section id="hero">
              <div class="hero-theme-toggle">
-                <button class="theme-toggle-button" id="hero-theme-toggle" aria-label="Toggle Theme">
-                     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.7V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.7C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M3,21V19H21V21H3Z" /></svg>
-                     <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A9.91 9.91 0 0 0 9 2.46A10 10 0 0 1 9 21.54A10 10 0 1 0 12 2Z" /></svg>
-                </button>
-            </div>
+                 <button class="theme-toggle-button" id="hero-theme-toggle" aria-label="Toggle Theme">
+                       <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.7V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.7C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M3,21V19H21V21H3Z" /></svg>
+                       <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A9.91 9.91 0 0 0 9 2.46A10 10 0 0 1 9 21.54A10 10 0 1 0 12 2Z" /></svg>
+                 </button>
+             </div>
             <h1 id="typing-text"></h1>
             <p class="fade-in-up subtext">A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
             <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">
@@ -390,22 +439,41 @@
 
         <section id="skills" class="content-section">
             <h2 class="section-title">Skills</h2>
-            <div class="skills-container">
-                <ul>
-                    <li>Python</li>
-                    <li>R</li>
-                    <li>C++ & Java</li>
-                    <li>SQL</li>
-                    <li>HTML/CSS & JavaScript</li>
-                    <li>Scikit-learn</li>
-                    <li>TensorFlow & Keras</li>
-                    <li>PyTorch</li>
-                    <li>Pandas & NumPy</li>
-                    <li>Linear & Logistic Regression</li>
-                    <li>K-Means Clustering</li>
-                    <li>Decision Trees & Random Forests</li>
-                    <li>Git & GitHub</li>
-                </ul>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages & Databases</h3>
+                    <div class="skill-pills">
+                        <span class="skill-pill c1">Python</span>
+                        <span class="skill-pill c2">R</span>
+                        <span class="skill-pill c3">SQL</span>
+                        <span class="skill-pill c1">C++</span>
+                        <span class="skill-pill c2">Java</span>
+                        <span class="skill-pill c3">HTML/CSS</span>
+                        <span class="skill-pill c1">JavaScript</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Frameworks & Libraries</h3>
+                    <div class="skill-pills">
+                        <span class="skill-pill c1">Scikit-learn</span>
+                        <span class="skill-pill c2">TensorFlow</span>
+                        <span class="skill-pill c3">Keras</span>
+                        <span class="skill-pill c1">PyTorch</span>
+                        <span class="skill-pill c2">Pandas</span>
+                        <span class="skill-pill c3">NumPy</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Concepts & Tools</h3>
+                    <div class="skill-pills">
+                        <span class="skill-pill c1">Linear Regression</span>
+                        <span class="skill-pill c2">Logistic Regression</span>
+                        <span class="skill-pill c3">K-Means Clustering</span>
+                        <span class="skill-pill c1">Decision Trees</span>
+                        <span class="skill-pill c2">Random Forests</span>
+                        <span class="skill-pill c3">Git & GitHub</span>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -423,6 +491,7 @@
 
         // --- CURSOR GLOW EFFECT ---
         const glow = document.querySelector('.cursor-glow');
+        // Only run this on devices that have a fine pointer (e.g., a mouse)
         if (window.matchMedia('(pointer: fine)').matches) {
             document.addEventListener('mousemove', (e) => {
                 glow.style.left = `${e.clientX}px`;
@@ -432,22 +501,26 @@
 
         // --- TYPING EFFECT & HERO ANIMATION ---
         const typingTextElement = document.getElementById('typing-text');
-        const heroIntro = document.querySelector('#hero .subtext');
+        const heroSubtext = document.querySelector('#hero .subtext');
         const resumeButton = document.querySelector('#hero .button');
         const scrollIndicator = document.querySelector('.scroll-down-indicator');
 
+        // Utility function to create a delay
         function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
+        // Function to type out a sequence of strings with delays
         async function typeSequence(element, sequence) {
             let currentText = "";
             for (const item of sequence) {
                 if (typeof item === 'string') {
+                    // Type out the string character by character
                     for (const char of item) {
                         currentText += char;
                         element.innerHTML = `${currentText}<span class="typing-cursor"></span>`;
-                        await wait(120);
+                        await wait(100); // Speed of typing
                     }
                 } else {
+                    // If it's a number, wait for that duration
                     await wait(item);
                 }
             }
@@ -455,12 +528,15 @@
             return Promise.resolve();
         }
         
+        // Orchestrates the hero section intro animation
         async function startHeroAnimation() {
-            await wait(500);
-            heroIntro.classList.add('visible');
+            await wait(500); // Initial delay before anything happens
+            typeSequence(typingTextElement, ["Hi,", 500, " I'm Sampat"]);
+            
+            // Fade in the other elements after a short delay
+            heroSubtext.classList.add('visible');
             resumeButton.classList.add('visible');
             scrollIndicator.classList.add('visible');
-            await typeSequence(typingTextElement, ["Hi,", 500, " I'm Sampat"]);
         }
 
         startHeroAnimation();
@@ -469,22 +545,26 @@
         const heroThemeToggle = document.getElementById('hero-theme-toggle');
         const headerThemeToggle = document.getElementById('header-theme-toggle');
         
+        // Function to apply the theme to the body
         function setTheme(isDark) {
             document.body.classList.toggle('dark-theme', isDark);
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         }
 
+        // Toggles the theme between light and dark
         function toggleTheme() {
             const isCurrentlyDark = document.body.classList.contains('dark-theme');
             setTheme(!isCurrentlyDark);
         }
 
+        // Check local storage for a saved theme preference on page load
         if (localStorage.getItem('theme') === 'light') {
             setTheme(false);
         } else {
-            setTheme(true);
+            setTheme(true); // Default to dark theme
         }
         
+        // Add click listeners to both theme toggle buttons
         heroThemeToggle.addEventListener('click', toggleTheme);
         headerThemeToggle.addEventListener('click', toggleTheme);
         
@@ -494,29 +574,36 @@
         const sections = document.querySelectorAll('.content-section');
         const navLinks = document.querySelectorAll('.header-nav a');
 
+        // Observer for making the sticky header appear
         const headerObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                // When the hero section is not intersecting (i.e., scrolled past), show the header
                 header.classList.toggle('visible', !entry.isIntersecting);
             });
-        }, { threshold: 0.1 });
+        }, { rootMargin: "-100px 0px 0px 0px" }); // Trigger a bit before the hero is fully gone
         headerObserver.observe(document.querySelector('#hero'));
 
 
+        // Observer for animating sections on scroll and updating nav links (Scrollspy)
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // Fade in the section when it enters the viewport
                     entry.target.classList.add('visible');
                     
+                    // Update the active state of the navigation links
                     navLinks.forEach(link => {
                         link.classList.remove('active');
+                        // Check if the link's href matches the intersecting section's id
                         if (link.getAttribute('href').substring(1) === entry.target.id) {
                             link.classList.add('active');
                         }
                     });
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.4 }); // Trigger when 40% of the section is visible
 
+        // Observe all content sections
         sections.forEach(section => {
             sectionObserver.observe(section);
         });
