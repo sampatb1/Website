@@ -62,8 +62,8 @@
             position: fixed;
             left: 0;
             top: 0;
-            width: 500px;
-            height: 500px;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
             background: var(--glow-color);
             filter: blur(100px);
@@ -213,16 +213,17 @@
 
         #hero h1 {
             font-size: clamp(2.5rem, 8vw, 5rem);
+            min-height: clamp(2.5rem, 8vw, 5rem); /* prevent layout shift */
         }
 
         .typing-cursor {
             display: inline-block;
-            width: 3px;
-            height: clamp(2.5rem, 8vw, 5rem);
+            width: 4px;
+            height: clamp(2rem, 6.5vw, 4.2rem); /* Adjusted height */
             background-color: var(--primary-color);
             animation: blink 0.7s infinite;
             margin-left: 8px;
-            vertical-align: bottom;
+            vertical-align: text-bottom; /* Corrected alignment */
         }
 
         @keyframes blink {
@@ -250,6 +251,26 @@
         .cta-button:hover {
             background-color: var(--primary-color);
             color: var(--bg-color);
+        }
+
+        /* Hero text fade-in animation */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in-up.subtext {
+             transition-delay: 0s;
+        }
+        
+        .fade-in-up.button {
+             transition-delay: 0.2s; /* Layered effect */
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
 
@@ -450,8 +471,8 @@
     <main>
         <section id="hero" class="visible">
             <h1 id="typing-text"></h1>
-            <p>A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
-            <a href="Resume.pdf" target="_blank" class="cta-button">View My Resume</a>
+            <p class="fade-in-up subtext">A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
+            <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">View My Resume</a>
         </section>
 
         <section id="about" class="container">
@@ -570,49 +591,69 @@
                 glow.style.top = `${e.clientY}px`;
             });
 
-            // --- TYPING EFFECT ---
+            // --- TYPING EFFECT & HERO ANIMATION ---
             const typingTextElement = document.getElementById('typing-text');
-            const textToType = "hi, i'm sampat";
-            let charIndex = 0;
+            const heroIntro = document.querySelector('#hero .subtext');
+            const resumeButton = document.querySelector('#hero .button');
 
-            function type() {
-                if (charIndex < textToType.length) {
-                    typingTextElement.innerHTML = `${textToType.substring(0, charIndex + 1)}<span class="typing-cursor"></span>`;
-                    charIndex++;
-                    setTimeout(type, 150);
-                } else {
-                    // Keep cursor blinking
-                     typingTextElement.innerHTML = `${textToType}<span class="typing-cursor"></span>`;
-                }
+            function wait(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
             }
-            type();
+
+            async function typeSequence(element, sequence) {
+                let currentText = "";
+                for (const item of sequence) {
+                    if (typeof item === 'string') {
+                        for (const char of item) {
+                            currentText += char;
+                            element.innerHTML = `${currentText}<span class="typing-cursor"></span>`;
+                            await wait(120); // Typing speed
+                        }
+                    } else if (typeof item === 'number') {
+                        await wait(item); // Pause
+                    }
+                }
+                element.innerHTML = `${currentText}<span class="typing-cursor"></span>`;
+                return Promise.resolve();
+            }
+            
+            async function startHeroAnimation() {
+                typingTextElement.innerHTML = `<span class="typing-cursor"></span>`;
+                
+                await wait(500); // Shortened initial delay
+
+                // Start typing and fade-ins simultaneously
+                heroIntro.classList.add('visible');
+                resumeButton.classList.add('visible');
+                await typeSequence(typingTextElement, ["hi,", 500, " i'm sampat"]);
+            }
+
+            startHeroAnimation();
+
 
             // --- THEME SWITCHER ---
             const themeSwitch = document.getElementById('checkbox');
             const currentTheme = localStorage.getItem('theme');
 
-            // Function to set theme
             function setTheme(isDark) {
                 document.body.classList.toggle('dark-theme', isDark);
-                themeSwitch.checked = !isDark; // Checkbox is "on" for light theme
+                themeSwitch.checked = !isDark;
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             }
 
-            // Check saved theme, default to dark
             if (currentTheme === 'light') {
                 setTheme(false);
             } else {
                 setTheme(true);
             }
             
-            // On switch change, toggle theme
             themeSwitch.addEventListener('change', () => {
                 setTheme(!themeSwitch.checked);
             });
 
 
             // --- SCROLL REVEAL ANIMATION ---
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('section:not(#hero)'); // Exclude hero
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
