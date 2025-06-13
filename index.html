@@ -80,7 +80,7 @@
         }
         
         /* Typography */
-        h1, h2, h3, .header-logo {
+        h1, .header-logo, .about-heading {
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
             background-size: 200% 200%;
             -webkit-background-clip: text;
@@ -88,8 +88,8 @@
             animation: waveAnimation 5s ease infinite;
             color: var(--grad-color-2); /* Fallback */
         }
-        h2 { font-size: 1.25rem; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; color: var(--secondary-color); -webkit-text-fill-color: unset;} /* h2 has different style */
-        h3 { color: var(--text-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; transition: color 0.3s ease; -webkit-text-fill-color: unset; }
+        h2 { font-size: 1.25rem; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; color: var(--secondary-color); }
+        h3 { color: var(--text-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; transition: color 0.3s ease; }
         p { color: var(--secondary-color); margin-bottom: 1rem; line-height: 1.7; }
         a { color: var(--grad-color-2); text-decoration: none; transition: opacity 0.3s ease; }
         a:hover { opacity: 0.8; }
@@ -111,7 +111,7 @@
         }
 
         /* Hero Section */
-        #hero { height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        #hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         #hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); min-height: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 1rem; }
         .typing-cursor { display: inline-block; width: 4px; height: clamp(2.2rem, 7vw, 4rem); animation: blink 0.7s infinite; margin-left: 8px; vertical-align: text-bottom;
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
@@ -129,7 +129,7 @@
             font-weight: 600;
             position: relative;
             overflow: hidden;
-            padding: 2px; /* This creates space for the border */
+            padding: 2px;
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
             background-size: 200% 200%;
             animation: waveAnimation 5s ease infinite;
@@ -166,9 +166,22 @@
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
         
         /* Content Sections */
-        .content-section { padding: 3rem 0; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        #experience.content-section { padding-top: 4rem; }
+        .content-section { padding: 4rem 0; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .content-section.visible { opacity: 1; transform: translateY(0); }
+
+        /* About Section Redesign */
+        #about .about-container {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr; /* Changed ratio */
+            align-items: center;
+            gap: 4rem; /* Increased gap */
+        }
+        .about-heading {
+            font-size: clamp(3rem, 10vw, 6rem); /* Resized font */
+            font-weight: 800;
+            line-height: 1;
+            text-align: right;
+        }
 
         /* Experience Section Cards */
         .experience-list .experience-item { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2rem; border-radius: 16px; border: 1px solid var(--card-border-color); margin-bottom: 2rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -198,7 +211,8 @@
             .header-nav { display: none; }
             #skills ul { columns: 1; }
             .content-section { padding: 3rem 0; }
-            #experience.content-section { padding-top: 3rem; }
+            #about .about-container { grid-template-columns: 1fr; gap: 1rem; }
+            .about-heading { font-size: 4rem; text-align: center; margin-bottom: 1rem; }
         }
 
     </style>
@@ -232,8 +246,13 @@
         </section>
 
         <section id="about" class="content-section">
-            <h2>About</h2>
-            <p>I am a detail-oriented and driven Data Science major with a strong foundation in statistical modeling, machine learning, and software development. My experience ranges from academic research projects in regression and classification to leading a team in a 24-hour hackathon. I thrive on solving complex problems and am always eager to learn new technologies to create efficient and impactful applications, with a keen focus on the future of AI and large language models.</p>
+            <div class="about-container">
+                <div class="about-heading">About</div>
+                <div class="about-text">
+                    <p>I am a detail-oriented and driven Data Science major with a strong foundation in statistical modeling, machine learning, and software development. My experience ranges from academic research projects in regression and classification to leading a team in a 24-hour hackathon.</p>
+                    <p>I thrive on solving complex problems and am always eager to learn new technologies to create efficient and impactful applications, with a keen focus on the future of AI and large language models.</p>
+                </div>
+            </div>
         </section>
 
         <section id="experience" class="content-section">
