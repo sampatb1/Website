@@ -78,6 +78,8 @@
             height: 100%;
             z-index: -1;
             pointer-events: none; /* Allows clicks to pass through */
+            opacity: 0; /* Start transparent for fade-in effect */
+            transition: opacity 2s ease-in; /* Smooth fade-in transition */
         }
 
         /* Main Container */
@@ -520,8 +522,9 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 4 + 1; // Size from 1 to 5
-                this.speedX = Math.random() * 1 - 0.5; // Slow horizontal speed
-                this.speedY = Math.random() * 1 - 0.5; // Slow vertical speed
+                // Slower particle speed
+                this.speedX = Math.random() * 0.4 - 0.2; 
+                this.speedY = Math.random() * 0.4 - 0.2; 
                 this.color = getComputedStyle(document.body).getPropertyValue('--particle-color');
             }
 
@@ -578,6 +581,11 @@
             resizeCanvas();
             initParticles(); // Re-initialize for new screen size
         });
+
+        // Fade in the canvas after a short delay
+        setTimeout(() => {
+            canvas.style.opacity = '1';
+        }, 500);
 
         // --- CURSOR GLOW EFFECT ---
         const glow = document.querySelector('.cursor-glow');
