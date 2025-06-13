@@ -80,7 +80,7 @@
         }
         
         /* Typography */
-        h1, .header-logo, .about-heading {
+        h1, .header-logo, .about-heading, .section-title {
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
             background-size: 200% 200%;
             -webkit-background-clip: text;
@@ -88,11 +88,18 @@
             animation: waveAnimation 5s ease infinite;
             color: var(--grad-color-2); /* Fallback */
         }
-        h2 { font-size: 1.25rem; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; color: var(--secondary-color); }
         h3 { color: var(--text-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; transition: color 0.3s ease; }
         p { color: var(--secondary-color); margin-bottom: 1rem; line-height: 1.7; }
         a { color: var(--grad-color-2); text-decoration: none; transition: opacity 0.3s ease; }
         a:hover { opacity: 0.8; }
+        
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
 
         /* Sticky Header */
         .sticky-header { position: sticky; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background-color: var(--header-bg-color); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border-color); transform: translateY(-100%); opacity: 0; transition: transform 0.4s ease-out, opacity 0.4s ease-out; }
@@ -256,7 +263,7 @@
         </section>
 
         <section id="experience" class="content-section">
-            <h2>Experience & Projects</h2>
+            <h2 class="section-title">Experience & Projects</h2>
             <div class="experience-list">
                 <div class="experience-item">
                     <div class="date">Feb 2025 - May 2025</div>
@@ -306,7 +313,7 @@
         </section>
 
         <section id="skills" class="content-section">
-            <h2>Skills</h2>
+            <h2 class="section-title">Skills</h2>
             <div class="skills-container">
                 <ul>
                     <li>Python</li>
