@@ -26,6 +26,7 @@
             --card-border-color: #e2e8f0;
             --glow-color: rgba(168, 85, 247, 0.2);
             --nav-link-color: #5f5f5f;
+            --particle-color: rgba(0, 0, 0, 0.15);
             /* Tag Colors */
             --tag-1-color: #3b82f6; --tag-1-bg: rgba(59, 130, 246, 0.1);
             --tag-2-color: #a855f7; --tag-2-bg: rgba(168, 85, 247, 0.1);
@@ -43,6 +44,7 @@
             --card-border-color: #222;
             --glow-color: rgba(168, 85, 247, 0.15);
             --nav-link-color: #888;
+            --particle-color: rgba(255, 255, 255, 0.1);
             /* Tag Colors */
             --tag-1-color: #5d9eff; --tag-1-bg: rgba(93, 158, 255, 0.15);
             --tag-2-color: #c084fc; --tag-2-bg: rgba(192, 132, 252, 0.15);
@@ -65,6 +67,17 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+        
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none; /* Allows clicks to pass through */
         }
 
         /* Main Container */
@@ -338,6 +351,7 @@
     </style>
 </head>
 <body class="dark-theme">
+    <canvas id="particle-canvas"></canvas>
     <div class="cursor-glow"></div>
 
     <header class="sticky-header">
@@ -489,6 +503,82 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
+        // --- PARTICLE BACKGROUND EFFECT ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        // Function to set canvas dimensions and handle resizing
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        // Particle class for creating bubble-like objects
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 4 + 1; // Size from 1 to 5
+                this.speedX = Math.random() * 1 - 0.5; // Slow horizontal speed
+                this.speedY = Math.random() * 1 - 0.5; // Slow vertical speed
+                this.color = getComputedStyle(document.body).getPropertyValue('--particle-color');
+            }
+
+            // Method to update particle's position
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Make particles wrap around the screen
+                if (this.x > canvas.width + this.size) this.x = -this.size;
+                if (this.x < -this.size) this.x = canvas.width + this.size;
+                if (this.y > canvas.height + this.size) this.y = -this.size;
+                if (this.y < -this.size) this.y = canvas.height + this.size;
+            }
+
+            // Method to draw a single particle
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Method to update particle color on theme change
+            updateColor() {
+                 this.color = getComputedStyle(document.body).getPropertyValue('--particle-color');
+            }
+        }
+
+        // Function to create the initial set of particles
+        function initParticles() {
+            particles = []; // Clear existing particles
+            const numberOfParticles = (canvas.width * canvas.height) / 9000; // Adjust density based on screen size
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        // Animation loop
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const particle of particles) {
+                particle.update();
+                particle.draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Setup and run the animation
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles(); // Re-initialize for new screen size
+        });
+
         // --- CURSOR GLOW EFFECT ---
         const glow = document.querySelector('.cursor-glow');
         // Only run this on devices that have a fine pointer (e.g., a mouse)
@@ -549,6 +639,13 @@
         function setTheme(isDark) {
             document.body.classList.toggle('dark-theme', isDark);
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Update particle colors after theme has been applied
+            setTimeout(() => {
+                for (const particle of particles) {
+                    particle.updateColor();
+                }
+            }, 0);
         }
 
         // Toggles the theme between light and dark
