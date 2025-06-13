@@ -111,7 +111,7 @@
         }
 
         /* Hero Section */
-        #hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        #hero { height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         #hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); min-height: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 1rem; }
         .typing-cursor { display: inline-block; width: 4px; height: clamp(2.2rem, 7vw, 4rem); animation: blink 0.7s infinite; margin-left: 8px; vertical-align: text-bottom;
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
@@ -120,8 +120,26 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
         #hero p { font-size: 1.1rem; max-width: 500px; margin: 1.5rem auto; }
-        .cta-button { display: inline-block; padding: 0.75rem 1.5rem; border: 2px solid; border-radius: 50px; font-weight: 600; transition: all 0.3s ease;
-             border-image: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)) 1;
+        
+        /* --- CTA Button --- */
+        .cta-button {
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            padding: 2px; /* This creates space for the border */
+            background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
+            background-size: 200% 200%;
+            animation: waveAnimation 5s ease infinite;
+        }
+        .cta-button-inner {
+            display: block;
+            padding: 0.65rem 1.4rem;
+            background-color: var(--bg-color-start);
+            border-radius: 48px;
+            transition: background-color 0.3s ease-out;
         }
         .cta-button span {
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
@@ -129,10 +147,18 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: waveAnimation 5s ease infinite;
+            transition: color 0.3s ease;
         }
-        .cta-button:hover { color: white; border-image: none; border-color: transparent; background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)); background-size: 200% 200%; animation: waveAnimation 5s ease infinite; box-shadow: 0 5px 15px var(--glow-color);}
-        .cta-button:hover span { -webkit-text-fill-color: white; background: none; animation: none; }
-        
+        .cta-button:hover .cta-button-inner {
+            background-color: transparent;
+        }
+        .cta-button:hover span {
+             -webkit-text-fill-color: white; 
+             color: white;
+             background: none;
+             animation: none;
+        }
+
         /* Fade-in Animation */
         .fade-in-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in-up.subtext { transition-delay: 0s; }
@@ -140,7 +166,7 @@
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
         
         /* Content Sections */
-        .content-section { padding: 2rem 0; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .content-section { padding: 3rem 0; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         #experience.content-section { padding-top: 4rem; }
         .content-section.visible { opacity: 1; transform: translateY(0); }
 
@@ -171,7 +197,7 @@
         @media (max-width: 768px) {
             .header-nav { display: none; }
             #skills ul { columns: 1; }
-            .content-section { padding: 2rem 0; }
+            .content-section { padding: 3rem 0; }
             #experience.content-section { padding-top: 3rem; }
         }
 
@@ -198,7 +224,11 @@
         <section id="hero">
             <h1 id="typing-text"></h1>
             <p class="fade-in-up subtext">A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
-            <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button"><span>View My Resume</span></a>
+            <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">
+                <div class="cta-button-inner">
+                    <span>View My Resume</span>
+                </div>
+            </a>
         </section>
 
         <section id="about" class="content-section">
