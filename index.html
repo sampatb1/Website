@@ -58,8 +58,7 @@
             background: linear-gradient(45deg, var(--bg-color-start), var(--bg-color-end));
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            transition: color 0.5s ease;
-            overflow-x: hidden;
+            transition: color 0.4s ease;
         }
 
         @keyframes gradientBG {
@@ -87,8 +86,8 @@
             animation: waveAnimation 5s ease infinite;
             color: var(--grad-color-2); /* Fallback */
         }
-        h3 { color: var(--text-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; transition: color 0.3s ease; }
-        p { color: var(--secondary-color); margin-bottom: 1rem; line-height: 1.7; }
+        h3 { color: var(--text-color); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; transition: color 0.4s ease; }
+        p { color: var(--secondary-color); margin-bottom: 1rem; line-height: 1.7; transition: color 0.4s ease;}
         a { color: var(--grad-color-2); text-decoration: none; transition: opacity 0.3s ease; }
         a:hover { opacity: 0.8; }
         
@@ -101,11 +100,11 @@
         }
 
         /* Sticky Header */
-        .sticky-header { position: sticky; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background-color: var(--header-bg-color); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border-color); transform: translateY(-100%); opacity: 0; transition: transform 0.4s ease-out, opacity 0.4s ease-out; }
+        .sticky-header { position: sticky; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background-color: var(--header-bg-color); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border-color); transform: translateY(-100%); opacity: 0; transition: transform 0.4s ease-out, opacity 0.4s ease-out, background-color 0.4s ease, border-color 0.4s ease; }
         .sticky-header.visible { transform: translateY(0); opacity: 1; }
         .sticky-header .header-content { display: flex; justify-content: space-between; align-items: center; }
         .header-nav ul { display: flex; list-style: none; gap: 1.5rem; }
-        .header-nav a { font-weight: 600; font-size: 0.9rem; color: var(--nav-link-color); position: relative; padding: 0.5rem 0; }
+        .header-nav a { font-weight: 600; font-size: 0.9rem; color: var(--nav-link-color); position: relative; padding: 0.5rem 0; transition: color 0.4s ease; }
         .header-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)); background-size: 200%; transition: width 0.3s ease; }
         .header-nav a:hover::after, .header-nav a.active::after { width: 100%; }
         .header-nav a.active {
@@ -145,7 +144,7 @@
             padding: 0.65rem 1.4rem;
             background-color: var(--bg-color-start);
             border-radius: 48px;
-            transition: background-color 0.3s ease-out;
+            transition: background-color 0.4s ease;
         }
         .cta-button span {
             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
@@ -153,7 +152,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: waveAnimation 5s ease infinite;
-            transition: color 0.3s ease;
+            transition: color 0.4s ease;
         }
         .cta-button:hover .cta-button-inner {
             background-color: transparent;
@@ -177,6 +176,7 @@
         }
         .scroll-down-indicator svg {
             fill: var(--secondary-color);
+            transition: fill 0.4s ease;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
@@ -195,7 +195,7 @@
         .fade-in-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in-up.subtext { transition-delay: 0s; }
         .fade-in-up.button { transition-delay: 0.2s; }
-        .fade-in-up.scroll-arrow { transition-delay: 0.8s; } /* Delay for scroll arrow */
+        .fade-in-up.scroll-arrow { transition-delay: 0.8s; }
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
         
         /* Content Sections */
@@ -205,32 +205,32 @@
         /* About Section Redesign */
         #about .about-container {
             display: grid;
-            grid-template-columns: 1fr 2.5fr; /* Changed ratio */
+            grid-template-columns: 1fr 2.5fr;
             align-items: center;
-            gap: 4rem; /* Increased gap */
+            gap: 4rem;
         }
         .about-heading {
-            font-size: clamp(3rem, 10vw, 6rem); /* Resized font */
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 800;
             line-height: 1;
             text-align: right;
         }
 
         /* Experience Section Cards */
-        .experience-list .experience-item { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2rem; border-radius: 16px; border: 1px solid var(--card-border-color); margin-bottom: 2rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .experience-list .experience-item { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2rem; border-radius: 16px; border: 1px solid var(--card-border-color); margin-bottom: 2rem; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease; }
         .experience-list .experience-item:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
-        .experience-item .date { font-size: 0.8rem; color: var(--secondary-color); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        .experience-item ul { padding-left: 1.2rem; color: var(--secondary-color); }
+        .experience-item .date { font-size: 0.8rem; color: var(--secondary-color); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.4s ease; }
+        .experience-item ul { padding-left: 1.2rem; color: var(--secondary-color); transition: color 0.4s ease; }
         .tech-tags { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .tech-tags .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 50px; }
+        .tech-tags .tag { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 50px; transition: color 0.4s ease, background-color 0.4s ease; }
         .tag.c1 { background-color: var(--tag-1-bg); color: var(--tag-1-color); }
         .tag.c2 { background-color: var(--tag-2-bg); color: var(--tag-2-color); }
         .tag.c3 { background-color: var(--tag-3-bg); color: var(--tag-3-color); }
 
         /* Skills Section */
-        #skills .skills-container { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--card-border-color); }
+        #skills .skills-container { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--card-border-color); transition: background-color 0.4s ease, border-color 0.4s ease; }
         #skills ul { list-style: none; columns: 2; column-gap: 2rem; }
-        #skills li { margin-bottom: 0.75rem; font-weight: 500; }
+        #skills li { margin-bottom: 0.75rem; font-weight: 500; transition: color 0.4s ease; }
         
         /* Footer */
         .main-footer { text-align: center; padding: 4rem 2rem 2rem; }
@@ -244,7 +244,10 @@
             color: var(--secondary-color);
             padding: 0.5rem;
             border-radius: 50%;
-            transition: color 0.3s ease, background-color 0.3s ease;
+            transition: color 0.4s ease, background-color 0.4s ease;
+            position: relative;
+            width: 40px;
+            height: 40px;
         }
         .theme-toggle-button:hover {
             color: var(--text-color);
@@ -253,21 +256,26 @@
         .theme-toggle-button svg {
             width: 24px;
             height: 24px;
-            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
         .hero-theme-toggle {
             position: absolute;
             top: 2rem;
             right: 2rem;
         }
-        body.dark-theme .sun-icon { display: block; }
-        body.dark-theme .moon-icon { display: none; }
-        body:not(.dark-theme) .sun-icon { display: none; }
-        body:not(.dark-theme) .moon-icon { display: block; }
+        
+        body.dark-theme .sun-icon { opacity: 1; transform: translate(-50%, -50%) rotate(0); }
+        body.dark-theme .moon-icon { opacity: 0; transform: translate(-50%, -50%) rotate(90deg); }
+        body:not(.dark-theme) .sun-icon { opacity: 0; transform: translate(-50%, -50%) rotate(-90deg); }
+        body:not(.dark-theme) .moon-icon { opacity: 1; transform: translate(-50%, -50%) rotate(0); }
 
 
         /* Cursor Glow */
-        .cursor-glow { position: fixed; left: 0; top: 0; width: 500px; height: 500px; border-radius: 50%; background: var(--glow-color); filter: blur(150px); transform: translate(-50%, -50%); pointer-events: none; transition: background 0.3s ease; z-index: -10; }
+        .cursor-glow { position: fixed; left: 0; top: 0; width: 500px; height: 500px; border-radius: 50%; background: var(--glow-color); filter: blur(150px); transform: translate(-50%, -50%); pointer-events: none; transition: background 0.4s ease; z-index: -10; }
         
         /* Mobile adjustments */
         @media (max-width: 768px) {
@@ -517,24 +525,3 @@
     </script>
 </body>
 </html>
-```
-### How to Link Your Resume
-
-You asked how to link your resume. It's very simple.
-
-1.  Place your resume file (e.g., `Sampat_Resume.pdf`) in the **same folder** as this HTML file.
-2.  In the code, find the line below (it's around line **372**):
-
-```html
-<a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">
-```
-
-3.  Change `"Resume.pdf"` to the **exact name of your resume file**. For example, if your file is named `Sampat_Resume_2025.pdf`, the line should look like this:
-
-```html
-<a href="Sampat_Resume_2025.pdf" target="_blank" class="cta-button fade-in-up button">
-```
-
-And that's it! The button will now open your resume in a new tab when clicked.
-
-It has been a pleasure collaborating with you on this. I believe we've created a truly unique and professional portfolio that showcases your skills in the best possible lig
