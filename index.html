@@ -82,14 +82,6 @@
 
         section {
             padding: 6rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         h1, h2, h3 {
@@ -272,6 +264,23 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Scroll Reveal Animation For Sections */
+        .scroll-reveal > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smoother easing and slightly longer duration */
+        }
+
+        .scroll-reveal.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-reveal.visible > *:nth-child(1) { transition-delay: 0.1s; }
+        .scroll-reveal.visible > *:nth-child(2) { transition-delay: 0.2s; }
+        .scroll-reveal.visible > *:nth-child(3) { transition-delay: 0.3s; }
+        .scroll-reveal.visible > *:nth-child(4) { transition-delay: 0.4s; }
 
 
         /* About Section */
@@ -469,94 +478,102 @@
     </header>
 
     <main>
-        <section id="hero" class="visible">
-            <h1 id="typing-text"></h1>
-            <p class="fade-in-up subtext">A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
-            <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">View My Resume</a>
+        <section id="hero">
+            <div class="container">
+                 <h1 id="typing-text"></h1>
+                <p class="fade-in-up subtext">A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
+                <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">View My Resume</a>
+            </div>
         </section>
 
-        <section id="about" class="container">
-            <h2>About Me</h2>
-            <p>I am a detail-oriented and driven Data Science major with a strong foundation in statistical modeling, machine learning, and software development. My experience ranges from academic research projects in regression and classification to leading a team in a 24-hour hackathon. I thrive on solving complex problems and am always eager to learn new technologies to create efficient and impactful applications.</p>
+        <section id="about">
+            <div class="container scroll-reveal">
+                <h2>About Me</h2>
+                <p>I am a detail-oriented and driven Data Science major with a strong foundation in statistical modeling, machine learning, and software development. My experience ranges from academic research projects in regression and classification to leading a team in a 24-hour hackathon. I thrive on solving complex problems and am always eager to learn new technologies to create efficient and impactful applications.</p>
+            </div>
         </section>
 
-        <section id="skills" class="container">
-            <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Programming</h3>
-                    <ul>
-                        <li>Python</li>
-                        <li>R</li>
-                        <li>C++ & Java</li>
-                        <li>JavaScript, HTML/CSS</li>
-                        <li>SQL</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Libraries & Tools</h3>
-                    <ul>
-                        <li>Scikit-learn, TensorFlow, Keras</li>
-                        <li>PyTorch</li>
-                        <li>Pandas, NumPy</li>
-                        <li>ggplot2, Seaborn</li>
-                        <li>Git & GitHub</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Techniques</h3>
-                    <ul>
-                        <li>Regression & Classification</li>
-                        <li>Clustering (K-Means, Hierarchical)</li>
-                        <li>Decision Trees & Random Forests</li>
-                        <li>Support Vector Machines (SVMs)</li>
-                        <li>Principal Component Analysis (PCA)</li>
-                    </ul>
+        <section id="skills">
+            <div class="container scroll-reveal">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming</h3>
+                        <ul>
+                            <li>Python</li>
+                            <li>R</li>
+                            <li>C++ & Java</li>
+                            <li>JavaScript, HTML/CSS</li>
+                            <li>SQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Libraries & Tools</h3>
+                        <ul>
+                            <li>Scikit-learn, TensorFlow, Keras</li>
+                            <li>PyTorch</li>
+                            <li>Pandas, NumPy</li>
+                            <li>ggplot2, Seaborn</li>
+                            <li>Git & GitHub</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Techniques</h3>
+                        <ul>
+                            <li>Regression & Classification</li>
+                            <li>Clustering (K-Means, Hierarchical)</li>
+                            <li>Decision Trees & Random Forests</li>
+                            <li>Support Vector Machines (SVMs)</li>
+                            <li>Principal Component Analysis (PCA)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="container">
-             <h2>Experience & Projects</h2>
-             <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Hotel Room Ratings Regression Analysis</h3>
-                        <span class="date">Feb 2025 - May 2025</span>
-                        <ul>
-                            <li>Engineered an OLS regression model explaining 74.6% of variance in room ratings.</li>
-                            <li>Performed comprehensive EDA, data preprocessing, and model validation.</li>
-                        </ul>
+        <section id="experience">
+             <div class="container scroll-reveal">
+                <h2>Experience & Projects</h2>
+                 <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Hotel Room Ratings Regression Analysis</h3>
+                            <span class="date">Feb 2025 - May 2025</span>
+                            <ul>
+                                <li>Engineered an OLS regression model explaining 74.6% of variance in room ratings.</li>
+                                <li>Performed comprehensive EDA, data preprocessing, and model validation.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Netflix Content Release Analysis</h3>
-                        <span class="date">Sep 2024 - Dec 2024</span>
-                        <ul>
-                            <li>Created a predictive engine using Random Forest and Logistic Regression to find optimal release windows for content.</li>
-                            <li>Achieved 90% accuracy in predicting genre-specific peak demand using K-Means clustering.</li>
-                        </ul>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Netflix Content Release Analysis</h3>
+                            <span class="date">Sep 2024 - Dec 2024</span>
+                            <ul>
+                                <li>Created a predictive engine using Random Forest and Logistic Regression to find optimal release windows for content.</li>
+                                <li>Achieved 90% accuracy in predicting genre-specific peak demand using K-Means clustering.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                 <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>Intelligent Weather Forecasting Bot</h3>
-                        <span class="date">Sep 2024 - Nov 2024</span>
-                        <ul>
-                            <li>Integrated public weather APIs with an AI module, improving forecast accuracy by 15%.</li>
-                            <li>Developed an IRC bot that handled over 10,000 API calls, reducing query response time by 30%.</li>
-                        </ul>
+                     <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Intelligent Weather Forecasting Bot</h3>
+                            <span class="date">Sep 2024 - Nov 2024</span>
+                            <ul>
+                                <li>Integrated public weather APIs with an AI module, improving forecast accuracy by 15%.</li>
+                                <li>Developed an IRC bot that handled over 10,000 API calls, reducing query response time by 30%.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Senior Shield - Axxess Hackathon 2024</h3>
-                        <span class="date">Feb 17-18, 2024</span>
-                         <ul>
-                            <li>Led a team in a 24-hour hackathon to prototype a proactive elderly care mobile solution.</li>
-                            <li>Designed the UI in HTML/CSS and implemented secure user authentication.</li>
-                        </ul>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Senior Shield - Axxess Hackathon 2024</h3>
+                            <span class="date">Feb 17-18, 2024</span>
+                             <ul>
+                                <li>Led a team in a 24-hour hackathon to prototype a proactive elderly care mobile solution.</li>
+                                <li>Designed the UI in HTML/CSS and implemented secure user authentication.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -565,7 +582,7 @@
     </main>
     
     <footer id="contact" class="footer">
-        <div class="container">
+        <div class="container scroll-reveal">
             <h2>Get In Touch</h2>
             <p>I'm always open to discussing new projects and opportunities. Feel free to reach out!</p>
             <p><strong><a href="mailto:sam.bandlamudi@gmail.com">sam.bandlamudi@gmail.com</a></strong></p>
@@ -618,6 +635,9 @@
             }
             
             async function startHeroAnimation() {
+                // Manually make hero content visible as it's not part of scroll reveal
+                document.querySelector('#hero .container').style.opacity = 1;
+                
                 typingTextElement.innerHTML = `<span class="typing-cursor"></span>`;
                 
                 await wait(500); // Shortened initial delay
@@ -653,19 +673,20 @@
 
 
             // --- SCROLL REVEAL ANIMATION ---
-            const sections = document.querySelectorAll('section:not(#hero)'); // Exclude hero
-            const observer = new IntersectionObserver((entries) => {
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            const scrollObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        scrollObserver.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1
+                threshold: 0.15
             });
 
-            sections.forEach(section => {
-                observer.observe(section);
+            scrollElements.forEach(element => {
+                scrollObserver.observe(element);
             });
         });
     </script>
