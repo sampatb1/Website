@@ -28,7 +28,7 @@
             --nav-link-color: #5f5f5f;
             --particle-color: rgba(0, 0, 0, 0.15);
             --grid-color: rgba(0, 0, 0, 0.03);
-            /* --- NEW: Monochromatic interaction colors --- */
+            /* Monochromatic interaction colors */
             --particle-interaction-color: rgba(0, 0, 0, 0.6);
             --shooting-star-color: rgba(50, 50, 50, 1);
             /* Tag Colors */
@@ -50,7 +50,7 @@
             --nav-link-color: #888;
             --particle-color: rgba(255, 255, 255, 0.2);
             --grid-color: rgba(255, 255, 255, 0.03);
-            /* --- NEW: Monochromatic interaction colors --- */
+            /* Monochromatic interaction colors */
             --particle-interaction-color: rgba(255, 255, 255, 0.8);
             --shooting-star-color: rgba(255, 255, 255, 1);
         }
@@ -215,7 +215,6 @@
         .fade-in-up.subtext { transition-delay: 0s; }
         .fade-in-up.button { transition-delay: 0.2s; }
         .fade-in-up.scroll-arrow { transition-delay: 0.8s; }
-        /* --- NEW: Transition for hero theme toggle --- */
         .fade-in-up.hero-theme-toggle { transition-delay: 0.4s; }
         .fade-in-up.visible { opacity: 1; transform: translateY(0); }
         
@@ -405,7 +404,6 @@
 
     <main class="container">
         <section id="hero">
-             <!-- --- MODIFIED: Added fade-in-up class for smooth transition --- -->
              <div class="hero-theme-toggle fade-in-up">
                  <button class="theme-toggle-button" id="hero-theme-toggle" aria-label="Toggle Theme">
                      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.7V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.3c-1.81-1.23-3-3.32-3-5.7a7 7 0 0 1 7-7m-9 19v-2h18v2H3z"/></svg>
@@ -588,27 +586,147 @@
             canvas.height = window.innerHeight;
         }
         
+        // --- NEW: Easing function for smoother motion ---
+        function easeInOutQuad(t) {
+            return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        }
+
         class ShootingStar {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 12 + 6; // Faster
-                this.speedY = (Math.random() - 0.5) * 12 + 6;
+                this.baseSize = Math.random() * 1.5 + 0.5;
+                this.size = this.baseSize;
                 this.color = getComputedStyle(document.body).getPropertyValue('--shooting-star-color');
-                this.life = 150; // Longer life for a longer trail
+                this.life = 0; // Will be set by the behavior sequence
+                
+                // --- NEW: Procedural behavior engine ---
+                this.behaviorSequence = this.generateBehaviorSequence();
+                this.currentActionIndex = 0;
+                this.actionProgress = 0; // From 0 to 1
+                this.x = this.behaviorSequence[0].startX;
+                this.y = this.behaviorSequence[0].startY;
             }
+
+            generateBehaviorSequence() {
+                const sequence = [];
+                const startX = Math.random() * canvas.width;
+                const startY = Math.random() * canvas.height;
+                let lastX = startX;
+                let lastY = startY;
+
+                const numActions = Math.floor(Math.random() * 3) + 2; // 2 to 4 actions per star
+
+                for (let i = 0; i < numActions; i++) {
+                    const actionTypes = ['move', 'arc', 'spiral', 'charge'];
+                    let randomActionType = actionTypes[Math.floor(Math.random() * actionTypes.length)];
+                    
+                    // --- Rule: Last action must be a 'shoot' action ---
+                    if (i === numActions - 1) {
+                        // If previous action was not 'charge', add one before shooting
+                        if(sequence.length > 0 && sequence[sequence.length-1].type !== 'charge') {
+                             sequence.push({
+                                type: 'charge',
+                                duration: Math.random() * 40 + 20, // 20-60 frames
+                                startX: lastX, startY: lastY,
+                            });
+                        }
+                        sequence.push({ type: 'shoot', startX: lastX, startY: lastY, duration: 120 });
+                        break;
+                    }
+                    
+                    // --- Rule: 'charge' must be followed by 'shoot', so don't pick it randomly unless it's the second to last action
+                    if (randomActionType === 'charge' && i < numActions - 2) {
+                        randomActionType = 'move'; // Default to move if charge is picked too early
+                    }
+
+
+                    const action = {
+                        type: randomActionType,
+                        duration: Math.random() * 60 + 60, // 60-120 frames
+                        startX: lastX,
+                        startY: lastY,
+                    };
+
+                    if (randomActionType === 'move' || randomActionType === 'arc') {
+                        action.targetX = lastX + (Math.random() - 0.5) * 500;
+                        action.targetY = lastY + (Math.random() - 0.5) * 500;
+                        lastX = action.targetX;
+                        lastY = action.targetY;
+                    }
+                    if (randomActionType === 'arc') {
+                        action.controlX = (action.startX + action.targetX) / 2 + (Math.random() - 0.5) * 200;
+                        action.controlY = (action.startY + action.targetY) / 2 + (Math.random() - 0.5) * 200;
+                    }
+                     if (randomActionType === 'spiral') {
+                        action.targetX = lastX + (Math.random() - 0.5) * 300;
+                        action.targetY = lastY + (Math.random() - 0.5) * 300;
+                        action.startRadius = Math.sqrt(Math.pow(action.targetX - action.startX, 2) + Math.pow(action.targetY - action.startY, 2));
+                        action.endRadius = 0;
+                        action.startAngle = Math.atan2(action.startY - action.targetY, action.startX - action.targetX);
+                        lastX = action.targetX;
+                        lastY = action.targetY;
+                    }
+
+                    sequence.push(action);
+                }
+                
+                // Calculate total life
+                this.life = sequence.reduce((acc, val) => acc + (val.duration || 120), 0); // Add default for shoot
+                return sequence;
+            }
+
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.life--;
+                if (this.currentActionIndex >= this.behaviorSequence.length) {
+                    this.life = 0; // End of life
+                    return;
+                }
+
+                const action = this.behaviorSequence[this.currentActionIndex];
+                this.actionProgress += 1 / action.duration;
+                const easedProgress = easeInOutQuad(this.actionProgress);
+
+                switch (action.type) {
+                    case 'move':
+                        this.x = action.startX + (action.targetX - action.startX) * easedProgress;
+                        this.y = action.startY + (action.targetY - action.startY) * easedProgress;
+                        break;
+                    case 'arc':
+                        const t = easedProgress;
+                        this.x = Math.pow(1 - t, 2) * action.startX + 2 * (1 - t) * t * action.controlX + Math.pow(t, 2) * action.targetX;
+                        this.y = Math.pow(1 - t, 2) * action.startY + 2 * (1 - t) * t * action.controlY + Math.pow(t, 2) * action.targetY;
+                        break;
+                    case 'spiral':
+                        const radius = action.startRadius * (1 - easedProgress);
+                        const angle = action.startAngle + easedProgress * Math.PI * 4; // 2 full rotations
+                        this.x = action.targetX + Math.cos(angle) * radius;
+                        this.y = action.targetY + Math.sin(angle) * radius;
+                        break;
+                    case 'charge':
+                        this.size = this.baseSize + Math.sin(this.actionProgress * Math.PI) * 3; // Pulsing effect
+                        break;
+                    case 'shoot':
+                         if (!action.speedX) { // Initialize speed on first frame of shoot
+                            action.speedX = (Math.random() - 0.5) * 25;
+                            action.speedY = (Math.random() - 0.5) * 25;
+                        }
+                        this.x += action.speedX;
+                        this.y += action.speedY;
+                        action.duration--; // Use duration as a countdown for shooting
+                        break;
+                }
+
+                if (this.actionProgress >= 1) {
+                    this.actionProgress = 0;
+                    this.currentActionIndex++;
+                }
+                 this.life--;
             }
+
             draw() {
                 ctx.save();
-                ctx.globalAlpha = this.life / 150;
+                ctx.globalAlpha = Math.min(1, this.life / 100);
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, Math.max(0, this.size), 0, Math.PI * 2);
                 ctx.fill();
                 ctx.restore();
             }
@@ -761,7 +879,7 @@
             
             drawGrid();
 
-            if (frameCount % 120 === 0) { // More frequent stars
+            if (frameCount % 180 === 0) {
                 if (shootingStars.length < 5) {
                      shootingStars.push(new ShootingStar());
                 }
@@ -810,7 +928,6 @@
         const heroSubtext = document.querySelector('#hero .subtext');
         const resumeButton = document.querySelector('#hero .button');
         const scrollIndicator = document.querySelector('.scroll-down-indicator');
-        // --- NEW: Select the hero theme toggle for animation ---
         const heroThemeToggleContainer = document.querySelector('.hero-theme-toggle');
 
         function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
@@ -839,7 +956,6 @@
             heroSubtext.classList.add('visible');
             resumeButton.classList.add('visible');
             scrollIndicator.classList.add('visible');
-            // --- NEW: Make theme toggle visible ---
             heroThemeToggleContainer.classList.add('visible');
         }
 
