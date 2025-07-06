@@ -44,11 +44,11 @@
             --card-border-color: #222;
             --glow-color: rgba(168, 85, 247, 0.15);
             --nav-link-color: #888;
-            --particle-color: rgba(255, 255, 255, 0.1);
-            /* Tag Colors */
-            --tag-1-color: #5d9eff; --tag-1-bg: rgba(93, 158, 255, 0.15);
-            --tag-2-color: #c084fc; --tag-2-bg: rgba(192, 132, 252, 0.15);
-            --tag-3-color: #f472b6; --tag-3-bg: rgba(244, 114, 182, 0.15);
+            --particle-color: rgba(255, 255, 255, 0.2);
+            /* Use theme colors for dark mode particle interaction */
+            --grad-color-1-dark: #5d9eff;
+            --grad-color-2-dark: #c084fc;
+            --grad-color-3-dark: #f472b6;
         }
 
         /* Base & Animated Background */
@@ -123,11 +123,11 @@
         .header-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3)); background-size: 200%; transition: width 0.3s ease; }
         .header-nav a:hover::after, .header-nav a.active::after { width: 100%; }
         .header-nav a.active {
-             background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
-             background-size: 200% 200%;
-             -webkit-background-clip: text;
-             -webkit-text-fill-color: transparent;
-             animation: waveAnimation 5s ease infinite;
+            background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: waveAnimation 5s ease infinite;
         }
 
         /* Hero Section */
@@ -173,10 +173,10 @@
             background-color: transparent;
         }
         .cta-button:hover span {
-             -webkit-text-fill-color: white; 
-             color: white;
-             background: none;
-             animation: none;
+            -webkit-text-fill-color: white; 
+            color: white;
+            background: none;
+            animation: none;
         }
 
         /* Scroll Down Indicator */
@@ -375,6 +375,7 @@
                 padding: 0.5rem 1rem;
                 font-size: 0.85rem;
             }
+            .cursor-glow { display: none; }
         }
 
     </style>
@@ -404,8 +405,8 @@
         <section id="hero">
              <div class="hero-theme-toggle">
                  <button class="theme-toggle-button" id="hero-theme-toggle" aria-label="Toggle Theme">
-                       <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.7V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.3c-1.81-1.23-3-3.32-3-5.7a7 7 0 0 1 7-7m-9 19v-2h18v2H3z"/></svg>
-                       <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A9.91 9.91 0 0 0 9 2.46A10 10 0 0 1 9 21.54A10 10 0 1 0 12 2Z" /></svg>
+                     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.7V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.3c-1.81-1.23-3-3.32-3-5.7a7 7 0 0 1 7-7m-9 19v-2h18v2H3z"/></svg>
+                     <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A9.91 9.91 0 0 0 9 2.46A10 10 0 0 1 9 21.54A10 10 0 1 0 12 2Z" /></svg>
                  </button>
              </div>
             <h1 id="typing-text"></h1>
@@ -556,42 +557,142 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- PARTICLE BACKGROUND EFFECT ---
+        // --- CONSTELLATION BACKGROUND EFFECT ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
+        let themeColors = [];
+        let shootingStars = []; 
+        let frameCount = 0; 
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 100 
+        };
+
+        if (window.matchMedia('(pointer: fine)').matches) {
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            });
+            window.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+        }
         
-        // Function to set canvas dimensions and handle resizing
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
+        
+        function getThemeColors() {
+            const styles = getComputedStyle(document.body);
+            const isDark = document.body.classList.contains('dark-theme');
+            if (isDark) {
+                themeColors = [
+                    styles.getPropertyValue('--grad-color-1-dark').trim(),
+                    styles.getPropertyValue('--grad-color-2-dark').trim(),
+                    styles.getPropertyValue('--grad-color-3-dark').trim()
+                ];
+            } else {
+                 themeColors = [
+                    styles.getPropertyValue('--grad-color-1').trim(),
+                    styles.getPropertyValue('--grad-color-2').trim(),
+                    styles.getPropertyValue('--grad-color-3').trim()
+                ];
+            }
+        }
 
-        // Particle class for creating bubble-like objects
+        class ShootingStar {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 8 + 2;
+                this.speedY = (Math.random() - 0.5) * 8 + 2;
+                this.color = themeColors[Math.floor(Math.random() * themeColors.length)];
+                this.life = 100;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life--;
+            }
+            draw() {
+                ctx.globalAlpha = this.life / 100; // Fade out
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1; // Reset alpha
+            }
+        }
+
+
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 4 + 1; // Size from 1 to 5
-                // Slower particle speed
-                this.speedX = Math.random() * 0.4 - 0.2; 
-                this.speedY = Math.random() * 0.4 - 0.2; 
-                this.color = getComputedStyle(document.body).getPropertyValue('--particle-color');
+                this.baseSize = Math.random() * 1.5 + 1;
+                this.size = this.baseSize;
+                this.speedX = Math.random() * 0.2 - 0.1; 
+                this.speedY = Math.random() * 0.2 - 0.1; 
+                this.defaultColor = getComputedStyle(document.body).getPropertyValue('--particle-color');
+                this.color = this.defaultColor;
+                
+                this.pulseAngle = Math.random() * Math.PI * 2;
+                this.pulseSpeed = Math.random() * 0.02 + 0.01;
+                this.pulseAmplitude = this.baseSize * 0.5;
+                this.interactionColor = themeColors[Math.floor(Math.random() * themeColors.length)];
+                
+                // --- NEW: Activation timer for node pings ---
+                this.activationTimer = 0;
             }
 
-            // Method to update particle's position
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
+                this.pulseAngle += this.pulseSpeed;
+                this.size = this.baseSize + Math.sin(this.pulseAngle) * this.pulseAmplitude;
 
-                // Make particles wrap around the screen
+                let isMouseInteracting = false;
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        isMouseInteracting = true;
+                        this.color = this.interactionColor;
+                        this.size = this.baseSize + 2 + Math.sin(this.pulseAngle) * this.pulseAmplitude * 2;
+
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const forceAmount = force * 1.5;
+
+                        this.x -= forceDirectionX * forceAmount;
+                        this.y -= forceDirectionY * forceAmount;
+                    }
+                }
+                
+                // --- NEW: Handle node ping activation ---
+                if (this.activationTimer > 0) {
+                    this.activationTimer--;
+                    // Use interaction color if activated, but mouse interaction takes precedence
+                    if (!isMouseInteracting) {
+                         this.color = this.interactionColor;
+                    }
+                } else if (!isMouseInteracting) {
+                    this.color = this.defaultColor;
+                }
+
                 if (this.x > canvas.width + this.size) this.x = -this.size;
                 if (this.x < -this.size) this.x = canvas.width + this.size;
                 if (this.y > canvas.height + this.size) this.y = -this.size;
                 if (this.y < -this.size) this.y = canvas.height + this.size;
             }
 
-            // Method to draw a single particle
             draw() {
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
@@ -599,48 +700,102 @@
                 ctx.fill();
             }
 
-            // Method to update particle color on theme change
             updateColor() {
-                 this.color = getComputedStyle(document.body).getPropertyValue('--particle-color');
+                this.defaultColor = getComputedStyle(document.body).getPropertyValue('--particle-color');
+                this.interactionColor = themeColors[Math.floor(Math.random() * themeColors.length)];
+                this.color = this.defaultColor;
             }
         }
 
-        // Function to create the initial set of particles
-        function initParticles() {
-            particles = []; // Clear existing particles
-            const numberOfParticles = (canvas.width * canvas.height) / 9000; // Adjust density based on screen size
+        function init() {
+            getThemeColors();
+            
+            particles = [];
+            const numberOfParticles = (canvas.width * canvas.height) / 15000;
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push(new Particle());
             }
         }
         
-        // Animation loop
-        function animateParticles() {
+        function connectParticles() {
+            const connectionDistance = 120;
+            let opacityValue = 1;
+
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        opacityValue = 1 - (distance / connectionDistance);
+                        
+                        // --- NEW: Activate particles on connection ---
+                        particles[a].activationTimer = 10; // Activate for 10 frames
+                        particles[b].activationTimer = 10;
+
+                        let mouseDxA = particles[a].x - mouse.x;
+                        let mouseDyA = particles[a].y - mouse.y;
+                        let mouseDistanceA = Math.sqrt(mouseDxA*mouseDxA + mouseDyA*mouseDyA);
+
+                        if (mouse.x !== null && mouseDistanceA < mouse.radius) {
+                            ctx.strokeStyle = `rgba(200, 200, 200, ${opacityValue * 1.5})`;
+                            ctx.lineWidth = 1.2;
+                        } else {
+                            ctx.strokeStyle = `rgba(128, 128, 128, ${opacityValue})`;
+                            ctx.lineWidth = 1;
+                        }
+
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            frameCount++;
+            
+            if (frameCount % 300 === 0) { 
+                if (shootingStars.length < 3) { // Limit number of stars on screen
+                     shootingStars.push(new ShootingStar());
+                }
+            }
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                shootingStars[i].update();
+                shootingStars[i].draw();
+                if (shootingStars[i].life <= 0) {
+                    shootingStars.splice(i, 1);
+                }
+            }
+
             for (const particle of particles) {
                 particle.update();
                 particle.draw();
             }
-            requestAnimationFrame(animateParticles);
+            connectParticles();
+            
+            requestAnimationFrame(animate);
         }
 
         // Setup and run the animation
         resizeCanvas();
-        initParticles();
-        animateParticles();
+        init();
+        animate();
         window.addEventListener('resize', () => {
             resizeCanvas();
-            initParticles(); // Re-initialize for new screen size
+            init();
         });
 
-        // Fade in the canvas after a short delay
         setTimeout(() => {
             canvas.style.opacity = '1';
         }, 500);
 
         // --- CURSOR GLOW EFFECT ---
         const glow = document.querySelector('.cursor-glow');
-        // Only run this on devices that have a fine pointer (e.g., a mouse)
         if (window.matchMedia('(pointer: fine)').matches) {
             document.addEventListener('mousemove', (e) => {
                 glow.style.left = `${e.clientX}px`;
@@ -654,22 +809,18 @@
         const resumeButton = document.querySelector('#hero .button');
         const scrollIndicator = document.querySelector('.scroll-down-indicator');
 
-        // Utility function to create a delay
         function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
-        // Function to type out a sequence of strings with delays
         async function typeSequence(element, sequence) {
             let currentText = "";
             for (const item of sequence) {
                 if (typeof item === 'string') {
-                    // Type out the string character by character
                     for (const char of item) {
                         currentText += char;
                         element.innerHTML = `${currentText}<span class="typing-cursor"></span>`;
-                        await wait(100); // Speed of typing
+                        await wait(100);
                     }
                 } else {
-                    // If it's a number, wait for that duration
                     await wait(item);
                 }
             }
@@ -677,12 +828,10 @@
             return Promise.resolve();
         }
         
-        // Orchestrates the hero section intro animation
         async function startHeroAnimation() {
-            await wait(500); // Initial delay before anything happens
+            await wait(500);
             typeSequence(typingTextElement, ["Hi,", 500, " I'm Sampat"]);
             
-            // Fade in the other elements after a short delay
             heroSubtext.classList.add('visible');
             resumeButton.classList.add('visible');
             scrollIndicator.classList.add('visible');
@@ -694,72 +843,54 @@
         const heroThemeToggle = document.getElementById('hero-theme-toggle');
         const headerThemeToggle = document.getElementById('header-theme-toggle');
         
-        // Function to apply the theme to the body
         function setTheme(isDark) {
             document.body.classList.toggle('dark-theme', isDark);
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             
-            // Update particle colors after theme has been applied
-            setTimeout(() => {
-                for (const particle of particles) {
-                    particle.updateColor();
-                }
-            }, 0);
+            init();
         }
 
-        // Toggles the theme between light and dark
         function toggleTheme() {
             const isCurrentlyDark = document.body.classList.contains('dark-theme');
             setTheme(!isCurrentlyDark);
         }
 
-        // Check local storage for a saved theme preference on page load
         if (localStorage.getItem('theme') === 'light') {
             setTheme(false);
         } else {
-            setTheme(true); // Default to dark theme
+            setTheme(true);
         }
         
-        // Add click listeners to both theme toggle buttons
         heroThemeToggle.addEventListener('click', toggleTheme);
         headerThemeToggle.addEventListener('click', toggleTheme);
         
-
         // --- STICKY HEADER & SCROLLSPY ---
         const header = document.querySelector('.sticky-header');
         const sections = document.querySelectorAll('.content-section');
         const navLinks = document.querySelectorAll('.header-nav a');
 
-        // Observer for making the sticky header appear
         const headerObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // When the hero section is not intersecting (i.e., scrolled past), show the header
                 header.classList.toggle('visible', !entry.isIntersecting);
             });
-        }, { rootMargin: "-100px 0px 0px 0px" }); // Trigger a bit before the hero is fully gone
+        }, { rootMargin: "-100px 0px 0px 0px" });
         headerObserver.observe(document.querySelector('#hero'));
 
-
-        // Observer for animating sections on scroll and updating nav links (Scrollspy)
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Fade in the section when it enters the viewport
                     entry.target.classList.add('visible');
                     
-                    // Update the active state of the navigation links
                     navLinks.forEach(link => {
                         link.classList.remove('active');
-                        // Check if the link's href matches the intersecting section's id
                         if (link.getAttribute('href').substring(1) === entry.target.id) {
                             link.classList.add('active');
                         }
                     });
                 }
             });
-        }, { threshold: 0.4 }); // Trigger when 40% of the section is visible
+        }, { threshold: 0.4 });
 
-        // Observe all content sections
         sections.forEach(section => {
             sectionObserver.observe(section);
         });
