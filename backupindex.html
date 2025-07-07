@@ -209,7 +209,6 @@
             }
         }
 
-
         /* Fade-in Animation */
         .fade-in-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in-up.subtext { transition-delay: 0s; }
@@ -236,9 +235,35 @@
             text-align: right;
         }
 
-        /* Experience Section Cards */
-        .experience-list .experience-item { background-color: var(--card-bg-color); backdrop-filter: blur(5px); padding: 2rem; border-radius: 16px; border: 1px solid var(--card-border-color); margin-bottom: 2rem; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, border-color 0.4s ease; }
-        .experience-list .experience-item:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+        /* --- V3: Experience Section Cards --- */
+        .experience-list .experience-item { 
+            background-color: var(--card-bg-color); 
+            backdrop-filter: blur(5px); 
+            padding: 2rem; 
+            border-radius: 16px; 
+            border: 1px solid var(--card-border-color); 
+            margin-bottom: 2rem; 
+            position: relative;
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        box-shadow 0.4s ease, 
+                        background-color 0.4s ease, 
+                        border-color 0.4s ease; 
+        }
+
+        /* V3: Subtle 3D Tilt and Border Color Change on Hover */
+        .experience-list .experience-item:hover { 
+            transform: perspective(1000px) rotateX(var(--rotateX, 0)) rotateY(var(--rotateY, 0)) translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1); 
+            border-color: var(--grad-color-2);
+        }
+        
+        body.dark-theme .experience-item:hover {
+             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+             border-color: var(--grad-color-2);
+        }
+
         .experience-item .date { font-size: 0.8rem; color: var(--secondary-color); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.4s ease; }
         .experience-item ul { padding-left: 1.2rem; color: var(--secondary-color); transition: color 0.4s ease; }
         
@@ -278,6 +303,13 @@
         body.dark-theme .tag:hover, body.dark-theme .skill-pill:hover {
             box-shadow: 0 4px 25px var(--glow-color);
         }
+        
+        /* --- V2: Staggered animation for skills --- */
+        .skill-pill {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
 
         /* --- Skills Section --- */
         .skills-grid {
@@ -290,14 +322,28 @@
             font-weight: 700;
             margin-bottom: 1.25rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--card-border-color);
+            position: relative; /* Needed for the gradient border */
             display: flex;
             align-items: center;
             gap: 0.75rem;
             background: none;
             -webkit-text-fill-color: var(--text-color);
             animation: none;
+            border: none; /* Removed original border */
         }
+        /* V2: Animated gradient border for skill category titles */
+        .skill-category h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3), var(--grad-color-1));
+            background-size: 300% 1px;
+            animation: waveAnimation 6s linear infinite;
+        }
+
         .skill-category h3 svg {
             width: 24px;
             height: 24px;
@@ -435,6 +481,7 @@
         <section id="experience" class="content-section">
             <h2 class="section-title">Experience & Projects</h2>
             <div class="experience-list">
+                <!-- V3: These items will now have the subtle tilt/border hover effect -->
                 <div class="experience-item">
                     <div class="date">Feb 2025 - May 2025</div>
                     <h3>Hotel Room Ratings Regression Analysis</h3>
@@ -492,6 +539,7 @@
                         Languages & Databases
                     </h3>
                     <div class="skill-pills">
+                        <!-- V3: These pills will stagger-fade in with a greater delay -->
                         <span class="skill-pill c1">Python</span>
                         <span class="skill-pill c2">R</span>
                         <span class="skill-pill c3">SQL</span>
@@ -624,10 +672,10 @@
                         // If previous action was not 'charge', add one before shooting
                         if(sequence.length > 0 && sequence[sequence.length-1].type !== 'charge') {
                              sequence.push({
-                                type: 'charge',
-                                duration: Math.random() * 40 + 20, // 20-60 frames
-                                startX: lastX, startY: lastY,
-                            });
+                                 type: 'charge',
+                                 duration: Math.random() * 40 + 20, // 20-60 frames
+                                 startX: lastX, startY: lastY,
+                             });
                         }
                         sequence.push({ type: 'shoot', startX: lastX, startY: lastY, duration: 120 });
                         break;
@@ -969,6 +1017,7 @@
             document.body.classList.toggle('dark-theme', isDark);
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             
+            // Re-initialize particles to get new theme colors
             init();
         }
 
@@ -988,9 +1037,6 @@
         
         // --- STICKY HEADER & SCROLLSPY ---
         const header = document.querySelector('.sticky-header');
-        const sections = document.querySelectorAll('.content-section');
-        const navLinks = document.querySelectorAll('.header-nav a');
-
         const headerObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 header.classList.toggle('visible', !entry.isIntersecting);
@@ -998,24 +1044,85 @@
         }, { rootMargin: "-100px 0px 0px 0px" });
         headerObserver.observe(document.querySelector('#hero'));
 
-        const sectionObserver = new IntersectionObserver((entries) => {
+        // --- V4: DUAL SCROLL OBSERVERS FOR DIFFERENT ANIMATION TIMING ---
+        const sections = document.querySelectorAll('.content-section');
+        const navLinks = document.querySelectorAll('.header-nav a');
+
+        function updateActiveNavLink(sectionId) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === sectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Observer for sections that should appear quickly (#about, #experience)
+        const fastSectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    updateActiveNavLink(entry.target.id);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 }); // Triggers when 20% of the section is visible
+
+        // Observer for the skills section, with a delay to showcase the animation
+        const skillsSectionObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                     
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href').substring(1) === entry.target.id) {
-                            link.classList.add('active');
-                        }
+                    // Animate skill pills with a stagger effect
+                    const skillPills = entry.target.querySelectorAll('.skill-pill');
+                    skillPills.forEach((pill, index) => {
+                        pill.style.transitionDelay = `${index * 75}ms`;
+                        pill.style.opacity = '1';
+                        pill.style.transform = 'translateY(0)';
                     });
+
+                    updateActiveNavLink(entry.target.id);
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.5 }); // Triggers when 50% is visible
 
+        // Apply the correct observer to each section
         sections.forEach(section => {
-            sectionObserver.observe(section);
+            if (section.id === 'skills') {
+                skillsSectionObserver.observe(section);
+            } else {
+                fastSectionObserver.observe(section);
+            }
         });
+
+        // --- V2: 3D TILT EFFECT FOR EXPERIENCE CARDS ---
+        const experienceItems = document.querySelectorAll('.experience-item');
+        if (window.matchMedia('(pointer: fine)').matches) { // Only apply on devices with fine pointers (mice)
+            experienceItems.forEach(item => {
+                item.addEventListener('mousemove', (e) => {
+                    const rect = item.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -8; // Max rotation of 8 degrees
+                    const rotateY = ((x - centerX) / centerX) * 8;   // Max rotation of 8 degrees
+                    
+                    item.style.setProperty('--rotateX', `${rotateX}deg`);
+                    item.style.setProperty('--rotateY', `${rotateY}deg`);
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    // Reset rotation smoothly
+                    item.style.setProperty('--rotateX', '0deg');
+                    item.style.setProperty('--rotateY', '0deg');
+                });
+            });
+        }
 
     });
     </script>
