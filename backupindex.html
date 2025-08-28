@@ -11,38 +11,44 @@
     
     <style>
         :root {
-            /* Shared Animated Gradient Colors */
+            /* --- NEW: Light Theme Palette (Emerald & Gold) --- */
+            --grad-color-1: #10b981; /* Rich Emerald */
+            --grad-color-2: #f59e0b; /* Warm Amber/Gold */
+            --grad-color-3: #86efac; /* Light Mint Green */
+
+            /* Base Colors */
+            --bg-color-start: #f8fafc; /* Slate 50 */
+            --bg-color-end: #f0fdf4; /* Green 50 */
+            --text-color: #0f172a; /* Slate 900 */
+            --secondary-color: #475569; /* Slate 600 */
+            --card-bg-color: rgba(255, 255, 255, 0.6);
+            --header-bg-color: rgba(248, 250, 252, 0.85); /* Slate 50 with opacity */
+            --card-border-color: rgba(0, 0, 0, 0.08);
+            --glow-color: rgba(16, 185, 129, 0.15); /* Emerald glow */
+            --nav-link-color: #334155; /* Slate 700 */
+            --particle-color: rgba(0, 0, 0, 0.2);
+            --grid-color: rgba(0, 0, 0, 0.04);
+            --particle-interaction-color: rgba(0, 0, 0, 0.7);
+            --shooting-star-color: rgba(50, 50, 50, 1);
+            
+            /* Tag Colors (matched to new gradient) */
+            --tag-1-color: var(--grad-color-1); --tag-1-bg: rgba(16, 185, 129, 0.1);
+            --tag-2-color: var(--grad-color-2); --tag-2-bg: rgba(245, 158, 11, 0.1);
+            --tag-3-color: #16a34a; --tag-3-bg: rgba(22, 163, 74, 0.1); /* Adjusted for better contrast */
+        }
+
+        body.dark-theme {
+            /* --- Original Dark Theme Palette (Blue, Purple, Pink) --- */
             --grad-color-1: #3b82f6;
             --grad-color-2: #a855f7;
             --grad-color-3: #ec4899;
 
-            /* Light Theme */
-            --bg-color-start: #ffffff;
-            --bg-color-end: #f0f2f5;
-            --text-color: #1a1a1a;
-            --secondary-color: #4a4a4a;
-            --card-bg-color: rgba(255, 255, 255, 0.4); /* V8: Enhanced glass effect */
-            --header-bg-color: rgba(245, 247, 250, 0.8);
-            --card-border-color: rgba(0, 0, 0, 0.1); 
-            --glow-color: rgba(168, 85, 247, 0.2);
-            --nav-link-color: #5f5f5f;
-            --particle-color: rgba(0, 0, 0, 0.15);
-            --grid-color: rgba(0, 0, 0, 0.03);
-            --particle-interaction-color: rgba(0, 0, 0, 0.6);
-            --shooting-star-color: rgba(50, 50, 50, 1);
-            /* Tag Colors */
-            --tag-1-color: #3b82f6; --tag-1-bg: rgba(59, 130, 246, 0.1);
-            --tag-2-color: #a855f7; --tag-2-bg: rgba(168, 85, 247, 0.1);
-            --tag-3-color: #ec4899; --tag-3-bg: rgba(236, 72, 153, 0.1);
-        }
-
-        body.dark-theme {
-            /* Dark Theme */
+            /* Base Colors */
             --bg-color-start: #000000;
             --bg-color-end: #0c0a12;
             --text-color: #e0e0e0;
             --secondary-color: #a0a0a0;
-            --card-bg-color: rgba(26, 26, 30, 0.25); /* V8: Enhanced glass effect */
+            --card-bg-color: rgba(26, 26, 30, 0.25);
             --header-bg-color: rgba(5, 5, 5, 0.8);
             --card-border-color: rgba(255, 255, 255, 0.1); 
             --glow-color: rgba(168, 85, 247, 0.15);
@@ -51,6 +57,11 @@
             --grid-color: rgba(255, 255, 255, 0.03);
             --particle-interaction-color: rgba(255, 255, 255, 0.8);
             --shooting-star-color: rgba(255, 255, 255, 1);
+
+            /* Tag Colors (matched to original gradient) */
+            --tag-1-color: #3b82f6; --tag-1-bg: rgba(59, 130, 246, 0.1);
+            --tag-2-color: #a855f7; --tag-2-bg: rgba(168, 85, 247, 0.1);
+            --tag-3-color: #ec4899; --tag-3-bg: rgba(236, 72, 153, 0.1);
         }
 
         /* Base & Animated Background */
@@ -117,7 +128,7 @@
         }
 
         /* Sticky Header */
-        .sticky-header { position: sticky; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background-color: var(--header-bg-color); backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border-color); transform: translateY(-100%); opacity: 0; transition: transform 0.4s ease-out, opacity 0.4s ease-out, background-color 0.4s ease, border-color 0.4s ease; }
+        .sticky-header { position: sticky; top: 0; width: 100%; padding: 1rem 0; z-index: 1000; background-color: var(--header-bg-color); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--card-border-color); transform: translateY(-100%); opacity: 0; transition: transform 0.4s ease-out, opacity 0.4s ease-out, background-color 0.4s ease, border-color 0.4s ease; }
         .sticky-header.visible { transform: translateY(0); opacity: 1; }
         .sticky-header .header-content { display: flex; justify-content: space-between; align-items: center; }
         .header-nav ul { display: flex; list-style: none; gap: 1.5rem; }
@@ -233,13 +244,13 @@
             text-align: right;
         }
 
-        /* --- V8: Experience Timeline --- */
+        /* --- Experience Timeline --- */
         .experience-timeline {
             position: relative;
             margin: 0 auto;
         }
 
-        /* V8: The central timeline bar - now a gradient */
+        /* The central timeline bar - now a gradient */
         .experience-timeline::after {
             content: '';
             position: absolute;
@@ -261,7 +272,7 @@
             opacity: 0;
             transform: translateY(50px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            z-index: 2; /* V8: Ensure items are above the line */
+            z-index: 2; /* Ensure items are above the line */
         }
         .timeline-item.visible {
             opacity: 1;
@@ -278,7 +289,7 @@
             left: 50%;
         }
 
-        /* V8: The icon on the timeline */
+        /* The icon on the timeline */
         .timeline-icon {
             position: absolute;
             width: 40px;
@@ -287,7 +298,7 @@
             background-color: var(--bg-color-end);
             top: 24px;
             border-radius: 50%;
-            z-index: 3; /* V8: Ensure icons are above the items and line */
+            z-index: 3; /* Ensure icons are above the items and line */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -311,7 +322,7 @@
             fill: var(--grad-color-1);
         }
 
-        /* V8: The card content with glassmorphism */
+        /* The card content with glassmorphism */
         .timeline-content {
             background-color: var(--card-bg-color);
             backdrop-filter: blur(20px);
@@ -379,14 +390,14 @@
             box-shadow: 0 4px 25px var(--glow-color);
         }
         
-        /* --- V2: Staggered animation for skills --- */
+        /* Staggered animation for skills */
         .skill-pill {
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
-        /* --- Skills Section --- */
+        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -406,7 +417,7 @@
             animation: none;
             border: none; /* Removed original border */
         }
-        /* V2: Animated gradient border for skill category titles */
+        /* Animated gradient border for skill category titles */
         .skill-category h3::after {
             content: '';
             position: absolute;
@@ -499,7 +510,7 @@
             }
             .cursor-glow { display: none; }
             
-            /* V6: Timeline mobile adjustments */
+            /* Timeline mobile adjustments */
             .experience-timeline::after {
                 left: 20px;
             }
@@ -553,7 +564,7 @@
              </div>
             <h1 id="typing-text"></h1>
             <p class="fade-in-up subtext">A Data Science student with a passion for Large Language Models (LLMs), superintelligence, and uncovering insights from complex data.</p>
-            <a href="Resume.pdf" target="_blank" class="cta-button fade-in-up button">
+            <a href="Resume.docx.pdf" target="_blank" class="cta-button fade-in-up button">
                 <div class="cta-button-inner">
                     <span>View My Resume</span>
                 </div>
@@ -1157,7 +1168,7 @@
         }, { rootMargin: "-100px 0px 0px 0px" });
         headerObserver.observe(document.querySelector('#hero'));
 
-        // --- V5: SCROLL ANIMATION LOGIC ---
+        // --- SCROLL ANIMATION LOGIC ---
         const sections = document.querySelectorAll('.content-section');
         const navLinks = document.querySelectorAll('.header-nav a');
 
@@ -1215,7 +1226,7 @@
         });
 
 
-        // --- V5: 3D TILT EFFECT FOR TIMELINE CARDS ---
+        // --- 3D TILT EFFECT FOR TIMELINE CARDS ---
         const timelineContents = document.querySelectorAll('.timeline-content');
         if (window.matchMedia('(pointer: fine)').matches) { // Only apply on devices with fine pointers (mice)
             timelineContents.forEach(item => {
