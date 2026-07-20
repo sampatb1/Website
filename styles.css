@@ -2576,7 +2576,7 @@ html[data-theme="arctic"] .contact-panel::after { border-radius: 38% 62% 44% 56%
 .visual-finance svg { width: 100%; height: 190px; margin-top: 20px; overflow: visible; }
 .visual-finance .visual-controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .visual-controls span { padding: 8px; border: 1px solid var(--border); border-radius: 6px; color: var(--text-faint); font-size: 7px; }
-.visual-controls span::before { margin-right: 5px; color: var(--success); content: "âœ“"; }
+.visual-controls span::before { margin-right: 5px; color: var(--success); content: "✓"; }
 
 .visual-miteg .threshold-visual { position: absolute; inset: 44px; display: grid; align-content: center; }
 .threshold-labels { display: flex; justify-content: space-between; color: var(--text-faint); font-size: 8px; }
@@ -2767,7 +2767,7 @@ html[data-theme="arctic"] .contact-panel::after { border-radius: 38% 62% 44% 56%
   .timeline-item { grid-template-columns: 15px minmax(0, 1fr); grid-template-rows: auto auto; gap: 0 13px; }
   .timeline-date { grid-column: 2; grid-row: 1; width: auto; height: auto; padding: 0 0 10px; flex-direction: row; align-items: center; gap: 5px; }
   .timeline-date span { position: static; width: auto; }
-  .timeline-date span:first-child::after { content: " â€”"; }
+  .timeline-date span:first-child::after { content: " —"; }
   .timeline-date span:last-child { display: inline; }
   .timeline-date i { position: absolute; top: 3px; left: -26px; width: 9px; flex: 0 0 auto; margin: 0; }
   .timeline-card { grid-column: 2; grid-row: 2; min-width: 0; }

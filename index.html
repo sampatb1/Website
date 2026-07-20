@@ -74,7 +74,7 @@
           <div class="hero-actions" aria-label="Portfolio actions">
             <a class="button button-primary" href="#work">Explore My Work <span aria-hidden="true">↓</span></a>
             <a class="button button-secondary" href="assets/Sampat_Bandlamudi_Analyst_Resume.pdf" target="_blank" rel="noopener">Analyst Resume <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="assets/Sampat_Bandlamudi_Technical_Resume.pdf" target="_blank" rel="noopener">Technical Resume <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="assets/Sampat_Bandlamudi_Technical_Resume.pdf" target="_blank" rel="noopener">Technical Resume <span aria-hidden="true">↗</span></a>
             <a class="button button-quiet" href="#contact">Contact Me <span aria-hidden="true">→</span></a>
           </div>
           <a class="focus-line" href="#contact">
@@ -92,7 +92,7 @@
             <article class="dash-card dash-main">
               <div class="dash-card-head">
                 <span>Decision Intelligence</span>
-                <span class="verified-label"><i></i> Validated inputs</span>
+                <span class="verified-label" aria-label="Validated inputs"><i></i><span class="verified-full" aria-hidden="true">Validated inputs</span><span class="verified-short" aria-hidden="true">Validated</span></span>
               </div>
               <div class="horizon-wrap" aria-hidden="true">
                 <div class="event-horizon"><span></span></div>
@@ -107,19 +107,26 @@
 
             <article class="dash-card dash-metric dash-metric-one">
               <span class="micro-label">Model Sensitivity</span>
-              <strong><span class="stat-number" data-counter="78.7" data-decimals="1">78.7</span><small>%</small></strong>
+              <strong class="metric-value metric-value-large">
+                <span class="metric-number stat-number" data-counter="78.7" data-decimals="1">78.7</span>
+                <span class="metric-suffix">%</span>
+              </strong>
               <svg viewBox="0 0 180 56" role="img" aria-label="Sensitivity improvement trend from 61.7 to 78.7 percent">
                 <defs><linearGradient id="heroLine" x1="0" x2="1"><stop stop-color="var(--accent-blue)"/><stop offset="1" stop-color="var(--accent-hot)"/></linearGradient></defs>
                 <path class="chart-area" d="M4 49C26 48 29 38 48 39s26 7 41-4 19-22 36-17 21 1 51-14v48H4Z"/>
                 <path class="chart-line" d="M4 49C26 48 29 38 48 39s26 7 41-4 19-22 36-17 21 1 51-14"/>
               </svg>
-              <span class="delta">61.7 → 78.7</span>
+              <span class="delta metric-comparison" aria-label="Sensitivity improved from 61.7 percent to 78.7 percent">
+                <span>61.7<span class="metric-suffix">%</span></span><span aria-hidden="true">→</span><span>78.7<span class="metric-suffix">%</span></span>
+              </span>
             </article>
 
             <article class="dash-card dash-metric dash-metric-two">
               <span class="micro-label">Research Dataset</span>
-              <strong class="stat-number" data-counter="1082">1,082</strong>
-              <span class="metric-caption">samples / 13 biomarkers</span>
+              <strong class="metric-value metric-value-large">
+                <span class="metric-number metric-number-wide stat-number" data-counter="1082">1,082</span>
+              </strong>
+              <span class="metric-label metric-caption">samples / 13 biomarkers</span>
               <div class="mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
             </article>
 
@@ -176,12 +183,12 @@
               <p class="project-kicker">Predictive research · UT Dallas industry capstone</p>
               <h3>MITEG Predictive Oncology Research</h3>
               <p>Classification research designed around model reliability, threshold decisions and the cost of false negatives.</p>
-              <div class="project-result"><span>Sensitivity</span><strong><span class="stat-number" data-counter="61.7" data-decimals="1">61.7</span>% → <span class="stat-number" data-counter="78.7" data-decimals="1">78.7</span>%</strong></div>
+              <div class="project-result"><span>Sensitivity</span><strong class="metric-comparison" aria-label="Sensitivity improved from 61.7 percent to 78.7 percent"><span><span class="metric-number stat-number" data-counter="61.7" data-decimals="1">61.7</span><span class="metric-suffix">%</span></span><span aria-hidden="true">→</span><span><span class="metric-number stat-number" data-counter="78.7" data-decimals="1">78.7</span><span class="metric-suffix">%</span></span></strong></div>
               <ul class="tool-list" aria-label="Tools"><li>Python</li><li>scikit-learn</li><li>SMOTE</li></ul>
               <button class="case-button" type="button" data-project="miteg">View Case Study <span aria-hidden="true">↗</span></button>
             </div>
             <div class="miteg-preview project-preview" aria-hidden="true">
-              <div class="model-orbit"><span class="model-core">0.682<small>AUROC</small></span><i></i><i></i><i></i></div>
+              <div class="model-orbit"><span class="model-core"><span class="metric-number">0.682</span><small>AUROC</small></span><i></i><i></i><i></i></div>
               <div class="threshold-scale"><span>Threshold</span><div><i></i></div><strong>Risk tradeoff</strong></div>
               <div class="model-stats"><div><span>Samples</span><strong>1,082</strong></div><div><span>Features</span><strong>13</strong></div><div><span>Validation</span><strong>5-fold</strong></div></div>
             </div>
@@ -226,13 +233,13 @@
             <article>
               <div class="tech-icon" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M8 31 17 12l8 20 5-11 6 10"/><circle cx="17" cy="12" r="3"/><circle cx="25" cy="32" r="3"/></svg></div>
               <div><p>Deep learning</p><h4>MobileNetV2 Image Classification</h4><p>Transfer learning on CIFAR-10 using augmentation and selective fine-tuning.</p></div>
-              <div class="technical-metric"><strong><span class="stat-number" data-counter="91.2" data-decimals="1">91.2</span>%</strong><span>test accuracy</span></div>
+              <div class="technical-metric"><strong class="metric-value"><span class="metric-number stat-number" data-counter="91.2" data-decimals="1">91.2</span><span class="metric-suffix">%</span></strong><span class="metric-label">test accuracy</span></div>
               <ul class="tool-list"><li>TensorFlow</li><li>Keras</li><li>0.90 macro F1</li><li>+6.4 pts</li></ul>
             </article>
             <article>
               <div class="tech-icon" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M7 33V18m10 15V10m10 23V22m10 11V6"/><path d="M6 35h32"/></svg></div>
               <div><p>Statistical modeling</p><h4>Hotel Review Rating Prediction</h4><p>Prepared 3,000+ bookings with parsing correction, missing-value imputation and feature engineering; evaluated OLS with AIC selection, VIF, residual diagnostics and Cook’s distance.</p></div>
-              <div class="technical-metric"><strong><span class="stat-number" data-counter="2705">2,705</span></strong><span>analysis-ready observations</span></div>
+              <div class="technical-metric"><strong class="metric-value"><span class="metric-number metric-number-wide stat-number" data-counter="2705">2,705</span></strong><span class="metric-label">analysis-ready observations</span></div>
               <ul class="tool-list"><li>R</li><li>AIC selection</li><li>VIF analysis</li><li>74.6% explained</li></ul>
             </article>
           </div>
@@ -290,15 +297,15 @@
             <summary><span class="cap-number">01</span><span><strong>Analytics &amp; Reporting</strong><small>From raw information to clear management views</small></span><i aria-hidden="true"></i></summary>
             <div class="capability-body"><ul><li>SQL</li><li>Excel</li><li>PivotTables</li><li>XLOOKUP / VLOOKUP</li><li>SUMIFS</li><li>INDEX / MATCH</li><li>Tableau</li><li>Dashboard development</li><li>Statistical analysis</li><li>Business reporting</li></ul></div>
           </details>
-          <details class="capability-card reveal">
+          <details class="capability-card reveal" open>
             <summary><span class="cap-number">02</span><span><strong>Risk, Controls &amp; Decision Support</strong><small>Reliable analysis with traceable controls</small></span><i aria-hidden="true"></i></summary>
             <div class="capability-body"><ul><li>Data reconciliation</li><li>Validation controls</li><li>Risk analysis</li><li>Process improvement</li><li>Compliance procedures</li><li>Requirements gathering</li><li>Model evaluation</li><li>Executive presentations</li></ul></div>
           </details>
-          <details class="capability-card reveal">
+          <details class="capability-card reveal" open>
             <summary><span class="cap-number">03</span><span><strong>Data &amp; Machine Learning</strong><small>Evaluation-led modeling and interpretation</small></span><i aria-hidden="true"></i></summary>
             <div class="capability-body"><ul><li>Python</li><li>R</li><li>Pandas</li><li>NumPy</li><li>scikit-learn</li><li>TensorFlow</li><li>Keras</li><li>PyTorch</li><li>Classification</li><li>Regression</li><li>Cross-validation</li><li>Feature engineering</li><li>Hyperparameter tuning</li><li>Model interpretation</li></ul></div>
           </details>
-          <details class="capability-card reveal">
+          <details class="capability-card reveal" open>
             <summary><span class="cap-number">04</span><span><strong>Engineering &amp; Cloud</strong><small>Practical systems behind data products</small></span><i aria-hidden="true"></i></summary>
             <div class="capability-body"><ul><li>Java</li><li>C++</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Node.js</li><li>REST APIs</li><li>MySQL</li><li>DynamoDB</li><li>AWS Lambda</li><li>API Gateway</li><li>Amazon Bedrock</li><li>Git</li></ul></div>
           </details>
@@ -384,8 +391,8 @@
       <div class="case-scroll" id="case-scroll">
         <article class="case-content" id="case-content"></article>
         <nav class="case-pagination" aria-label="Case study navigation">
-          <button type="button" data-case-direction="previous"><span aria-hidden="true">←</span><small>Previous</small><strong id="previous-project">Previous project</strong></button>
-          <button type="button" data-case-direction="next"><small>Next</small><strong id="next-project">Next project</strong><span aria-hidden="true">→</span></button>
+          <button type="button" data-case-direction="previous"><span class="case-nav-arrow" aria-hidden="true">←</span><span class="case-nav-copy"><small>Previous</small><strong id="previous-project">Previous project</strong></span></button>
+          <button type="button" data-case-direction="next"><span class="case-nav-copy"><small>Next</small><strong id="next-project">Next project</strong></span><span class="case-nav-arrow" aria-hidden="true">→</span></button>
         </nav>
       </div>
     </div>

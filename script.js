@@ -5,7 +5,7 @@
     {
       id: 'financial',
       title: 'Financial Reporting, Capital & Variance Analysis',
-      category: 'Financial analysis Â· Independent case study',
+      category: 'Financial analysis · Independent case study',
       context: 'Independent case study using Goldman Sachs public filings',
       summary: 'A control-minded financial analysis workflow that turns annual and quarterly filing data into a structured Excel model and an executive-ready management dashboard.',
       facts: [
@@ -13,7 +13,7 @@
         ['Comparison views', 'QoQ + YoY'],
         ['Core discipline', 'Reconciliation + controls']
       ],
-      overview: 'This independent case study examined publicly available annual and quarterly filings to evaluate revenue, earnings, expenses, assets, shareholdersâ€™ equity, risk-weighted assets, CET1 ratios and business-segment performance. The work was designed as evidence of financial analysis, reporting discipline and control-aware communicationâ€”not as sponsored or commissioned work.',
+      overview: 'This independent case study examined publicly available annual and quarterly filings to evaluate revenue, earnings, expenses, assets, shareholders’ equity, risk-weighted assets, CET1 ratios and business-segment performance. The work was designed as evidence of financial analysis, reporting discipline and control-aware communication—not as sponsored or commissioned work.',
       objective: 'Build a dependable reporting process that could compare periods, surface performance and capital changes, and preserve a clear line back to source disclosures. The central challenge was not simply displaying figures; it was keeping reporting periods, units, source references and calculation logic consistent enough that the output could be trusted.',
       role: 'As the independent analyst, I structured the source data, developed the Excel financial model, designed the management dashboard and defined validation checks across the workflow. I also shaped the presentation around questions a management audience would ask: what changed, where it changed and whether the underlying numbers reconcile.',
       approach: [
@@ -31,12 +31,12 @@
     {
       id: 'miteg',
       title: 'MITEG Predictive Oncology Research',
-      category: 'Predictive research Â· UT Dallas industry capstone',
-      context: 'Four-person capstone Â· Augustâ€“December 2025',
+      category: 'Predictive research · UT Dallas industry capstone',
+      context: 'Four-person capstone · August–December 2025',
       summary: 'Predictive research on breast-cancer data focused on classification reliability, threshold decisions and the tradeoff between sensitivity and false negatives.',
       facts: [
-        ['Research data', '1,082 samples Â· 13 biomarkers'],
-        ['Sensitivity', '61.7% â†’ 78.7%'],
+        ['Research data', '1,082 samples · 13 biomarkers'],
+        ['Sensitivity', '61.7% → 78.7%'],
         ['Strongest AUROC', '0.682']
       ],
       overview: 'The UT Dallas industry capstone used the TCGA-BRCA genomic dataset to study predictive classification across 1,082 breast-cancer samples and 13 biomarker features. It was a research and analytical decision-support project, not a deployed clinical diagnostic system.',
@@ -58,8 +58,8 @@
     {
       id: 'rainline',
       title: 'Rainline AI Irrigation Assistant',
-      category: 'Decision product Â· Serverless cloud system',
-      context: 'Project Lead Â· December 2025â€“March 2026',
+      category: 'Decision product · Serverless cloud system',
+      context: 'Project Lead · December 2025–March 2026',
       summary: 'A location-aware irrigation decision product combining validated field inputs, rules-based safeguards, weather context and AI-generated explanations.',
       facts: [
         ['Recognition', 'AWS 10,000 AIdeas Semi-Finalist'],
@@ -85,13 +85,13 @@
     {
       id: 'patient',
       title: 'Patient-Link Clinic Management System',
-      category: 'Operational system Â· Relational database',
-      context: 'Five-person team Â· Juneâ€“August 2025',
+      category: 'Operational system · Relational database',
+      context: 'Five-person team · June–August 2025',
       summary: 'A PHP and MySQL clinic-management system with separate patient, receptionist and doctor interfaces built on normalized relational design.',
       facts: [
         ['Team', 'Five members'],
         ['Data design', 'Third Normal Form'],
-        ['Interfaces', 'Patient Â· Receptionist Â· Doctor']
+        ['Interfaces', 'Patient · Receptionist · Doctor']
       ],
       overview: 'Patient-Link organized core clinic workflows across appointments, billing records and role-specific interfaces. The project connected database design choices to the day-to-day operational needs of patients, receptionists and doctors.',
       objective: 'Create a structured clinic system that separated responsibilities by user role while keeping operational records organized and consistent. The database needed clear entity relationships, normalized tables and practical create, read, update and delete workflows.',
@@ -465,7 +465,7 @@
       <div class="case-visual visual-rainline" aria-label="Irrigation recommendation-system workflow">
         <div class="system-flow">
           <div class="flow-row"><span class="flow-node">Inputs</span><i class="flow-arrow"></i><span class="flow-node">Validation</span><i class="flow-arrow"></i><span class="flow-node emphasis">Rules Engine</span><i class="flow-arrow"></i><span class="flow-node">AI Explanation</span></div>
-          <div class="flow-output"><span>Decision output</span><strong>Field recommendation</strong><small>Recommendation â†’ History â†’ User feedback</small></div>
+          <div class="flow-output"><span>Decision output</span><strong>Field recommendation</strong><small>Recommendation → History → User feedback</small></div>
         </div>
       </div>`,
     patient: () => `
@@ -629,15 +629,15 @@
     try {
       await copyText(copyButton.dataset.email);
       copyToast.textContent = 'Email copied to clipboard';
-      copyButton.innerHTML = '<span aria-hidden="true">âœ“</span> Copied';
+      copyButton.innerHTML = '<span aria-hidden="true">✓</span> Copied';
     } catch (error) {
-      copyToast.textContent = 'Copy unavailable â€” use the email link';
+      copyToast.textContent = 'Copy unavailable — use the email link';
     }
     window.clearTimeout(toastTimer);
     copyToast.classList.add('is-visible');
     toastTimer = window.setTimeout(() => {
       copyToast.classList.remove('is-visible');
-      copyButton.innerHTML = '<span aria-hidden="true">â§‰</span> Copy email';
+      copyButton.innerHTML = '<span aria-hidden="true">⧉</span> Copy email';
     }, 2200);
   });
 
