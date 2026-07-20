@@ -1,1111 +1,397 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="singularity">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sampat Bandlamudi | Data Science Portfolio</title>
-    <meta name="description" content="Portfolio of Sampat Bandlamudi, a Data Science student specializing in AI/ML.">
-    
-    <!-- Fonts: Including Extra Light (200) and Light (300) for that "Thinner" look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-    <style>
-        :root {
-            /* --- Deep "Wish" Space Theme --- */
-            --bg-color: #02040a; /* Almost black, hint of blue */
-            
-            /* Deep Nebula Gradient */
-            --bg-gradient: 
-                radial-gradient(circle at 50% 0%, rgba(30, 41, 59, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 80% 50%, rgba(88, 28, 135, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, rgba(15, 23, 42, 0.4) 0%, transparent 60%);
-            
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8; /* Cool gray */
-            
-            --accent-primary: #a5b4fc;   /* Soft Indigo */
-            --accent-secondary: #e879f9; /* Faint Purple/Pink */
-            --accent-glow: rgba(165, 180, 252, 0.3);
-            
-            /* Ultra-thin Glass */
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.06);
-            --card-hover-border: rgba(255, 255, 255, 0.2);
-            
-            --nav-bg: rgba(2, 4, 10, 0.8);
-            
-            /* Tag Colors */
-            --tag-bg: rgba(255, 255, 255, 0.05);
-            --tag-text: #cbd5e1;
-        }
-
-        /* Reset & Base */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            background-image: var(--bg-gradient);
-            background-attachment: fixed;
-            background-size: cover;
-            color: var(--text-primary);
-            overflow-x: hidden;
-            min-height: 100vh;
-            font-weight: 300; /* Default thin weight */
-        }
-
-        /* Typography - The "Thinner Modern" Look */
-        h1, h2, h3, .logo {
-            font-family: 'Inter', sans-serif;
-            font-weight: 200; /* Extra Light */
-            letter-spacing: 0.02em; /* Wider spacing */
-        }
-        
-        h1 {
-            font-size: clamp(3.5rem, 9vw, 6rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to bottom right, #fff 30%, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-        }
-        
-        h2.section-title {
-            font-size: 2.5rem;
-            font-weight: 200;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            position: relative;
-        }
-
-        p {
-            line-height: 1.8;
-            color: var(--text-secondary);
-            font-weight: 300;
-            font-size: 1.05rem;
-        }
-
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-
-        /* Canvas & Effects */
-        #particle-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* --- Header --- */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1.5rem 0;
-            background: transparent; /* Start transparent */
-            transition: background 0.5s ease, padding 0.5s ease;
-        }
-        
-        header.scrolled {
-            background: var(--nav-bg);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 300;
-            font-size: 1.4rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        /* --- Hero Section --- */
-        #hero {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding-top: 4rem;
-        }
-
-        .hero-badge {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--accent-primary);
-            margin-bottom: 1.5rem;
-            opacity: 0.8;
-            animation: fadeInDown 1.5s ease-out;
-        }
-
-        .typing-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background: #fff;
-            margin-left: 8px;
-            animation: blink 1s infinite;
-            vertical-align: baseline;
-            box-shadow: 0 0 8px #fff;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .hero-sub {
-            max-width: 650px;
-            font-size: 1.15rem;
-            margin-bottom: 3rem;
-            font-weight: 200;
-            opacity: 0;
-            animation: fadeInUp 1.5s ease-out 0.5s forwards;
-        }
-
-        /* Thin, Elegant Buttons */
-        .btn-group {
-            display: flex; 
-            gap: 1.5rem; 
-            opacity: 0;
-            animation: fadeInUp 1.5s ease-out 0.8s forwards;
-        }
-
-        .btn-primary, .btn-outline {
-            padding: 0.8rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 300;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            transition: all 0.4s ease;
-            text-transform: uppercase;
-        }
-
-        .btn-primary {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            backdrop-filter: blur(5px);
-        }
-
-        .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid transparent;
-        }
-        
-        .btn-outline:hover {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2.5rem;
-            animation: pulseFade 3s infinite;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1.5s forwards, pulseFade 3s infinite 2s;
-        }
-
-        @keyframes pulseFade {
-            0%, 100% { opacity: 0.3; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(5px); }
-        }
-
-        /* --- Section Base --- */
-        section {
-            padding: 7rem 0;
-        }
-
-        .section-header {
-            margin-bottom: 5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .section-header.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- About --- */
-        #about .content {
-            display: grid;
-            grid-template-columns: 1.8fr 1fr;
-            gap: 6rem;
-            align-items: start;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-        
-        /* Minimalist Stacked Stats */
-        .about-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            padding-left: 2rem;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: translateX(20px);
-            transition: 0.6s ease-out;
-        }
-        
-        .section-header.visible ~ .content .stat-item {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .content .stat-item:nth-child(1) { transition-delay: 0.2s; }
-        .content .stat-item:nth-child(2) { transition-delay: 0.4s; }
-        .content .stat-item:nth-child(3) { transition-delay: 0.6s; }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 100; /* Super thin numbers */
-            color: #fff;
-            line-height: 1;
-            margin-bottom: 0.2rem;
-        }
-        
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--accent-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* --- Experience Timeline --- */
-        .timeline-controls {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 5rem;
-        }
-
-        .filter-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-            padding-bottom: 5px;
-            font-weight: 300;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            color: #fff;
-        }
-
-        .filter-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 1px;
-            background: #fff;
-            box-shadow: 0 0 10px #fff;
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Central Line - Very faint */
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0; left: 50%;
-            width: 1px;
-            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            margin-bottom: 4rem;
-            position: relative;
-            width: 50%;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        
-        .timeline-item.visible { opacity: 1; transform: translateY(0); }
-        .timeline-item.hidden-filter { display: none; }
-
-        .timeline-item:nth-child(odd) { left: 0; padding-right: 4rem; text-align: right; }
-        .timeline-item:nth-child(even) { left: 50%; padding-left: 4rem; text-align: left; }
-
-        /* Glowing Dots */
-        .timeline-dot {
-            position: absolute;
-            top: 0;
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-            z-index: 2;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-dot { right: -4px; }
-        .timeline-item:nth-child(even) .timeline-dot { left: -4px; }
-
-        .timeline-content {
-            position: relative;
-        }
-
-        .role {
-            font-size: 1.4rem;
-            font-weight: 300;
-            color: #fff;
-            margin-bottom: 0.25rem;
-        }
-
-        .company {
-            font-size: 1rem;
-            color: var(--accent-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-        }
-
-        .date {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .timeline-content ul {
-            list-style: none;
-            font-size: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-weight: 300;
-        }
-        
-        .timeline-content ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .tags {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-            justify-content: inherit; 
-        }
-        
-        .timeline-item:nth-child(odd) .tags { justify-content: flex-end; }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--tag-text);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-        }
-        
-        .tag:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #fff;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
-        /* --- Skills --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            padding: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
-        }
-
-        .skill-category:hover {
-            border-color: rgba(255, 255, 255, 0.5);
-            background: linear-gradient(to bottom, rgba(255,255,255,0.02), transparent);
-        }
-
-        .skill-category h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: #fff;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-        }
-        
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .skill-pill {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-
-        .skill-pill:hover {
-            color: #fff;
-            text-shadow: 0 0 8px rgba(255,255,255,0.5);
-            transform: translateX(5px);
-        }
-
-        /* --- Footer --- */
-        footer {
-            padding: 6rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .social-link {
-            font-size: 1.8rem;
-            color: var(--text-secondary);
-            transition: 0.3s;
-            opacity: 0.7;
-        }
-
-        .social-link:hover {
-            color: #fff;
-            opacity: 1;
-            transform: scale(1.1);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-        }
-
-        /* --- Animations --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Mobile Responsive --- */
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            
-            .nav-links { display: none; } 
-            
-            #about .content { grid-template-columns: 1fr; gap: 4rem; }
-            .about-stats { padding-left: 0; border-left: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; }
-            
-            .timeline::before { left: 20px; }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 3rem !important;
-                padding-right: 0 !important;
-                text-align: left !important;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-dot,
-            .timeline-item:nth-child(even) .timeline-dot {
-                left: 16px;
-                right: auto;
-            }
-            
-            .timeline-item:nth-child(odd) .tags,
-            .timeline-item:nth-child(odd) .timeline-content ul li {
-                justify-content: flex-start;
-                text-align: left;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Sampat Bandlamudi, a data and business analyst combining financial analysis, reporting, predictive modeling, SQL, and cloud development.">
+  <meta name="theme-color" content="#050510">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sampat Bandlamudi — Data & Business Analyst">
+  <meta property="og:description" content="Financial analysis, predictive modeling, SQL, reporting, controls, and cloud systems built for reliable decisions.">
+  <link rel="canonical" href="https://yourusername.github.io/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050510'/%3E%3Cpath d='M17 41c4 4 10 6 16 6 9 0 15-4 15-11 0-6-4-9-13-11-6-1-8-3-8-5 0-3 3-5 8-5 4 0 8 1 11 4' fill='none' stroke='%238b5cf6' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M16 15v34M16 32h20' stroke='%2369d7ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <title>Sampat Bandlamudi — Data & Business Analyst</title>
+  <script>
+    document.documentElement.classList.add('js');
+    try {
+      const savedTheme = localStorage.getItem('sb-theme');
+      if (savedTheme === 'arctic' || savedTheme === 'singularity') {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    } catch (error) {}
+  </script>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Cosmic Background -->
-    <canvas id="particle-canvas"></canvas>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <!-- Header -->
-    <header id="navbar">
-        <div class="container nav-content">
-            <a href="#hero" class="logo">Sampat B.</a>
-            
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-            </ul>
+  <header class="site-header" data-inert-target>
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Sampat Bandlamudi, home">
+        <span class="brand-mark" aria-hidden="true">SB</span>
+        <span class="brand-name">Sampat Bandlamudi</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Open navigation</span>
+        <span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#about">About</a>
+        <details class="resume-menu">
+          <summary>Resume <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5"/></svg></summary>
+          <div class="resume-popover">
+            <a href="assets/Sampat_Bandlamudi_Analyst_Resume.pdf" target="_blank" rel="noopener">Analyst Resume <span aria-hidden="true">↗</span></a>
+            <a href="assets/Sampat_Bandlamudi_Technical_Resume.pdf" target="_blank" rel="noopener">Technical Resume <span aria-hidden="true">↗</span></a>
+          </div>
+        </details>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="theme-control-wrap">
+        <button class="theme-control" id="theme-control" type="button" aria-label="Switch to Arctic Signal theme" aria-describedby="theme-tooltip">
+          <span class="portal" aria-hidden="true"><span class="portal-orbit"></span></span>
+          <span class="theme-name">Singularity</span>
+        </button>
+        <span class="theme-tooltip" id="theme-tooltip" role="tooltip">Switch visual theme</span>
+      </div>
+    </nav>
+  </header>
+
+  <div class="theme-wash" aria-hidden="true"></div>
+
+  <main id="main-content" data-inert-target>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid page-shell">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Data &amp; Business Analyst <span class="eyebrow-divider">/</span> Dallas–Fort Worth</p>
+          <h1 id="hero-title">I turn complex data into decisions people can trust.</h1>
+          <p class="hero-lede">Data Science graduate combining financial analysis, predictive modeling, SQL, reporting and cloud development to build reliable decision systems.</p>
+          <div class="hero-actions" aria-label="Portfolio actions">
+            <a class="button button-primary" href="#work">Explore My Work <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="assets/Sampat_Bandlamudi_Analyst_Resume.pdf" target="_blank" rel="noopener">Analyst Resume <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="assets/Sampat_Bandlamudi_Technical_Resume.pdf" target="_blank" rel="noopener">Technical Resume <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="#contact">Contact Me <span aria-hidden="true">→</span></a>
+          </div>
+          <a class="focus-line" href="#contact">
+            <span class="focus-line-icon" aria-hidden="true"></span>
+            <span><strong>Open to analytical opportunities</strong><small>Risk, reporting, operations, data &amp; technical business roles</small></span>
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
-    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="hero">
-            <div class="hero-badge">Data Science • AI • Future</div>
-            <h1>SAMPAT<br>BANDLAMUDI</h1>
-            
-            <p class="hero-sub">
-                Building <span id="typing-text"></span><span class="typing-cursor"></span>
-            </p>
-            
-            <div class="btn-group">
-                <a href="#experience" class="btn-primary">See My Work</a>
-                <a href="Resume_Sampat_Bandlamudi.docx.pdf" target="_blank" class="btn-outline">Resume</a>
-            </div>
+        <div class="hero-visual" id="hero-visual" aria-label="Analytical dashboard showing verified project metrics and validation controls">
+          <div class="hero-glow" aria-hidden="true"></div>
+          <div class="dashboard-stage">
+            <div class="dashboard-grid" aria-hidden="true"></div>
 
-            <div class="scroll-indicator">
-                Scroll to Explore
-            </div>
-        </section>
+            <article class="dash-card dash-main">
+              <div class="dash-card-head">
+                <span>Decision Intelligence</span>
+                <span class="verified-label"><i></i> Validated inputs</span>
+              </div>
+              <div class="horizon-wrap" aria-hidden="true">
+                <div class="event-horizon"><span></span></div>
+                <div class="horizon-axis"><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+              <div class="signal-row">
+                <span>Data Quality</span>
+                <div class="signal-track"><i></i></div>
+                <strong>Verified</strong>
+              </div>
+            </article>
 
-        <!-- About Section -->
-        <section id="about">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Who I Am</h2>
-                </div>
-                
-                <div class="content">
-                    <div class="about-text">
-                        <p>I am a Data Science student at UTD (Class of '26), driven by the potential of <strong>Artificial Intelligence</strong> to solve real-world problems.</p>
-                        <br>
-                        <p>Currently, I am researching predictive oncology models using multi-omics data. My work bridges the gap between raw data and life-saving insights. Whether I'm building full-stack applications or training neural networks, I am obsessed with precision, efficiency, and impact.</p>
-                    </div>
-                    
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">03+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">05+</span>
-                            <span class="stat-label">Major Projects</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">∞</span>
-                            <span class="stat-label">Passion for AI</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <article class="dash-card dash-metric dash-metric-one">
+              <span class="micro-label">Model Sensitivity</span>
+              <strong><span class="stat-number" data-counter="78.7" data-decimals="1">78.7</span><small>%</small></strong>
+              <svg viewBox="0 0 180 56" role="img" aria-label="Sensitivity improvement trend from 61.7 to 78.7 percent">
+                <defs><linearGradient id="heroLine" x1="0" x2="1"><stop stop-color="var(--accent-blue)"/><stop offset="1" stop-color="var(--accent-hot)"/></linearGradient></defs>
+                <path class="chart-area" d="M4 49C26 48 29 38 48 39s26 7 41-4 19-22 36-17 21 1 51-14v48H4Z"/>
+                <path class="chart-line" d="M4 49C26 48 29 38 48 39s26 7 41-4 19-22 36-17 21 1 51-14"/>
+              </svg>
+              <span class="delta">61.7 → 78.7</span>
+            </article>
 
-        <!-- Experience Section -->
-        <section id="experience">
-            <div class="container">
-                <div class="section-header" style="text-align: center;">
-                    <h2 class="section-title">Trajectory</h2>
-                </div>
+            <article class="dash-card dash-metric dash-metric-two">
+              <span class="micro-label">Research Dataset</span>
+              <strong class="stat-number" data-counter="1082">1,082</strong>
+              <span class="metric-caption">samples / 13 biomarkers</span>
+              <div class="mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
 
-                <div class="timeline-controls">
-                    <button class="filter-btn active" data-filter="all">ALL</button>
-                    <button class="filter-btn" data-filter="ml">AI / MACHINE LEARNING</button>
-                    <button class="filter-btn" data-filter="web">DEVELOPMENT</button>
-                    <button class="filter-btn" data-filter="analytics">ANALYTICS</button>
-                </div>
+            <article class="dash-card dash-control">
+              <div class="dash-card-head"><span>Reporting Controls</span><span>04 / 04</span></div>
+              <ul>
+                <li><span aria-hidden="true">✓</span> Reporting period</li>
+                <li><span aria-hidden="true">✓</span> Unit consistency</li>
+                <li><span aria-hidden="true">✓</span> Duplicate detection</li>
+                <li><span aria-hidden="true">✓</span> Source reconciliation</li>
+              </ul>
+            </article>
 
-                <div class="timeline">
-                    <!-- Item 1 -->
-                    <div class="timeline-item" data-category="ml">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="role">AI/ML Specialist</div>
-                            <div class="company">UTD Capstone - MITEG</div>
-                            <div class="date">Aug 2025 - Present</div>
-                            <ul>
-                                <li>Developing predictive ML models for breast-cancer outcomes using multi-omics pipelines on TCGA-BRCA & METABRIC datasets.</li>
-                                <li>Designing two-stage validation (biomarker + model-level) targeting AUC > 0.80.</li>
-                            </ul>
-                            <div class="tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Bioinformatics</span>
-                                <span class="tag">Predictive Modeling</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="timeline-item" data-category="web">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="role">Team Lead</div>
-                            <div class="company">Patient-Link: Clinic Management</div>
-                            <div class="date">Jun 2025 - Aug 2025</div>
-                            <ul>
-                                <li>Led a team of 5 to build a full-stack web app, replacing legacy spreadsheet workflows.</li>
-                                <li>Architected a MySQL database with 3NF normalization for data integrity.</li>
-                            </ul>
-                            <div class="tags">
-                                <span class="tag">PHP</span>
-                                <span class="tag">MySQL</span>
-                                <span class="tag">Database Design</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="timeline-item" data-category="analytics">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="role">Regression Analyst</div>
-                            <div class="company">Hotel Room Ratings Analysis</div>
-                            <div class="date">Feb 2025 - May 2025</div>
-                            <ul>
-                                <li>Preprocessed 3,000+ bookings to clean errors and engineer features.</li>
-                                <li>Built an OLS regression model explaining 74.6% of variance in room ratings.</li>
-                            </ul>
-                            <div class="tags">
-                                <span class="tag">R</span>
-                                <span class="tag">Statistical Modeling</span>
-                                <span class="tag">Data Cleaning</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 4 -->
-                    <div class="timeline-item" data-category="ml">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="role">Data Analyst</div>
-                            <div class="company">Netflix Content Release Analysis</div>
-                            <div class="date">Sep 2024 - Dec 2024</div>
-                            <ul>
-                                <li>Developed Random Forest and Logistic Regression models to predict viewership.</li>
-                                <li>Applied K-Means clustering to segment content genres based on historical data.</li>
-                            </ul>
-                            <div class="tags">
-                                <span class="tag">Scikit-learn</span>
-                                <span class="tag">Clustering</span>
-                                <span class="tag">Python</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 5 -->
-                    <div class="timeline-item" data-category="other">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="role">Passenger Service Agent</div>
-                            <div class="company">Alliance Ground International</div>
-                            <div class="date">Jun 2024 - Mar 2025</div>
-                            <ul>
-                                <li>Facilitated key operations including ticketing and flight boarding for Sun Country Airlines.</li>
-                                <li>Managed high-pressure situations with a focus on customer satisfaction.</li>
-                            </ul>
-                            <div class="tags">
-                                <span class="tag">Operations</span>
-                                <span class="tag">Communication</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Arsenal</h2>
-                </div>
-                
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3><i class="ph ph-code"></i> Code & Data</h3>
-                        <div class="skill-list">
-                            <span class="skill-pill">Python</span>
-                            <span class="skill-pill">R</span>
-                            <span class="skill-pill">SQL</span>
-                            <span class="skill-pill">C++</span>
-                            <span class="skill-pill">Java</span>
-                            <span class="skill-pill">JavaScript</span>
-                            <span class="skill-pill">PHP</span>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3><i class="ph ph-brain"></i> Intelligence</h3>
-                        <div class="skill-list">
-                            <span class="skill-pill">TensorFlow</span>
-                            <span class="skill-pill">Keras</span>
-                            <span class="skill-pill">PyTorch</span>
-                            <span class="skill-pill">Scikit-learn</span>
-                            <span class="skill-pill">Pandas</span>
-                            <span class="skill-pill">NumPy</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3><i class="ph ph-graph"></i> Methods</h3>
-                        <div class="skill-list">
-                            <span class="skill-pill">Regression</span>
-                            <span class="skill-pill">Clustering</span>
-                            <span class="skill-pill">Random Forests</span>
-                            <span class="skill-pill">SVMs</span>
-                            <span class="skill-pill">PCA</span>
-                            <span class="skill-pill">Normalization</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="https://github.com/sampatb1" target="_blank" class="social-link" aria-label="GitHub"><i class="ph ph-github-logo"></i></a>
-                <a href="https://www.linkedin.com/in/sampat-bandlamudi/" target="_blank" class="social-link" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
-                <a href="mailto:sam.bandlamudi@gmail.com" class="social-link" aria-label="Email"><i class="ph ph-envelope-simple"></i></a>
-            </div>
-            <p style="font-size: 0.8rem; opacity: 0.5;">&copy; 2025 Sampat Bandlamudi. Engineered in Texas.</p>
+            <div class="dash-chip dash-chip-one"><i></i> Variance Analysis</div>
+            <div class="dash-chip dash-chip-two"><i></i> Decision Support</div>
+          </div>
         </div>
-    </footer>
+      </div>
+      <div class="hero-proof page-shell" aria-label="Core areas of work">
+        <span>Financial reporting</span><i></i><span>Predictive analytics</span><i></i><span>Data controls</span><i></i><span>Cloud systems</span>
+      </div>
+    </section>
 
-    <script>
-        // --- Typing Effect ---
-        const words = ["Intelligent Systems.", "Predictive Models.", "Scalable Web Apps.", "The Future."];
-        let i = 0;
-        let timer;
+    <section class="section work-section" id="work" aria-labelledby="work-title">
+      <div class="page-shell">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">Selected Work / 01</p>
+            <h2 id="work-title">Analysis with an operating point of view.</h2>
+          </div>
+          <p>Projects across financial reporting, predictive research, decision products and operational systems—each built around traceability, sound judgment and useful outcomes.</p>
+        </div>
 
-        function typingEffect() {
-            const word = words[i].split("");
-            var loopTyping = function() {
-                if (word.length > 0) {
-                    document.getElementById('typing-text').innerHTML += word.shift();
-                } else {
-                    setTimeout(deletingEffect, 2000);
-                    return false;
-                }
-                timer = setTimeout(loopTyping, 100);
-            };
-            loopTyping();
-        }
+        <div class="project-grid">
+          <article class="project-card project-finance reveal" data-project-card>
+            <div class="project-copy">
+              <p class="project-kicker">Financial analysis · Independent case study</p>
+              <h3>Financial Reporting, Capital &amp; Variance Analysis</h3>
+              <p>Annual and quarterly filing analysis translated into a controlled Excel model and executive-ready management dashboard.</p>
+              <div class="project-result"><span>Control focus</span><strong>Reconciled to public filings</strong></div>
+              <ul class="tool-list" aria-label="Tools"><li>Excel</li><li>Financial modeling</li><li>Validation controls</li></ul>
+              <button class="case-button" type="button" data-project="financial">View Case Study <span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="finance-preview project-preview" aria-hidden="true">
+              <div class="preview-top"><span>Performance view</span><i>Validated</i></div>
+              <div class="variance-strip"><div><span>QoQ</span><strong>Variance</strong></div><div><span>YoY</span><strong>Trend</strong></div><div><span>CET1</span><strong>Capital</strong></div></div>
+              <svg viewBox="0 0 420 150"><defs><linearGradient id="financeFill" x1="0" x2="0" y1="0" y2="1"><stop stop-color="var(--accent-blue)" stop-opacity=".34"/><stop offset="1" stop-color="var(--accent-blue)" stop-opacity="0"/></linearGradient></defs><path class="preview-grid-line" d="M0 30h420M0 75h420M0 120h420"/><path fill="url(#financeFill)" d="M0 126C54 113 79 116 116 87s62-19 99-35 65 17 102-4 59-30 103-37v139H0Z"/><path class="preview-line" d="M0 126C54 113 79 116 116 87s62-19 99-35 65 17 102-4 59-30 103-37"/><path class="preview-line-secondary" d="M0 103C54 92 82 101 124 90s69 14 110 2 79 9 116-7 45-12 70-6"/></svg>
+              <div class="control-row"><span><i>✓</i> Source</span><span><i>✓</i> Period</span><span><i>✓</i> Units</span><span><i>✓</i> Integrity</span></div>
+            </div>
+          </article>
 
-        function deletingEffect() {
-            const word = words[i].split("");
-            var loopDeleting = function() {
-                if (word.length > 0) {
-                    word.pop();
-                    document.getElementById('typing-text').innerHTML = word.join("");
-                } else {
-                    if (words.length > (i + 1)) { i++; } else { i = 0; }
-                    typingEffect();
-                    return false;
-                }
-                timer = setTimeout(loopDeleting, 50);
-            };
-            loopDeleting();
-        }
+          <article class="project-card project-miteg reveal" data-project-card>
+            <div class="project-copy">
+              <p class="project-kicker">Predictive research · UT Dallas industry capstone</p>
+              <h3>MITEG Predictive Oncology Research</h3>
+              <p>Classification research designed around model reliability, threshold decisions and the cost of false negatives.</p>
+              <div class="project-result"><span>Sensitivity</span><strong><span class="stat-number" data-counter="61.7" data-decimals="1">61.7</span>% → <span class="stat-number" data-counter="78.7" data-decimals="1">78.7</span>%</strong></div>
+              <ul class="tool-list" aria-label="Tools"><li>Python</li><li>scikit-learn</li><li>SMOTE</li></ul>
+              <button class="case-button" type="button" data-project="miteg">View Case Study <span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="miteg-preview project-preview" aria-hidden="true">
+              <div class="model-orbit"><span class="model-core">0.682<small>AUROC</small></span><i></i><i></i><i></i></div>
+              <div class="threshold-scale"><span>Threshold</span><div><i></i></div><strong>Risk tradeoff</strong></div>
+              <div class="model-stats"><div><span>Samples</span><strong>1,082</strong></div><div><span>Features</span><strong>13</strong></div><div><span>Validation</span><strong>5-fold</strong></div></div>
+            </div>
+          </article>
 
-        typingEffect();
+          <article class="project-card project-rainline reveal" data-project-card>
+            <div class="rainline-visual project-preview" aria-hidden="true">
+              <div class="rain-signal"><i></i><i></i><i></i></div>
+              <div class="recommendation-card"><span>Field recommendation</span><strong>Inputs validated</strong><small>Rules + contextual explanation</small></div>
+              <div class="flow-mini"><span>Inputs</span><i></i><span>Rules</span><i></i><span>AI</span><i></i><span>Action</span></div>
+            </div>
+            <div class="project-copy">
+              <p class="project-kicker">Decision product · Serverless cloud system</p>
+              <h3>Rainline AI Irrigation Assistant</h3>
+              <p>A location-aware decision product combining agricultural safeguards, weather context and AI-generated explanations.</p>
+              <div class="project-result"><span>Recognition</span><strong>AWS 10,000 AIdeas National Semi-Finalist</strong></div>
+              <ul class="tool-list" aria-label="Tools"><li>React</li><li>TypeScript</li><li>AWS</li><li>Bedrock</li></ul>
+              <button class="case-button" type="button" data-project="rainline">View Case Study <span aria-hidden="true">↗</span></button>
+            </div>
+          </article>
 
-        // --- Timeline Filtering ---
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const timelineItems = document.querySelectorAll('.timeline-item');
+          <article class="project-card project-patient reveal" data-project-card>
+            <div class="project-copy">
+              <p class="project-kicker">Operational system · Relational database</p>
+              <h3>Patient-Link Clinic Management System</h3>
+              <p>A role-based clinic system structured around clean relational design and practical patient, receptionist and doctor workflows.</p>
+              <div class="project-result"><span>Leadership</span><strong>Five-person team</strong></div>
+              <ul class="tool-list" aria-label="Tools"><li>PHP</li><li>MySQL</li><li>3NF</li><li>CRUD</li></ul>
+              <button class="case-button" type="button" data-project="patient">View Case Study <span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="patient-preview project-preview" aria-hidden="true">
+              <div class="db-node db-center">Appointments<small>Primary workflow</small></div>
+              <div class="db-node db-one">Patients</div><div class="db-node db-two">Doctors</div><div class="db-node db-three">Billing</div>
+              <svg viewBox="0 0 420 240"><path d="M210 65V30H90v34M210 65V30h120v34M210 118v58h120v-24"/><circle cx="210" cy="65" r="3"/><circle cx="90" cy="64" r="3"/><circle cx="330" cy="64" r="3"/><circle cx="330" cy="152" r="3"/></svg>
+            </div>
+          </article>
+        </div>
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+        <div class="additional-work reveal">
+          <div class="additional-heading"><div><p class="eyebrow">Additional Technical Work</p><h3>Focused experiments in modeling and evaluation.</h3></div><span>02 studies</span></div>
+          <div class="technical-grid">
+            <article>
+              <div class="tech-icon" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M8 31 17 12l8 20 5-11 6 10"/><circle cx="17" cy="12" r="3"/><circle cx="25" cy="32" r="3"/></svg></div>
+              <div><p>Deep learning</p><h4>MobileNetV2 Image Classification</h4><p>Transfer learning on CIFAR-10 using augmentation and selective fine-tuning.</p></div>
+              <div class="technical-metric"><strong><span class="stat-number" data-counter="91.2" data-decimals="1">91.2</span>%</strong><span>test accuracy</span></div>
+              <ul class="tool-list"><li>TensorFlow</li><li>Keras</li><li>0.90 macro F1</li><li>+6.4 pts</li></ul>
+            </article>
+            <article>
+              <div class="tech-icon" aria-hidden="true"><svg viewBox="0 0 44 44"><path d="M7 33V18m10 15V10m10 23V22m10 11V6"/><path d="M6 35h32"/></svg></div>
+              <div><p>Statistical modeling</p><h4>Hotel Review Rating Prediction</h4><p>Prepared 3,000+ bookings with parsing correction, missing-value imputation and feature engineering; evaluated OLS with AIC selection, VIF, residual diagnostics and Cook’s distance.</p></div>
+              <div class="technical-metric"><strong><span class="stat-number" data-counter="2705">2,705</span></strong><span>analysis-ready observations</span></div>
+              <ul class="tool-list"><li>R</li><li>AIC selection</li><li>VIF analysis</li><li>74.6% explained</li></ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                const filter = btn.getAttribute('data-filter');
+    <section class="section experience-section" id="experience" aria-labelledby="experience-title">
+      <div class="page-shell split-heading">
+        <div class="section-heading sticky-heading reveal">
+          <div><p class="eyebrow">Experience / 02</p><h2 id="experience-title">Technical rigor. Operational accountability.</h2></div>
+          <p>Experience spanning research leadership and time-critical passenger operations.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-date"><span>Aug 2025</span><i></i><span>Dec 2025</span></div>
+            <div class="timeline-card">
+              <div class="timeline-top"><div><p>MITEG · UT Dallas Industry Capstone</p><h3>AI/ML Research Analyst</h3></div><span>Richardson, TX</span></div>
+              <p>Led the analytical workstream for a four-person predictive oncology capstone, from model evaluation through leadership presentation.</p>
+              <ul class="experience-points">
+                <li>Designed a repeatable evaluation workflow using class balancing, cross-validation, search and threshold optimization.</li>
+                <li>Connected model performance to false-negative tradeoffs and risk-based decision support.</li>
+                <li>Communicated methodology, biomarker insights and results to company leadership.</li>
+              </ul>
+              <div class="evidence-row"><span>1,082 samples</span><span>13 biomarkers</span><span>78.7% sensitivity</span></div>
+            </div>
+          </article>
 
-                timelineItems.forEach(item => {
-                    const category = item.getAttribute('data-category');
-                    if (filter === 'all' || category === filter) {
-                        item.classList.remove('hidden-filter');
-                        setTimeout(() => item.classList.add('visible'), 50);
-                    } else {
-                        item.classList.add('hidden-filter');
-                        item.classList.remove('visible');
-                    }
-                });
-            });
-        });
+          <article class="timeline-item reveal">
+            <div class="timeline-date"><span>Jun 2024</span><i></i><span>Mar 2025</span></div>
+            <div class="timeline-card">
+              <div class="timeline-top"><div><p>Alliance Ground International</p><h3>Passenger Service Agent</h3></div><span>Irving, TX</span></div>
+              <p>Supported high-volume airport operations where accuracy, communication and time-sensitive execution directly affected daily departures.</p>
+              <ul class="experience-points">
+                <li>Managed ticketing, check-in, baggage, boarding and gate-support workflows under strict time constraints.</li>
+                <li>Verified documentation and followed compliance procedures while resolving passenger issues.</li>
+                <li>Coordinated across flight crew, gate agents, ground teams, airport vendors and passengers.</li>
+                <li>Completed flight close-out records with accountability for accurate handoffs.</li>
+              </ul>
+              <div class="evidence-row"><span>Operational discipline</span><span>Cross-functional coordination</span><span>Compliance</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        // --- Scroll Observer ---
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+    <section class="section capability-section" id="capabilities" aria-labelledby="capabilities-title">
+      <div class="page-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">Capabilities / 03</p><h2 id="capabilities-title">A business-first technical toolkit.</h2></div>
+          <p>Structured around the work each capability enables—not arbitrary proficiency scores.</p>
+        </div>
+        <div class="capability-grid">
+          <details class="capability-card reveal" open>
+            <summary><span class="cap-number">01</span><span><strong>Analytics &amp; Reporting</strong><small>From raw information to clear management views</small></span><i aria-hidden="true"></i></summary>
+            <div class="capability-body"><ul><li>SQL</li><li>Excel</li><li>PivotTables</li><li>XLOOKUP / VLOOKUP</li><li>SUMIFS</li><li>INDEX / MATCH</li><li>Tableau</li><li>Dashboard development</li><li>Statistical analysis</li><li>Business reporting</li></ul></div>
+          </details>
+          <details class="capability-card reveal">
+            <summary><span class="cap-number">02</span><span><strong>Risk, Controls &amp; Decision Support</strong><small>Reliable analysis with traceable controls</small></span><i aria-hidden="true"></i></summary>
+            <div class="capability-body"><ul><li>Data reconciliation</li><li>Validation controls</li><li>Risk analysis</li><li>Process improvement</li><li>Compliance procedures</li><li>Requirements gathering</li><li>Model evaluation</li><li>Executive presentations</li></ul></div>
+          </details>
+          <details class="capability-card reveal">
+            <summary><span class="cap-number">03</span><span><strong>Data &amp; Machine Learning</strong><small>Evaluation-led modeling and interpretation</small></span><i aria-hidden="true"></i></summary>
+            <div class="capability-body"><ul><li>Python</li><li>R</li><li>Pandas</li><li>NumPy</li><li>scikit-learn</li><li>TensorFlow</li><li>Keras</li><li>PyTorch</li><li>Classification</li><li>Regression</li><li>Cross-validation</li><li>Feature engineering</li><li>Hyperparameter tuning</li><li>Model interpretation</li></ul></div>
+          </details>
+          <details class="capability-card reveal">
+            <summary><span class="cap-number">04</span><span><strong>Engineering &amp; Cloud</strong><small>Practical systems behind data products</small></span><i aria-hidden="true"></i></summary>
+            <div class="capability-body"><ul><li>Java</li><li>C++</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Node.js</li><li>REST APIs</li><li>MySQL</li><li>DynamoDB</li><li>AWS Lambda</li><li>API Gateway</li><li>Amazon Bedrock</li><li>Git</li></ul></div>
+          </details>
+        </div>
+      </div>
+    </section>
 
-        document.querySelectorAll('.section-header, .timeline-item, .stat-item').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Sticky Nav Background on Scroll
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="page-shell about-grid">
+        <div class="about-visual reveal" aria-hidden="true">
+          <div class="about-orb"><span>BUSINESS</span><span>DATA</span><span>SYSTEMS</span><i></i></div>
+          <div class="about-coordinate"><span>ANALYSIS</span><i></i><span>DECISION</span></div>
+        </div>
+        <div class="about-copy reveal">
+          <p class="eyebrow">About / 04</p>
+          <h2 id="about-title">Built to work across the boundary between analysis and execution.</h2>
+          <p class="about-lede">I’m a Data Science graduate from The University of Texas at Dallas, where I completed my degree in three years.</p>
+          <p>My interests sit where data, analytics, risk, reporting and operations meet. I’m comfortable translating business needs into technical implementations—and translating quantitative results back into decisions that technical and nontechnical audiences can act on.</p>
+          <p>I’m especially interested in roles that reward analytical rigor, control-minded thinking and practical execution.</p>
+          <div class="about-principles">
+            <div><span>01</span><strong>Clarity over complexity</strong></div>
+            <div><span>02</span><strong>Controls build trust</strong></div>
+            <div><span>03</span><strong>Analysis should move decisions</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        // --- ADVANCED COSMIC CANVAS (Stars & Shooting Stars) ---
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let stars = [];
-        let shootingStars = [];
+    <section class="section education-section" id="education" aria-labelledby="education-title">
+      <div class="page-shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">Education &amp; Recognition / 05</p><h2 id="education-title">A compressed degree path. A broad analytical foundation.</h2></div>
+        </div>
+        <div class="education-grid">
+          <article class="degree-card reveal">
+            <div class="degree-mark" aria-hidden="true">UTD</div>
+            <div><p>The University of Texas at Dallas</p><h3>B.S. in Data Science</h3><span>Completed in Three Years · May 2026</span></div>
+            <div class="degree-detail"><span>Foundation</span><p>Database systems, big data management, statistical learning, applied linear models and machine learning.</p></div>
+          </article>
+          <div class="recognition-list">
+            <article class="recognition-item reveal"><span>01</span><div><p>Recognition</p><h3>AWS 10,000 AIdeas National Semi-Finalist</h3></div><i aria-hidden="true">↗</i></article>
+            <article class="recognition-item reveal"><span>02</span><div><p>Simulation</p><h3>Goldman Sachs Risk Job Simulation · Forage</h3></div><i aria-hidden="true">↗</i></article>
+            <article class="recognition-item reveal"><span>03</span><div><p>Certification</p><h3>Microsoft Programming Using Python</h3></div><i aria-hidden="true">↗</i></article>
+            <article class="recognition-item reveal"><span>04</span><div><p>Certification</p><h3>Coursera Relational Database &amp; SQL</h3></div><i aria-hidden="true">↗</i></article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="page-shell contact-panel reveal">
+        <div class="contact-copy">
+          <p class="eyebrow">Contact / 06</p>
+          <h2 id="contact-title">Let’s turn the next complex question into a clear decision.</h2>
+          <p>Open to data, business systems, risk, reporting, operations and technical analytics opportunities.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="contact-primary" href="mailto:sam.bandlamudi@gmail.com"><span>Email</span><strong>sam.bandlamudi@gmail.com</strong><i aria-hidden="true">↗</i></a>
+          <button class="copy-email" type="button" data-email="sam.bandlamudi@gmail.com"><span aria-hidden="true">⧉</span> Copy email</button>
+          <a class="contact-link" href="https://www.linkedin.com/in/sampat-bandlamudi" target="_blank" rel="noopener"><span>LinkedIn</span><strong>Connect professionally</strong><i aria-hidden="true">↗</i></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        // --- Star Class ---
-        class Star {
-            constructor() {
-                this.reset();
-                // Start with random opacity to avoid simultaneous twinkling
-                this.alpha = Math.random(); 
-            }
-            
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 1.5; // Tiny stars
-                this.blinkSpeed = 0.005 + Math.random() * 0.01;
-                this.alpha = Math.random();
-                this.direction = Math.random() > 0.5 ? 1 : -1;
-                
-                // Some stars move VERY slowly (parallax effect)
-                this.vx = (Math.random() - 0.5) * 0.05;
-                this.vy = (Math.random() - 0.5) * 0.05;
-            }
+  <footer class="site-footer" data-inert-target>
+    <div class="page-shell footer-grid">
+      <div><a class="brand footer-brand" href="#top"><span class="brand-mark">SB</span><span class="brand-name">Sampat Bandlamudi</span></a><p>Data &amp; Business Analyst with strong technical depth.</p></div>
+      <div class="footer-links"><span>Navigate</span><a href="#work">Work</a><a href="#experience">Experience</a><a href="#capabilities">Capabilities</a><a href="#about">About</a></div>
+      <div class="footer-links"><span>Resumes</span><a href="assets/Sampat_Bandlamudi_Analyst_Resume.pdf" download>Analyst Resume <i aria-hidden="true">↓</i></a><a href="assets/Sampat_Bandlamudi_Technical_Resume.pdf" download>Technical Resume <i aria-hidden="true">↓</i></a></div>
+      <div class="footer-links"><span>Connect</span><a href="mailto:sam.bandlamudi@gmail.com">Email <i aria-hidden="true">↗</i></a><a href="https://www.linkedin.com/in/sampat-bandlamudi" target="_blank" rel="noopener">LinkedIn <i aria-hidden="true">↗</i></a></div>
+    </div>
+    <div class="page-shell footer-bottom"><span>© <span id="current-year">2026</span> Sampat Bandlamudi</span><span>Designed for clarity, trust &amp; useful decisions.</span></div>
+  </footer>
 
-            update() {
-                // Twinkle
-                this.alpha += this.blinkSpeed * this.direction;
-                if (this.alpha >= 1 || this.alpha <= 0.2) {
-                    this.direction *= -1;
-                }
-                
-                // Move
-                this.x += this.vx;
-                this.y += this.vy;
-                
-                // Wrap
-                if(this.x < 0) this.x = width;
-                if(this.x > width) this.x = 0;
-                if(this.y < 0) this.y = height;
-                if(this.y > height) this.y = 0;
-            }
+  <section class="case-overlay" id="case-overlay" role="dialog" aria-modal="true" aria-labelledby="case-title" hidden>
+    <div class="case-shell">
+      <header class="case-header">
+        <a class="brand" href="#top" tabindex="-1" aria-hidden="true"><span class="brand-mark">SB</span><span class="brand-name">Selected Work</span></a>
+        <span class="case-count" id="case-count">01 / 04</span>
+        <button class="case-close" type="button" aria-label="Close case study"><span>Close</span><i aria-hidden="true"></i></button>
+      </header>
+      <div class="case-scroll" id="case-scroll">
+        <article class="case-content" id="case-content"></article>
+        <nav class="case-pagination" aria-label="Case study navigation">
+          <button type="button" data-case-direction="previous"><span aria-hidden="true">←</span><small>Previous</small><strong id="previous-project">Previous project</strong></button>
+          <button type="button" data-case-direction="next"><small>Next</small><strong id="next-project">Next project</strong><span aria-hidden="true">→</span></button>
+        </nav>
+      </div>
+    </div>
+  </section>
 
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        // --- Shooting Star Class ---
-        class ShootingStar {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height * 0.5; // Spawn in upper half
-                this.len = Math.random() * 80 + 10;
-                this.speed = Math.random() * 10 + 6;
-                this.size = Math.random() * 1 + 0.1;
-                // Angle between 30 and 60 degrees (falling diagonally)
-                this.angle = Math.PI / 4; // 45 degrees
-                this.waitTime = Math.random() * 1000; // Delay before shooting
-                this.active = false;
-            }
-
-            update() {
-                if (this.waitTime > 0) {
-                    this.waitTime--;
-                } else {
-                    this.active = true;
-                    this.x -= this.speed; // Move left
-                    this.y += this.speed; // Move down
-                    
-                    // Reset if out of bounds
-                    if (this.x < -this.len || this.y > height + this.len) {
-                        this.active = false;
-                        this.waitTime = Math.random() * 500 + 200; // Random delay
-                        this.reset();
-                    }
-                }
-            }
-
-            draw() {
-                if (this.active) {
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${Math.random()})`;
-                    ctx.lineWidth = this.size;
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.lineTo(this.x + this.len, this.y - this.len); // Trail goes up-right
-                    ctx.stroke();
-                }
-            }
-        }
-
-        function init() {
-            resize();
-            stars = [];
-            shootingStars = [];
-            
-            // Create Starfield
-            for(let i=0; i < 300; i++) {
-                stars.push(new Star());
-            }
-            
-            // Create Shooting Stars
-            for(let i=0; i < 3; i++) {
-                shootingStars.push(new ShootingStar());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            // Draw Constellation Lines (Connect nearby stars)
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)'; // Very faint
-            ctx.lineWidth = 0.5;
-            
-            for (let i = 0; i < stars.length; i++) {
-                let star = stars[i];
-                star.update();
-                star.draw();
-                
-                // Simple constellation logic: connect to nearby stars
-                // Optimization: Only check a few neighbors or use a spatial grid
-                // For this demo, check all but limit distance drastically
-                for(let j = i + 1; j < stars.length; j++) {
-                     let other = stars[j];
-                     let dx = star.x - other.x;
-                     let dy = star.y - other.y;
-                     if (Math.abs(dx) < 80 && Math.abs(dy) < 80) { // Quick box check
-                         let dist = Math.sqrt(dx*dx + dy*dy);
-                         if (dist < 80) {
-                             ctx.beginPath();
-                             ctx.moveTo(star.x, star.y);
-                             ctx.lineTo(other.x, other.y);
-                             ctx.stroke();
-                         }
-                     }
-                }
-            }
-            
-            // Draw Shooting Stars
-            shootingStars.forEach(s => {
-                s.update();
-                s.draw();
-            });
-            
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', () => {
-            resize();
-            init();
-        });
-
-        init();
-        animate();
-
-    </script>
+  <div class="copy-toast" role="status" aria-live="polite" aria-atomic="true">Email copied to clipboard</div>
+  <script src="script.js" defer></script>
 </body>
 </html>
