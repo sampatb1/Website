@@ -2147,7 +2147,7 @@ html[data-theme="arctic"] .project-kicker {
 .capability-card summary > i::before,
 .capability-card summary > i::after { transition-duration: 250ms; transition-timing-function: var(--ease); }
 .capability-body { padding: 0 22px 22px; opacity: 1; transform: translateY(0); }
-.capability-body ul { display: grid; margin: 0; padding: 20px 0 0; grid-template-columns: 1fr 1fr; gap: 9px 18px; border-top: 1px solid var(--border); list-style: none; }
+.capability-body ul { display: grid; min-height: 144px; margin: 0; padding: 20px 0 0; grid-template-columns: 1fr 1fr; align-content: start; gap: 9px 18px; border-top: 1px solid var(--border); list-style: none; }
 .capability-body li { position: relative; padding-left: 12px; color: var(--text-soft); font-size: 11px; }
 .capability-body li::before { position: absolute; top: .73em; left: 0; width: 4px; height: 1px; background: var(--accent); content: ""; }
 
